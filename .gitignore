@@ -1,2 +1,7 @@
 
 .env
+BulletDynamics/api/__pycache__/
+
+BulletDynamics/api/migrations/__pycache__/
+
+BulletDynamics/BulletDynamics/__pycache__/
