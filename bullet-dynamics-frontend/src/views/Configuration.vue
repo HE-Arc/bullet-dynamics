@@ -1,6 +1,6 @@
 <template>
-  <div class="simulator">
-    <h1>SIMULATOR</h1>
+  <div class="configuration">
+    <h1>CONFIGURATION</h1>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 //import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: "Simulator",
+  name: "Configuration",
   components: {
     //HelloWorld,
   },
