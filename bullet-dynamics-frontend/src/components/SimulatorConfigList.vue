@@ -1,36 +1,41 @@
 <template>
-<v-card
-    class="mx-auto"
-    max-width="344"
-    outlined
-  >
-  <v-card-title>
-      config name
-  </v-card-title>
-  <v-container>
-    <v-row align="center">
-      <v-col cols="8">
-        <v-img
-            :src="require('../assets/m16a4-small.png')">
-        </v-img>
-      </v-col>
-      <v-col cols="4">
-        <v-checkbox
-            v-model="checkbox"
-            :label="'display'"
-        >       
-        </v-checkbox>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-card class="mx-auto" max-width="500" outlined>
+    <v-card-title> config list </v-card-title>
+    <v-list rounded>      
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+        >
+          <v-list-item-content>
+            <SimulatorConfigElement :name="item.name"/>
+          </v-list-item-content>
+        </v-list-item>
+    </v-list>
   </v-card>
 </template>
 
 <script>
-  export default {
-    name: 'SimulatorConfigElement',
+import SimulatorConfigElement from "@/components/SimulatorConfigElement.vue";
 
-    data: () => ({    
-    }),
-  }
+export default {
+  name: "SimulatorConfigList",
+  
+  components: {
+    SimulatorConfigElement,
+  },
+
+  data: () => ({
+    items: [
+      {
+        name: "config 1",
+      },
+      {
+        name: "config 2",
+      },
+      {
+        name: "config 3",
+      },
+    ],
+  }),
+};
 </script>

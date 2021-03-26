@@ -1,11 +1,11 @@
 <template>
 <v-card
     class="mx-auto"
-    max-width="344"
+    max-width="400"
     outlined
   >
   <v-card-title>
-      config name
+      {{name}}
   </v-card-title>
   <v-container>
     <v-row align="center">
@@ -32,5 +32,7 @@
 
     data: () => ({    
     }),
+
+    props: ['name'],
   }
 </script>
