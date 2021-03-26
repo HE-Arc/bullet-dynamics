@@ -31,10 +31,7 @@ export default {
       },
       {
         name: "config 2",
-      },
-      {
-        name: "config 3",
-      },
+      },      
     ],
   }),
 };

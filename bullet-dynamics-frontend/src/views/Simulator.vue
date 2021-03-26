@@ -1,20 +1,20 @@
 <template>
-  <div class="home">
-    <SimulatorConfigList/>
-    <SimulatorConfigElement/>    
+  <div>
+    <SimulatorConfigList/> 
+    <SimulatorParamList/>  
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import SimulatorConfigElement from '@/components/SimulatorConfigElement.vue'
 import SimulatorConfigList from '../components/SimulatorConfigList.vue'
+import SimulatorParamList from '../components/SimulatorParamList.vue'
 
 export default {
   name: 'Simulator',
   components: {
-    SimulatorConfigElement,
-    SimulatorConfigList
+    SimulatorConfigList,
+    SimulatorParamList
   }
 }
 </script>

@@ -30,7 +30,8 @@
   export default {
     name: 'SimulatorConfigElement',
 
-    data: () => ({    
+    data: () => ({ 
+        checkbox:''   
     }),
 
     props: ['name'],
