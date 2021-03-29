@@ -25,7 +25,7 @@ SECRET_KEY = 'hb#lbmk9b&4=+tv1=sq^rbkg3-oqzq=hj!6@i5wpy!f!g=cnpt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['bullet.srvz-webapp.he-arc.ch']
 
 
 # Application definition
