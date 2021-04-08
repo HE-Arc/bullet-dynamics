@@ -23,6 +23,14 @@
                 <GraphComponent />
               </v-col>
             </v-row>
+            <!--<v-row justify="space-between">
+              <v-col>
+                <GraphComponent />
+              </v-col>
+              <v-col>
+                <GraphComponent />
+              </v-col>
+            </v-row>-->
           </v-container>
         </v-col>
       </v-row>

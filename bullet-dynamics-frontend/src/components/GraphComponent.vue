@@ -26,7 +26,7 @@ export default {
         return {
         // Array will be automatically processed with visualization.arrayToDataTable function
         chartData: [
-        ['Day', 'G', 'A', 'T'],
+        ['meter', '1', '2', '3'],
         [1,  37.8, 80.8, 41.8],
         [2,  30.9, 69.5, 32.4],
         [3,  25.4,   57, 25.7],
@@ -44,8 +44,8 @@ export default {
       ],
         chartOptions: {
             chart: {
-            title: 'Box Office',
-            subtitle: 'in millions of dollars (USD)',
+            title: 'title',
+            subtitle: 'subtitle',
             },
             }        
         }
