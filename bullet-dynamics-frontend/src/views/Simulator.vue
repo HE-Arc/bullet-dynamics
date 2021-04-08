@@ -44,6 +44,7 @@ import GraphComponent from "../components/GraphComponent.vue";
 import SimulatorConfigList from "../components/SimulatorConfigList.vue";
 import SimulatorParamList from "../components/SimulatorParamList.vue";
 import { getAPI } from '../plugins/axios-api';
+import { mapState } from 'vuex';
 
 export default {
   name: "Simulator",
@@ -57,6 +58,7 @@ export default {
     SimulatorParamList,
     GraphComponent,
   },
+  computed: mapState(['APIData']),
   methods: {
     loadConfigs() {
       let _this = this;
@@ -66,7 +68,7 @@ export default {
       this.loadingConfigs = true;
       
       getAPI
-        .get("/configs/")
+        .get("/api/configs/")
         .then(response => {
           console.log('Getting configs');
           _this.configs = response.data;
@@ -83,7 +85,16 @@ export default {
   created: function () {
     let _this = this;
 
-    _this.loadConfigs();
+    //_this.loadConfigs();
+
+     getAPI.get('/api/configs/', { headers: { Authorization: `Bearer ${_this.$store.state.accessToken}` } })
+          .then(response => {
+            _this.$store.state.APIData = response.data
+            console.log(_this.$store.state.APIData);
+          })
+          .catch(err => {
+            console.log(err)
+          })
   }
 
 };

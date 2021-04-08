@@ -1,28 +1,13 @@
 from django.shortcuts import render
-
 # Create your views here.
-from rest_framework import viewsets
+from rest_framework import generics, viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
-from .serializers import AmmoSerializer
-from .models import Ammo
-
-from .serializers import PlatformSerializer
-from .models import Platform
-
-from .serializers import CannonSerializer
-from .models import Cannon
-
-from .serializers import ConfigSerializer
-from .models import Config
-
-from .serializers import ParamSerializer
-from .models import Param
-
-from .serializers import UserSerializer
-from .models import User
-
-from .serializers import InitSpeedSerializer
-from .models import InitSpeed
+from .models import Ammo, Cannon, Config, InitSpeed, Param, Platform, User
+from .serializers import (AmmoSerializer, CannonSerializer, ConfigSerializer,
+                          InitSpeedSerializer, ParamSerializer,
+                          PlatformSerializer, UserSerializer)
 
 class AmmoViewSet(viewsets.ModelViewSet):
     queryset = Ammo.objects.all().order_by('id')
@@ -37,6 +22,7 @@ class CannonViewSet(viewsets.ModelViewSet):
     serializer_class = CannonSerializer
 
 class ConfigViewSet(viewsets.ModelViewSet):
+    psermission_classes = (IsAuthenticated,)
     queryset = Config.objects.all().order_by('id')
     serializer_class = ConfigSerializer
 

@@ -6,7 +6,7 @@
       
       <v-spacer></v-spacer>
 
-      <v-btn icon>
+      <v-btn icon @click="$router.push({ name: 'Login' }).catch(() => {})">
         <v-icon>mdi-account</v-icon>
       </v-btn>
     </v-app-bar>
