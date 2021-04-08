@@ -12,7 +12,10 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      requiresLogin: true
+    }
   },
   {
     path: '/about',
@@ -20,13 +23,16 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: About
+    component: About,
   },
   {
     path: '/simulator',
     name: 'Simulator',
     //
-    component: Simulator
+    component: Simulator,
+    meta: {
+      requiresLogin: true
+    }
   },
   {
     path: '/login',
@@ -35,14 +41,16 @@ const routes = [
     component: Login
   },
   {
-    path: '/lougout',
-    name: 'Lougout',
+    path: '/logout',
+    name: 'Logout',
     //
     component: Logout
   },
 ]
 
 const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes
 })
 

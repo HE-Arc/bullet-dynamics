@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: "SimulatoParamList",
+  name: "SimulatorParamList",
 
   data: () => ({
     height: 0,

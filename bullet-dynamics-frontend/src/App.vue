@@ -5,7 +5,10 @@
       <v-toolbar-title>Bullet Dynamics</v-toolbar-title>
       
       <v-spacer></v-spacer>
-
+      
+      <v-btn v-if="this.$store.getters.loggedIn" icon @click="$router.push({ name: 'Logout' }).catch(() => {})">
+        <v-icon>mdi-logout</v-icon>
+      </v-btn>
       <v-btn icon @click="$router.push({ name: 'Login' }).catch(() => {})">
         <v-icon>mdi-account</v-icon>
       </v-btn>

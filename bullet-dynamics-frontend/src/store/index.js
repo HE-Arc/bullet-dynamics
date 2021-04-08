@@ -14,15 +14,20 @@ export default new Vuex.Store({
     updateStorage (state, { access, refresh }) {
       state.accessToken = access
       state.refreshToken = refresh
+      localStorage.setItem('accessToken', access);
     },
     destroyToken (state) {
       state.accessToken = null
       state.refreshToken = null
+      localStorage.removeItem('accessToken')     
     }
   },
   getters:{
     loggedIn (state) {
-      return state.accessToken != null
+      if(localStorage.getItem('accessToken') != null) {
+        state.accessToken = localStorage.getItem('accessToken');
+      }
+      return state.accessToken != null;
     }
   },
   actions: {
