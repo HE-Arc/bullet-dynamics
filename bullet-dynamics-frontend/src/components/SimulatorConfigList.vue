@@ -3,11 +3,11 @@
     <v-card-title> config list </v-card-title>
     <v-list rounded>      
         <v-list-item
-          v-for="(item, i) in items"
+          v-for="(config, i) in configs"
           :key="i"
         >
           <v-list-item-content>
-            <SimulatorConfigElement :name="item.name"/>
+            <SimulatorConfigElement :name="config.name"/>
           </v-list-item-content>
         </v-list-item>
     </v-list>
@@ -24,15 +24,15 @@ export default {
     SimulatorConfigElement,
   },
 
-  data: () => ({
-    items: [
-      {
-        name: "config 1",
-      },
-      {
-        name: "config 2",
-      },      
-    ],
+  data: () => ({ 
   }),
+
+  props: ['configs'],
+
+  created: function () {
+    let _this = this;
+
+    console.log(_this.configs);
+  },
 };
 </script>

@@ -6,7 +6,7 @@
           <v-container>
             <v-row justify="space-between">
               <v-col>
-                <SimulatorConfigList />
+                <SimulatorConfigList :configs="this.configs" />
               </v-col>
             </v-row>
             <v-row justify="space-between">
@@ -43,22 +43,22 @@
 import GraphComponent from "../components/GraphComponent.vue";
 import SimulatorConfigList from "../components/SimulatorConfigList.vue";
 import SimulatorParamList from "../components/SimulatorParamList.vue";
-import { getAPI } from '../plugins/axios-api';
-import { mapState } from 'vuex';
+import { getAPI } from "../plugins/axios-api";
+import { mapState } from "vuex";
 
 export default {
   name: "Simulator",
-  data () {
+  data() {
     return {
-        configs: []
-      }
+      configs: [],
+    };
   },
   components: {
     SimulatorConfigList,
     SimulatorParamList,
     GraphComponent,
   },
-  computed: mapState(['APIData']),
+  computed: mapState(["APIData"]),
   methods: {
     loadConfigs() {
       let _this = this;
@@ -66,16 +66,20 @@ export default {
       // Get loot history
       this.configs = [];
       this.loadingConfigs = true;
-      
+
       getAPI
-        .get("/api/configs/")
-        .then(response => {
-          console.log('Getting configs');
+        .get("/api/configs/", {
+          headers: {
+            Authorization: `Bearer ${_this.$store.state.accessToken}`,
+          },
+        })
+        .then((response) => {
+          console.log("Getting configs");
           _this.configs = response.data;
           console.log(response.data);
         })
-        .catch(error => {
-          console.log(error);
+        .catch((err) => {
+          console.log(err);
         })
         .then(() => {
           _this.loadingConfigs = false;
@@ -85,17 +89,7 @@ export default {
   created: function () {
     let _this = this;
 
-    //_this.loadConfigs();
-
-     getAPI.get('/api/configs/', { headers: { Authorization: `Bearer ${_this.$store.state.accessToken}` } })
-          .then(response => {
-            _this.$store.state.APIData = response.data
-            console.log(_this.$store.state.APIData);
-          })
-          .catch(err => {
-            console.log(err)
-          })
-  }
-
+    _this.loadConfigs();
+  },
 };
 </script>

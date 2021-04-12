@@ -33,9 +33,7 @@
       }
     },
     methods: {
-      login () { 
-        console.log(this.username);
-        console.log(this.password);
+      login () {
         this.$store.dispatch('userLogin', {
           username: this.username,
           password: this.password
