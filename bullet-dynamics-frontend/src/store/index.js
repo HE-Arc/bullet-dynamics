@@ -9,10 +9,22 @@ export default new Vuex.Store({
     accessToken: null,
     refreshToken: null,
     APIData: '',
-    configs: [{id:1, name:"conf test 1", ammo_id:1, platform_id:2, cannon_id:3}, {id:2, name:"conf test 2", ammo_id:2, platform_id:2, cannon_id:3}],
-    platforms: [],
-    ammos: [],
-    cannons: []
+    configs: {
+      1: { id: 1, name: "conf test 1", ammo_id: 1, platform_id: 1, cannon_id: 1 },
+      2: { id: 2, name: "conf test 2", ammo_id: 2, platform_id: 2, cannon_id: 2 },
+    },
+    platforms: {
+      1: { "id": 1, "name": "AR-15", "weight": 3, "price": 1500, "length": 0.83, "standard_cannon_length": 0.406 },
+      2: { "id": 2, "name": "AK-M", "weight": 3.5, "price": 500, "length": 0.88, "standard_cannon_length": 0.37 },
+    },
+    ammos: {
+      1: { "id": 1, "name": "5.56 NATO", "weight": 0.37, "price": 0.5, "bullet_weight": 0.004, "cx": 0.37 },
+      2: { "id": 2, "name": "7.62 NATO", "weight": 0.75, "price": 1.2, "bullet_weight": 0.010, "cx": 0.475 },
+    },
+    cannons: {
+      1: { "id": 1, "name": "10.5\" light", "weight": 0.50, "price": 200, "length": 0.267 },
+      2: { "id": 2, "name": "14\" M4 milspec", "weight": 0.70, "price": 150, "length": 0.37 },
+    },
   },
   mutations: {
     updateStorage(state, { access, refresh }) {
@@ -26,22 +38,13 @@ export default new Vuex.Store({
       localStorage.removeItem('accessToken')
     },
     updateConfigPlatform(state, { configId, id }) {
-      state.configs.forEach(function (part, index) {
-        if (state.configs[index].id == configId)
-          state.configs[index].platform_id = id;
-      });
+      state.configs[configId].platform_id = id;
     },
     updateConfigAmmo(state, { configId, id }) {
-      state.configs.forEach(function (part, index) {
-        if (state.configs[index].id == configId)
-          state.configs[index].ammo_id = id;
-      });
+      state.configs[configId].ammo_id = id;
     },
     updateConfigCannon(state, { configId, id }) {
-      state.configs.forEach(function (part, index) {
-        if (state.configs[index].id == configId)
-          state.configs[index].cannon_id = id;
-      });
+      state.configs[configId].cannon_id = id;
     },
     updatConfigs(state, data) {
       state.configs = data;
@@ -54,7 +57,7 @@ export default new Vuex.Store({
     },
     updateAmmos(state, data) {
       state.ammos = data;
-    }
+    },
   },
   getters: {
     loggedIn(state) {
@@ -85,38 +88,34 @@ export default new Vuex.Store({
           })
       })
     },
-    async fetchConfigs({commit}) {
+    async fetchConfigs({ commit }) {
       try {
         const response = await getAPI.get('/api/configs/');
         commit('updatePlatforms', response.data);
-        //console.log(response);
       } catch (error) {
         console.log(error);
       }
     },
-    async fetchPlatforms({commit}) {
+    async fetchPlatforms({ commit }) {
       try {
         const response = await getAPI.get('/api/platforms/');
         commit('updatePlatforms', response.data);
-        //console.log(response);
       } catch (error) {
         console.log(error);
       }
     },
-    async fetchAmmos({commit}) {
+    async fetchAmmos({ commit }) {
       try {
         const response = await getAPI.get('/api/ammos/');
         commit('updateAmmos', response.data);
-        //console.log(response);
       } catch (error) {
         console.log(error);
       }
     },
-    async fetchCannons({commit}) {
+    async fetchCannons({ commit }) {
       try {
         const response = await getAPI.get('/api/cannons/');
         commit('updateCannons', response.data);
-        //console.log(state.cannons);
       } catch (error) {
         console.log(error);
       }

@@ -156,27 +156,21 @@ export default {
       );
     },
     configs() {
-      return this.$store.state.configs;
+      return Object.values(this.$store.state.configs);
     },
     selectedConfigPlatformId() {
       if (this.selectedConfigId != null)
-        return this.$store.state.configs.find(
-          (config) => config.id == this.selectedConfigId
-        ).platform_id;
+        return this.$store.state.configs[this.selectedConfigId].platform_id;
       else return null;
     },
     selectedConfigAmmoId: function () {
       if (this.selectedConfigId != null)
-        return this.$store.state.configs.find(
-          (config) => config.id == this.selectedConfigId
-        ).ammo_id;
+        return this.$store.state.configs[this.selectedConfigId].ammo_id;
       else return null;
     },
     selectedConfigCannonId: function () {
       if (this.selectedConfigId != null)
-        return this.$store.state.configs.find(
-          (config) => config.id == this.selectedConfigId
-        ).cannon_id;
+        return this.$store.state.configs[this.selectedConfigId].cannon_id;
       else return null;
     },
     platforms() {
@@ -200,9 +194,7 @@ export default {
   },
   methods: {
     updateConfig(configId) {
-      const config = this.$store.state.configs.find(
-        (config) => config.id == configId
-      );
+      const config = this.$store.state.configs[configId];
 
       if (config != null) {
         this.selectedPlatform = this.$store.state.platforms[config.platform_id];
@@ -211,17 +203,17 @@ export default {
 
         //TODO cast to int 
         this.weight =
-          this.selectedPlatform.weight +
-          this.selectedAmmo.weight +
-          this.selectedCannon.weight;
+          parseFloat(this.selectedPlatform.weight) +
+          parseFloat(this.selectedAmmo.weight) +
+          parseFloat(this.selectedCannon.weight);
         this.price =
-          this.selectedPlatform.price +
-          this.selectedAmmo.price +
-          this.selectedCannon.price;
-        this.length =
-          this.selectedPlatform.length +
-          this.selectedPlatform.standard_cannon_length +
-          this.selectedCannon.length;
+          parseFloat(this.selectedPlatform.price) +
+          parseFloat(this.selectedAmmo.price) +
+          parseFloat(this.selectedCannon.price);
+        this.length = 100 * (
+          parseFloat(this.selectedPlatform.length) -
+          parseFloat(this.selectedPlatform.standard_cannon_length) +
+          parseFloat(this.selectedCannon.length));
       } else {
         this.selectedPlatform = null;
         this.selectedAmmo = null;
