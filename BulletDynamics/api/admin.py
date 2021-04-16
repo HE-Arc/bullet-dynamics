@@ -1,11 +1,6 @@
 from django.contrib import admin
-from .models import Ammo
-from .models import Platform
-from .models import Cannon
-from .models import Config
-from .models import Param
-from .models import User
-from .models import InitSpeed
+
+from .models import Ammo, Cannon, Config, InitSpeed, Param, Platform, User
 
 # Register your models here.
 admin.site.register(Ammo)
