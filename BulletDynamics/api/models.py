@@ -45,7 +45,7 @@ class Param(models.Model):
 
 class User(AbstractUser):
     param = models.ForeignKey('Param', on_delete=models.SET_NULL, null=True) 
-    config = models.ManyToManyField(Config)
+    config = models.ManyToManyField(Config, blank=True)
     class Meta:
         ordering = ['id']
 

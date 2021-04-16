@@ -32,6 +32,7 @@ class ParamViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    lookup_field = 'username'
 
 class InitSpeedViewSet(viewsets.ModelViewSet):
     queryset = InitSpeed.objects.all()

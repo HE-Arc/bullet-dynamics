@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     accessToken: null,
     refreshToken: null,
-    APIData: '',
+    username: null,
     configs: [
       { id: 0, name: "Config alpha", cannon_id: 0, munition_id: 0, plateform_id: 0 },
       { id: 1, name: "Config beta", cannon_id: 0, munition_id: 0, plateform_id: 0 },
@@ -32,9 +32,10 @@ export default new Vuex.Store({
     ],
   },
   mutations: {
-    updateStorage (state, { access, refresh }) {
+    updateStorage (state, { access, refresh, username }) {
       state.accessToken = access
       state.refreshToken = refresh
+      state.username = username
       localStorage.setItem('accessToken', access);
     },
     destroyToken (state) {
@@ -76,13 +77,14 @@ export default new Vuex.Store({
       }
     },
     userLogin (context, usercredentials) {
+      let username = usercredentials.username;
       return new Promise((resolve, reject) => {
         getAPI.post('/api-token/', {
-          username: usercredentials.username,
+          username: username,
           password: usercredentials.password
         })
           .then(response => {
-            context.commit('updateStorage', { access: response.data.access, refresh: response.data.refresh }) 
+            context.commit('updateStorage', { access: response.data.access, refresh: response.data.refresh, username }) 
             resolve()
           })
           .catch(err => {
