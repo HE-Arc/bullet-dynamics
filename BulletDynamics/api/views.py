@@ -8,32 +8,31 @@ from .serializers import (AmmoSerializer, CannonSerializer, ConfigSerializer,
                           InitSpeedSerializer, ParamSerializer,
                           PlatformSerializer, UserSerializer)
 
-
 class AmmoViewSet(viewsets.ModelViewSet):
-    queryset = Ammo.objects.all().order_by('id')
+    queryset = Ammo.objects.all()
     serializer_class = AmmoSerializer
 
 class PlatformViewSet(viewsets.ModelViewSet):
-    queryset = Platform.objects.all().order_by('id')
+    queryset = Platform.objects.all()
     serializer_class = PlatformSerializer
 
 class CannonViewSet(viewsets.ModelViewSet):
-    queryset = Cannon.objects.all().order_by('id')
+    queryset = Cannon.objects.all()
     serializer_class = CannonSerializer
 
 class ConfigViewSet(viewsets.ModelViewSet):
     psermission_classes = (IsAuthenticated,)
-    queryset = Config.objects.all().order_by('id')
+    queryset = Config.objects.all()
     serializer_class = ConfigSerializer
 
 class ParamViewSet(viewsets.ModelViewSet):
-    queryset = Param.objects.all().order_by('id')
+    queryset = Param.objects.all()
     serializer_class = ParamSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('id')
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 class InitSpeedViewSet(viewsets.ModelViewSet):
-    queryset = InitSpeed.objects.all().order_by('id')
+    queryset = InitSpeed.objects.all()
     serializer_class = InitSpeedSerializer

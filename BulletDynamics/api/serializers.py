@@ -20,7 +20,7 @@ class CannonSerializer(serializers.HyperlinkedModelSerializer):
 class ConfigSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Config
-        fields = ('name', 'cannon_id', 'ammo_id', 'platform_id')
+        fields = ('name', 'cannon', 'ammo', 'platform')
 
 class ParamSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -30,9 +30,9 @@ class ParamSerializer(serializers.HyperlinkedModelSerializer):
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('name', 'param_id')
+        fields = ('name', 'param')
 
 class InitSpeedSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = InitSpeed
-        fields = ('init_speed', 'cannon_id', 'ammo_id')
+        fields = ('init_speed', 'cannon', 'ammo')
