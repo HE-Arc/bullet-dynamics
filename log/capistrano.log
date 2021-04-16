@@ -1,0 +1,560 @@
+# Logfile created on 2021-04-08 01:14:28 -0700 by logger.rb/v1.4.2
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-04-08 01:14:28 -0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [eaf8d70e] Running /usr/bin/env mkdir -p /tmp as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [eaf8d70e] Command: /usr/bin/env mkdir -p /tmp
+  INFO [eaf8d70e] Finished in 0.601 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-86711d3a7a79687d46f2.sh 0.0%
+  INFO Uploading /tmp/git-ssh-86711d3a7a79687d46f2.sh 100.0%
+  INFO [8191c5fc] Running /usr/bin/env chmod 700 /tmp/git-ssh-86711d3a7a79687d46f2.sh as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [8191c5fc] Command: /usr/bin/env chmod 700 /tmp/git-ssh-86711d3a7a79687d46f2.sh
+  INFO [8191c5fc] Finished in 0.097 seconds with exit status 0 (successful).
+  INFO [19661419] Running /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [19661419] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-86711d3a7a79687d46f2.sh" ; /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD )
+ DEBUG [19661419] 	6f6ffd3d6b7872eb5cd8eab61d0ec72feddcac5b	HEAD
+  INFO [19661419] Finished in 1.452 seconds with exit status 0 (successful).
+  INFO [0f5c7965] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [0f5c7965] Command: /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases
+  INFO [0f5c7965] Finished in 0.090 seconds with exit status 0 (successful).
+ DEBUG [4f8fe4ee] Running [ -f /var/www/bullet-dynamics/current/REVISION ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [4f8fe4ee] Command: [ -f /var/www/bullet-dynamics/current/REVISION ]
+ DEBUG [4f8fe4ee] Finished in 0.080 seconds with exit status 1 (failed).
+ DEBUG [bfeaf330] Running [ -f /var/www/bullet-dynamics/repo/HEAD ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [bfeaf330] Command: [ -f /var/www/bullet-dynamics/repo/HEAD ]
+ DEBUG [bfeaf330] Finished in 0.080 seconds with exit status 1 (failed).
+ DEBUG [e6accebc] Running if test ! -d /var/www/bullet-dynamics; then echo "Directory does not exist '/var/www/bullet-dynamics'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [e6accebc] Command: if test ! -d /var/www/bullet-dynamics; then echo "Directory does not exist '/var/www/bullet-dynamics'" 1>&2; false; fi
+ DEBUG [e6accebc] Finished in 0.085 seconds with exit status 0 (successful).
+  INFO [cd6eb8ee] Running /usr/bin/env git clone --mirror git@github.com:HE-Arc/bullet-dynamics.git /var/www/bullet-dynamics/repo as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [cd6eb8ee] Command: cd /var/www/bullet-dynamics && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-86711d3a7a79687d46f2.sh" ; /usr/bin/env git clone --mirror git@github.com:HE-Arc/bullet-dynamics.git /var/www/bullet-dynamics/repo )
+ DEBUG [cd6eb8ee] 	Cloning into bare repository '/var/www/bullet-dynamics/repo'...
+  INFO [cd6eb8ee] Finished in 1.846 seconds with exit status 0 (successful).
+ DEBUG [8422345e] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [8422345e] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [8422345e] Finished in 0.081 seconds with exit status 0 (successful).
+  INFO [a43e0a15] Running /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [a43e0a15] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-86711d3a7a79687d46f2.sh" ; /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git )
+  INFO [a43e0a15] Finished in 0.109 seconds with exit status 0 (successful).
+  INFO [26032972] Running /usr/bin/env git remote update --prune as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [26032972] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-86711d3a7a79687d46f2.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [26032972] 	Fetching origin
+  INFO [26032972] Finished in 1.167 seconds with exit status 0 (successful).
+ DEBUG [ba8df0df] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [ba8df0df] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [ba8df0df] Finished in 0.086 seconds with exit status 0 (successful).
+  INFO [efa956b9] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210408081430 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [efa956b9] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-86711d3a7a79687d46f2.sh" ; /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210408081430 )
+  INFO [efa956b9] Finished in 0.097 seconds with exit status 0 (successful).
+  INFO [10dae6d9] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210408081430 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [10dae6d9] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-86711d3a7a79687d46f2.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210408081430 )
+  INFO [10dae6d9] Finished in 0.142 seconds with exit status 0 (successful).
+ DEBUG [d19e112f] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [d19e112f] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [d19e112f] Finished in 0.083 seconds with exit status 0 (successful).
+ DEBUG [1a69aacd] Running /usr/bin/env git rev-list --max-count=1 master as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [1a69aacd] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-86711d3a7a79687d46f2.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [1a69aacd] 	932f16ef5877adc252354f4368daa24756c33d6b
+ DEBUG [1a69aacd] Finished in 0.100 seconds with exit status 0 (successful).
+ DEBUG [863fa3a6] Running if test ! -d /var/www/bullet-dynamics/releases/20210408081430; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210408081430'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [863fa3a6] Command: if test ! -d /var/www/bullet-dynamics/releases/20210408081430; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210408081430'" 1>&2; false; fi
+ DEBUG [863fa3a6] Finished in 0.090 seconds with exit status 0 (successful).
+  INFO [8d85dc9a] Running /usr/bin/env echo "932f16ef5877adc252354f4368daa24756c33d6b" > REVISION as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [8d85dc9a] Command: cd /var/www/bullet-dynamics/releases/20210408081430 && /usr/bin/env echo "932f16ef5877adc252354f4368daa24756c33d6b" > REVISION
+  INFO [8d85dc9a] Finished in 0.097 seconds with exit status 0 (successful).
+  INFO [9c3391a5] Running /usr/bin/env ln -s /var/www/bullet-dynamics/releases/20210408081430 /var/www/bullet-dynamics/releases/current as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [9c3391a5] Command: /usr/bin/env ln -s /var/www/bullet-dynamics/releases/20210408081430 /var/www/bullet-dynamics/releases/current
+  INFO [9c3391a5] Finished in 0.092 seconds with exit status 0 (successful).
+  INFO [714b17bb] Running /usr/bin/env mv /var/www/bullet-dynamics/releases/current /var/www/bullet-dynamics as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [714b17bb] Command: /usr/bin/env mv /var/www/bullet-dynamics/releases/current /var/www/bullet-dynamics
+  INFO [714b17bb] Finished in 0.103 seconds with exit status 0 (successful).
+ DEBUG [0e3d8d94] Running /usr/bin/env ls -x /var/www/bullet-dynamics/releases as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [0e3d8d94] Command: /usr/bin/env ls -x /var/www/bullet-dynamics/releases
+ DEBUG [0e3d8d94] 	20210408081430
+ DEBUG [0e3d8d94] Finished in 0.088 seconds with exit status 0 (successful).
+ DEBUG [f9f6fb0a] Running if test ! -d /var/www/bullet-dynamics/releases; then echo "Directory does not exist '/var/www/bullet-dynamics/releases'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [f9f6fb0a] Command: if test ! -d /var/www/bullet-dynamics/releases; then echo "Directory does not exist '/var/www/bullet-dynamics/releases'" 1>&2; false; fi
+ DEBUG [f9f6fb0a] Finished in 0.079 seconds with exit status 0 (successful).
+  INFO [50a37b69] Running /usr/bin/env echo "Branch master (at 932f16ef5877adc252354f4368daa24756c33d6b) deployed as release 20210408081430 by ma2s" >> /var/www/bullet-dynamics/revisions.log as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [50a37b69] Command: cd /var/www/bullet-dynamics/releases && /usr/bin/env echo "Branch master (at 932f16ef5877adc252354f4368daa24756c33d6b) deployed as release 20210408081430 by ma2s" >> /var/www/bullet-dynamics/revisions.log
+  INFO [50a37b69] Finished in 0.091 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-04-08 01:16:41 -0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [a9b6ca24] Running /usr/bin/env mkdir -p /tmp as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [a9b6ca24] Command: /usr/bin/env mkdir -p /tmp
+  INFO [a9b6ca24] Finished in 0.328 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-ca408db5ba74de9202b4.sh 0.0%
+  INFO Uploading /tmp/git-ssh-ca408db5ba74de9202b4.sh 100.0%
+  INFO [692331ca] Running /usr/bin/env chmod 700 /tmp/git-ssh-ca408db5ba74de9202b4.sh as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [692331ca] Command: /usr/bin/env chmod 700 /tmp/git-ssh-ca408db5ba74de9202b4.sh
+  INFO [692331ca] Finished in 0.084 seconds with exit status 0 (successful).
+  INFO [14189d43] Running /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [14189d43] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ca408db5ba74de9202b4.sh" ; /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD )
+ DEBUG [14189d43] 	6f6ffd3d6b7872eb5cd8eab61d0ec72feddcac5b	HEAD
+  INFO [14189d43] Finished in 1.147 seconds with exit status 0 (successful).
+  INFO [c6bfb94f] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [c6bfb94f] Command: /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases
+  INFO [c6bfb94f] Finished in 0.088 seconds with exit status 0 (successful).
+ DEBUG [20ec6315] Running [ -f /var/www/bullet-dynamics/current/REVISION ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [20ec6315] Command: [ -f /var/www/bullet-dynamics/current/REVISION ]
+ DEBUG [20ec6315] Finished in 0.081 seconds with exit status 1 (failed).
+ DEBUG [5ce5228b] Running [ -f /var/www/bullet-dynamics/repo/HEAD ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [5ce5228b] Command: [ -f /var/www/bullet-dynamics/repo/HEAD ]
+ DEBUG [5ce5228b] Finished in 0.079 seconds with exit status 1 (failed).
+ DEBUG [d00c8c5d] Running if test ! -d /var/www/bullet-dynamics; then echo "Directory does not exist '/var/www/bullet-dynamics'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [d00c8c5d] Command: if test ! -d /var/www/bullet-dynamics; then echo "Directory does not exist '/var/www/bullet-dynamics'" 1>&2; false; fi
+ DEBUG [d00c8c5d] Finished in 0.084 seconds with exit status 0 (successful).
+  INFO [a20ac683] Running /usr/bin/env git clone --mirror git@github.com:HE-Arc/bullet-dynamics.git /var/www/bullet-dynamics/repo as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [a20ac683] Command: cd /var/www/bullet-dynamics && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ca408db5ba74de9202b4.sh" ; /usr/bin/env git clone --mirror git@github.com:HE-Arc/bullet-dynamics.git /var/www/bullet-dynamics/repo )
+ DEBUG [a20ac683] 	Cloning into bare repository '/var/www/bullet-dynamics/repo'...
+  INFO [a20ac683] Finished in 1.707 seconds with exit status 0 (successful).
+ DEBUG [9431cf12] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [9431cf12] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [9431cf12] Finished in 0.079 seconds with exit status 0 (successful).
+  INFO [8dccf258] Running /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [8dccf258] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ca408db5ba74de9202b4.sh" ; /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git )
+  INFO [8dccf258] Finished in 0.108 seconds with exit status 0 (successful).
+  INFO [5ce552d1] Running /usr/bin/env git remote update --prune as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [5ce552d1] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ca408db5ba74de9202b4.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [5ce552d1] 	Fetching origin
+  INFO [5ce552d1] Finished in 1.185 seconds with exit status 0 (successful).
+ DEBUG [39345c9e] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [39345c9e] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [39345c9e] Finished in 0.081 seconds with exit status 0 (successful).
+  INFO [23600992] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210408081643 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [23600992] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ca408db5ba74de9202b4.sh" ; /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210408081643 )
+  INFO [23600992] Finished in 0.098 seconds with exit status 0 (successful).
+  INFO [8dff5013] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210408081643 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [8dff5013] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ca408db5ba74de9202b4.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210408081643 )
+  INFO [8dff5013] Finished in 0.129 seconds with exit status 0 (successful).
+ DEBUG [994fa9e5] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [994fa9e5] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [994fa9e5] Finished in 0.079 seconds with exit status 0 (successful).
+ DEBUG [e2f2845f] Running /usr/bin/env git rev-list --max-count=1 master as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [e2f2845f] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ca408db5ba74de9202b4.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [e2f2845f] 	ada3c3d7ea7f5a9657736cc80c8a594e9f8ee4c3
+ DEBUG [e2f2845f] Finished in 0.098 seconds with exit status 0 (successful).
+ DEBUG [d334a8bd] Running if test ! -d /var/www/bullet-dynamics/releases/20210408081643; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210408081643'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [d334a8bd] Command: if test ! -d /var/www/bullet-dynamics/releases/20210408081643; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210408081643'" 1>&2; false; fi
+ DEBUG [d334a8bd] Finished in 0.095 seconds with exit status 0 (successful).
+  INFO [ad05c97c] Running /usr/bin/env echo "ada3c3d7ea7f5a9657736cc80c8a594e9f8ee4c3" > REVISION as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [ad05c97c] Command: cd /var/www/bullet-dynamics/releases/20210408081643 && /usr/bin/env echo "ada3c3d7ea7f5a9657736cc80c8a594e9f8ee4c3" > REVISION
+  INFO [ad05c97c] Finished in 0.085 seconds with exit status 0 (successful).
+  INFO [03f6a286] Running /usr/bin/env ln -s /var/www/bullet-dynamics/releases/20210408081643 /var/www/bullet-dynamics/releases/current as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [03f6a286] Command: /usr/bin/env ln -s /var/www/bullet-dynamics/releases/20210408081643 /var/www/bullet-dynamics/releases/current
+  INFO [03f6a286] Finished in 0.081 seconds with exit status 0 (successful).
+  INFO [5a63675a] Running /usr/bin/env mv /var/www/bullet-dynamics/releases/current /var/www/bullet-dynamics as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [5a63675a] Command: /usr/bin/env mv /var/www/bullet-dynamics/releases/current /var/www/bullet-dynamics
+  INFO [5a63675a] Finished in 0.086 seconds with exit status 0 (successful).
+ DEBUG [b8a8cb4c] Running /usr/bin/env ls -x /var/www/bullet-dynamics/releases as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [b8a8cb4c] Command: /usr/bin/env ls -x /var/www/bullet-dynamics/releases
+ DEBUG [b8a8cb4c] 	20210408081643
+ DEBUG [b8a8cb4c] Finished in 0.086 seconds with exit status 0 (successful).
+ DEBUG [4f1d3dc8] Running if test ! -d /var/www/bullet-dynamics/releases; then echo "Directory does not exist '/var/www/bullet-dynamics/releases'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [4f1d3dc8] Command: if test ! -d /var/www/bullet-dynamics/releases; then echo "Directory does not exist '/var/www/bullet-dynamics/releases'" 1>&2; false; fi
+ DEBUG [4f1d3dc8] Finished in 0.080 seconds with exit status 0 (successful).
+  INFO [87be09fa] Running /usr/bin/env echo "Branch master (at ada3c3d7ea7f5a9657736cc80c8a594e9f8ee4c3) deployed as release 20210408081643 by ma2s" >> /var/www/bullet-dynamics/revisions.log as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [87be09fa] Command: cd /var/www/bullet-dynamics/releases && /usr/bin/env echo "Branch master (at ada3c3d7ea7f5a9657736cc80c8a594e9f8ee4c3) deployed as release 20210408081643 by ma2s" >> /var/www/bullet-dynamics/revisions.log
+  INFO [87be09fa] Finished in 0.090 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-04-08 01:35:45 -0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [178bbb3c] Running /usr/bin/env mkdir -p /tmp as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [178bbb3c] Command: /usr/bin/env mkdir -p /tmp
+  INFO [178bbb3c] Finished in 0.538 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-37a136d9b71f2e5926dc.sh 0.0%
+  INFO Uploading /tmp/git-ssh-37a136d9b71f2e5926dc.sh 100.0%
+  INFO [d558b064] Running /usr/bin/env chmod 700 /tmp/git-ssh-37a136d9b71f2e5926dc.sh as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [d558b064] Command: /usr/bin/env chmod 700 /tmp/git-ssh-37a136d9b71f2e5926dc.sh
+  INFO [d558b064] Finished in 0.094 seconds with exit status 0 (successful).
+  INFO [bf482278] Running /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [bf482278] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-37a136d9b71f2e5926dc.sh" ; /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD )
+ DEBUG [bf482278] 	cc874d2dbbd8edeefcaea16fbbde41ac35b422c6	HEAD
+  INFO [bf482278] Finished in 1.225 seconds with exit status 0 (successful).
+  INFO [e7b426f3] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [e7b426f3] Command: /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases
+  INFO [e7b426f3] Finished in 0.087 seconds with exit status 0 (successful).
+ DEBUG [93bdc50e] Running [ -f /var/www/bullet-dynamics/current/REVISION ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [93bdc50e] Command: [ -f /var/www/bullet-dynamics/current/REVISION ]
+ DEBUG [93bdc50e] Finished in 0.078 seconds with exit status 0 (successful).
+ DEBUG [c004f8dd] Running /usr/bin/env cat /var/www/bullet-dynamics/current/REVISION 2>/dev/null as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [c004f8dd] Command: /usr/bin/env cat /var/www/bullet-dynamics/current/REVISION 2>/dev/null
+ DEBUG [c004f8dd] 	ada3c3d7ea7f5a9657736cc80c8a594e9f8ee4c3
+ DEBUG [c004f8dd] Finished in 0.094 seconds with exit status 0 (successful).
+ DEBUG [9d384777] Running [ -f /var/www/bullet-dynamics/repo/HEAD ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [9d384777] Command: [ -f /var/www/bullet-dynamics/repo/HEAD ]
+ DEBUG [9d384777] Finished in 0.080 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/bullet-dynamics/repo
+ DEBUG [fe248cde] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [fe248cde] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [fe248cde] Finished in 0.080 seconds with exit status 0 (successful).
+  INFO [1d3b602e] Running /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [1d3b602e] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-37a136d9b71f2e5926dc.sh" ; /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git )
+  INFO [1d3b602e] Finished in 0.112 seconds with exit status 0 (successful).
+  INFO [e46bd17d] Running /usr/bin/env git remote update --prune as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [e46bd17d] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-37a136d9b71f2e5926dc.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [e46bd17d] 	Fetching origin
+ DEBUG [e46bd17d] 	From github.com:HE-Arc/bullet-dynamics
+   6f6ffd3..cc874d2  dev            -> dev
+ DEBUG [e46bd17d] 	   c819d9a..1cb77db  simulator-page -> simulator-page
+  INFO [e46bd17d] Finished in 1.404 seconds with exit status 0 (successful).
+ DEBUG [794e38c2] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [794e38c2] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [794e38c2] Finished in 0.087 seconds with exit status 0 (successful).
+  INFO [57519add] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210408083548 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [57519add] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-37a136d9b71f2e5926dc.sh" ; /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210408083548 )
+  INFO [57519add] Finished in 0.103 seconds with exit status 0 (successful).
+  INFO [4b7cd44c] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210408083548 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [4b7cd44c] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-37a136d9b71f2e5926dc.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210408083548 )
+  INFO [4b7cd44c] Finished in 0.137 seconds with exit status 0 (successful).
+ DEBUG [aea21988] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [aea21988] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [aea21988] Finished in 0.082 seconds with exit status 0 (successful).
+ DEBUG [cca6aca3] Running /usr/bin/env git rev-list --max-count=1 master as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [cca6aca3] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-37a136d9b71f2e5926dc.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [cca6aca3] 	ada3c3d7ea7f5a9657736cc80c8a594e9f8ee4c3
+ DEBUG [cca6aca3] Finished in 0.099 seconds with exit status 0 (successful).
+ DEBUG [0e0580c7] Running if test ! -d /var/www/bullet-dynamics/releases/20210408083548; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210408083548'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [0e0580c7] Command: if test ! -d /var/www/bullet-dynamics/releases/20210408083548; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210408083548'" 1>&2; false; fi
+ DEBUG [0e0580c7] Finished in 0.090 seconds with exit status 0 (successful).
+  INFO [00083394] Running /usr/bin/env echo "ada3c3d7ea7f5a9657736cc80c8a594e9f8ee4c3" > REVISION as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [00083394] Command: cd /var/www/bullet-dynamics/releases/20210408083548 && /usr/bin/env echo "ada3c3d7ea7f5a9657736cc80c8a594e9f8ee4c3" > REVISION
+  INFO [00083394] Finished in 0.096 seconds with exit status 0 (successful).
+  INFO [4be11949] Running source /var/www/bullet-dynamics/shared/env/bin/activate && /var/www/bullet-dynamics/shared/env/bin/pip install -r /var/www/bullet-dynamics/releases/20210408083548/backend/requirements.txt as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [4be11949] Command: source /var/www/bullet-dynamics/shared/env/bin/activate && /var/www/bullet-dynamics/shared/env/bin/pip install -r /var/www/bullet-dynamics/releases/20210408083548/backend/requirements.txt
+ DEBUG [4be11949] 	ERROR: Could not open requirements file: [Errno 2] No such file or directory: '/var/www/bullet-dynamics/releases/20210408083548/backend/requirements.txt'
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-04-08 01:37:55 -0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [85442ea1] Running /usr/bin/env mkdir -p /tmp as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [85442ea1] Command: /usr/bin/env mkdir -p /tmp
+  INFO [85442ea1] Finished in 0.325 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-c5f897c2f74963c892c4.sh 0.0%
+  INFO Uploading /tmp/git-ssh-c5f897c2f74963c892c4.sh 100.0%
+  INFO [6a58be0f] Running /usr/bin/env chmod 700 /tmp/git-ssh-c5f897c2f74963c892c4.sh as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [6a58be0f] Command: /usr/bin/env chmod 700 /tmp/git-ssh-c5f897c2f74963c892c4.sh
+  INFO [6a58be0f] Finished in 0.088 seconds with exit status 0 (successful).
+  INFO [5fa09789] Running /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [5fa09789] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-c5f897c2f74963c892c4.sh" ; /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD )
+ DEBUG [5fa09789] 	cc874d2dbbd8edeefcaea16fbbde41ac35b422c6	HEAD
+  INFO [5fa09789] Finished in 1.164 seconds with exit status 0 (successful).
+  INFO [d1cb0d9e] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [d1cb0d9e] Command: /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases
+  INFO [d1cb0d9e] Finished in 0.084 seconds with exit status 0 (successful).
+ DEBUG [12660b08] Running [ -f /var/www/bullet-dynamics/current/REVISION ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [12660b08] Command: [ -f /var/www/bullet-dynamics/current/REVISION ]
+ DEBUG [12660b08] Finished in 0.076 seconds with exit status 0 (successful).
+ DEBUG [bd8285d0] Running /usr/bin/env cat /var/www/bullet-dynamics/current/REVISION 2>/dev/null as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [bd8285d0] Command: /usr/bin/env cat /var/www/bullet-dynamics/current/REVISION 2>/dev/null
+ DEBUG [bd8285d0] 	ada3c3d7ea7f5a9657736cc80c8a594e9f8ee4c3
+ DEBUG [bd8285d0] Finished in 0.082 seconds with exit status 0 (successful).
+ DEBUG [b87c4f83] Running [ -f /var/www/bullet-dynamics/repo/HEAD ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [b87c4f83] Command: [ -f /var/www/bullet-dynamics/repo/HEAD ]
+ DEBUG [b87c4f83] Finished in 0.079 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/bullet-dynamics/repo
+ DEBUG [2e25acd9] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [2e25acd9] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [2e25acd9] Finished in 0.081 seconds with exit status 0 (successful).
+  INFO [adb29960] Running /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [adb29960] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-c5f897c2f74963c892c4.sh" ; /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git )
+  INFO [adb29960] Finished in 0.098 seconds with exit status 0 (successful).
+  INFO [4f0cf0ae] Running /usr/bin/env git remote update --prune as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [4f0cf0ae] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-c5f897c2f74963c892c4.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [4f0cf0ae] 	Fetching origin
+ DEBUG [4f0cf0ae] 	From github.com:HE-Arc/bullet-dynamics
+   ada3c3d..e6495b5  master     -> master
+  INFO [4f0cf0ae] Finished in 1.351 seconds with exit status 0 (successful).
+ DEBUG [7a3330db] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [7a3330db] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [7a3330db] Finished in 0.083 seconds with exit status 0 (successful).
+  INFO [1be111fc] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210408083757 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [1be111fc] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-c5f897c2f74963c892c4.sh" ; /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210408083757 )
+  INFO [1be111fc] Finished in 0.100 seconds with exit status 0 (successful).
+  INFO [47c00801] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210408083757 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [47c00801] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-c5f897c2f74963c892c4.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210408083757 )
+  INFO [47c00801] Finished in 0.134 seconds with exit status 0 (successful).
+ DEBUG [84bda9c7] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [84bda9c7] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [84bda9c7] Finished in 0.080 seconds with exit status 0 (successful).
+ DEBUG [40255dfa] Running /usr/bin/env git rev-list --max-count=1 master as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [40255dfa] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-c5f897c2f74963c892c4.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [40255dfa] 	e6495b52b260087e862a57ff5710c72f2b38ba49
+ DEBUG [40255dfa] Finished in 0.104 seconds with exit status 0 (successful).
+ DEBUG [404fa93d] Running if test ! -d /var/www/bullet-dynamics/releases/20210408083757; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210408083757'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [404fa93d] Command: if test ! -d /var/www/bullet-dynamics/releases/20210408083757; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210408083757'" 1>&2; false; fi
+ DEBUG [404fa93d] Finished in 0.093 seconds with exit status 0 (successful).
+  INFO [2f90a498] Running /usr/bin/env echo "e6495b52b260087e862a57ff5710c72f2b38ba49" > REVISION as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [2f90a498] Command: cd /var/www/bullet-dynamics/releases/20210408083757 && /usr/bin/env echo "e6495b52b260087e862a57ff5710c72f2b38ba49" > REVISION
+  INFO [2f90a498] Finished in 0.086 seconds with exit status 0 (successful).
+  INFO [1587aa17] Running source /var/www/bullet-dynamics/shared/env/bin/activate && /var/www/bullet-dynamics/shared/env/bin/pip install -r /var/www/bullet-dynamics/releases/20210408083757/backend/requirements.txt as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [1587aa17] Command: source /var/www/bullet-dynamics/shared/env/bin/activate && /var/www/bullet-dynamics/shared/env/bin/pip install -r /var/www/bullet-dynamics/releases/20210408083757/backend/requirements.txt
+ DEBUG [1587aa17] 	Requirement already satisfied: asgiref==3.3.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210408083757/backend/requirements.txt (line 1)) (3.3.1)
+ DEBUG [1587aa17] 	Requirement already satisfied: Django==3.1.7 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210408083757/backend/requirements.txt (line 2)) (3.1.7)
+ DEBUG [1587aa17] 	Requirement already satisfied: djangorestframework==3.12.2 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210408083757/backend/requirements.txt (line 3)) (3.12.2)
+ DEBUG [1587aa17] 	Requirement already satisfied: pytz==2021.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210408083757/backend/requirements.txt (line 4)) (2021.1)
+ DEBUG [1587aa17] 	Requirement already satisfied: sqlparse==0.4.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210408083757/backend/requirements.txt (line 5)) (0.4.1)
+  INFO [1587aa17] Finished in 1.286 seconds with exit status 0 (successful).
+  INFO [e3e283d0] Running /usr/bin/env ln -s /var/www/bullet-dynamics/releases/20210408083757 /var/www/bullet-dynamics/releases/current as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [e3e283d0] Command: /usr/bin/env ln -s /var/www/bullet-dynamics/releases/20210408083757 /var/www/bullet-dynamics/releases/current
+  INFO [e3e283d0] Finished in 0.103 seconds with exit status 0 (successful).
+  INFO [1e438592] Running /usr/bin/env mv /var/www/bullet-dynamics/releases/current /var/www/bullet-dynamics as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [1e438592] Command: /usr/bin/env mv /var/www/bullet-dynamics/releases/current /var/www/bullet-dynamics
+  INFO [1e438592] Finished in 0.105 seconds with exit status 0 (successful).
+  INFO [476e7fef] Running cd /var/www/bullet-dynamics/releases/20210408083757/frontend && npm install && npm run build as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [476e7fef] Command: cd /var/www/bullet-dynamics/releases/20210408083757/frontend && npm install && npm run build
+ DEBUG [476e7fef] 	
+> yorkie@2.0.0 install /var/www/bullet-dynamics/releases/20210408083757/frontend/node_modules/yorkie
+> node bin/install.js
+
+ DEBUG [476e7fef] 	setting up Git hooks
+ DEBUG [476e7fef] 	can't find .git directory, skipping Git hooks installation
+ DEBUG [476e7fef] 	
+> core-js@3.9.1 postinstall /var/www/bullet-dynamics/releases/20210408083757/frontend/node_modules/core-js
+> node -e "try{require('./postinstall')}catch(e){}"
+
+ DEBUG [476e7fef] 	[96mThank you for using core-js ([94m https://github.com/zloirock/core-js [96m) for polyfilling JavaScript standard library![0m
+
+[96mThe project needs your help! Please consider supporting of core-js on Open Collective or Patreon: [0m
+[96m>[94m https://opencollective.com/core-js [0m
+[96m>[94m https://www.patreon.com/zloirock [0m
+
+[96mAlso, the author of core-js ([94m https://github.com/zloirock [96m) is looking for a good job -)[0m
+
+ DEBUG [476e7fef] 	
+> ejs@2.7.4 postinstall /var/www/bullet-dynamics/releases/20210408083757/frontend/node_modules/ejs
+> node ./postinstall.js
+
+ DEBUG [476e7fef] 	Thank you for installing [35mEJS[0m: built with the [32mJake[0m JavaScript build tool ([32mhttps://jakejs.com/[0m)
+
+ DEBUG [476e7fef] 	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/webpack-dev-server/node_modules/fsevents):
+ DEBUG [476e7fef] 	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+ DEBUG [476e7fef] 	npm WARN optional
+ DEBUG [476e7fef] 	 SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/watchpack-chokidar2/node_modules/fsevents):
+npm WARN notsup
+ DEBUG [476e7fef] 	 SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+ DEBUG [476e7fef] 	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules/fsevents):
+npm WARN
+ DEBUG [476e7fef] 	 notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+ DEBUG [476e7fef] 	
+ DEBUG [476e7fef] 	added 1332 packages from 977 contributors and audited 1338 packages in 30.748s
+ DEBUG [476e7fef] 	
+77 packages are looking for funding
+  run `npm fund` for details
+
+ DEBUG [476e7fef] 	found 0 vulnerabilities
+
+ DEBUG [476e7fef] 	
+> bullet-dynamics-frontend@0.1.0 build /var/www/bullet-dynamics/releases/20210408083757/frontend
+> vue-cli-service build
+
+ DEBUG [476e7fef] 	
+ DEBUG [476e7fef] 	-  Building for production...
+ DEBUG [476e7fef] 	 WARNING  Compiled with 2 warnings8:39:25 AM
+ DEBUG [476e7fef] 	
+ DEBUG [476e7fef] 	 warning  
+ DEBUG [476e7fef] 	
+ DEBUG [476e7fef] 	asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  css/chunk-vendors.767e5b95.css (314 KiB)
+  js/chunk-vendors.749b00a3.js (251 KiB)
+
+ DEBUG [476e7fef] 	 warning  
+ DEBUG [476e7fef] 	
+entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  app (572 KiB)
+      css/chunk-vendors.767e5b95.css
+      js/chunk-vendors.749b00a3.js
+      js/app.e028fa14.js
+
+
+ DEBUG [476e7fef] 	  File                                   Size              Gzipped
+
+  dist/js/chunk-vendors.749b00a3.js      250.79 KiB        84.36 KiB
+  dist/js/app.e028fa14.js                7.30 KiB          2.87 KiB
+  dist/js/about.c53f8d80.js              0.83 KiB          0.46 KiB
+  dist/css/chunk-vendors.767e5b95.css    314.33 KiB        36.90 KiB
+
+  Images and other types of assets omitted.
+
+ DEBUG [476e7fef] 	 DONE  Build complete. The dist directory is ready to be deployed.
+ INFO  Check out deployment instructions at https://cli.vuejs.org/guide/deployment.html
+      
+  INFO [476e7fef] Finished in 84.841 seconds with exit status 0 (successful).
+ DEBUG [5e9f9d7a] Running /usr/bin/env ls -x /var/www/bullet-dynamics/releases as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [5e9f9d7a] Command: /usr/bin/env ls -x /var/www/bullet-dynamics/releases
+ DEBUG [5e9f9d7a] 	20210408081643	20210408083548	20210408083757
+ DEBUG [5e9f9d7a] Finished in 0.129 seconds with exit status 0 (successful).
+ DEBUG [2704c908] Running if test ! -d /var/www/bullet-dynamics/releases; then echo "Directory does not exist '/var/www/bullet-dynamics/releases'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [2704c908] Command: if test ! -d /var/www/bullet-dynamics/releases; then echo "Directory does not exist '/var/www/bullet-dynamics/releases'" 1>&2; false; fi
+ DEBUG [2704c908] Finished in 0.082 seconds with exit status 0 (successful).
+  INFO [33c21ec1] Running /usr/bin/env echo "Branch master (at e6495b52b260087e862a57ff5710c72f2b38ba49) deployed as release 20210408083757 by ma2s" >> /var/www/bullet-dynamics/revisions.log as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [33c21ec1] Command: cd /var/www/bullet-dynamics/releases && /usr/bin/env echo "Branch master (at e6495b52b260087e862a57ff5710c72f2b38ba49) deployed as release 20210408083757 by ma2s" >> /var/www/bullet-dynamics/revisions.log
+  INFO [33c21ec1] Finished in 0.112 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-04-08 01:47:31 -0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [8ff9f4c6] Running /usr/bin/env mkdir -p /tmp as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [8ff9f4c6] Command: /usr/bin/env mkdir -p /tmp
+  INFO [8ff9f4c6] Finished in 0.507 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-157b5085609623506eb3.sh 0.0%
+  INFO Uploading /tmp/git-ssh-157b5085609623506eb3.sh 100.0%
+  INFO [1371b211] Running /usr/bin/env chmod 700 /tmp/git-ssh-157b5085609623506eb3.sh as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [1371b211] Command: /usr/bin/env chmod 700 /tmp/git-ssh-157b5085609623506eb3.sh
+  INFO [1371b211] Finished in 0.092 seconds with exit status 0 (successful).
+  INFO [c8e77edc] Running /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [c8e77edc] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-157b5085609623506eb3.sh" ; /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD )
+ DEBUG [c8e77edc] 	cc874d2dbbd8edeefcaea16fbbde41ac35b422c6	HEAD
+  INFO [c8e77edc] Finished in 1.229 seconds with exit status 0 (successful).
+  INFO [a57cb10a] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [a57cb10a] Command: /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases
+  INFO [a57cb10a] Finished in 0.084 seconds with exit status 0 (successful).
+ DEBUG [763c737e] Running [ -f /var/www/bullet-dynamics/current/REVISION ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [763c737e] Command: [ -f /var/www/bullet-dynamics/current/REVISION ]
+ DEBUG [763c737e] Finished in 0.081 seconds with exit status 0 (successful).
+ DEBUG [a6424644] Running /usr/bin/env cat /var/www/bullet-dynamics/current/REVISION 2>/dev/null as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [a6424644] Command: /usr/bin/env cat /var/www/bullet-dynamics/current/REVISION 2>/dev/null
+ DEBUG [a6424644] 	e6495b52b260087e862a57ff5710c72f2b38ba49
+ DEBUG [a6424644] Finished in 0.096 seconds with exit status 0 (successful).
+ DEBUG [306cb869] Running [ -f /var/www/bullet-dynamics/repo/HEAD ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [306cb869] Command: [ -f /var/www/bullet-dynamics/repo/HEAD ]
+ DEBUG [306cb869] Finished in 0.078 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/bullet-dynamics/repo
+ DEBUG [ef0de728] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [ef0de728] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [ef0de728] Finished in 0.083 seconds with exit status 0 (successful).
+  INFO [cacd4dc6] Running /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [cacd4dc6] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-157b5085609623506eb3.sh" ; /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git )
+  INFO [cacd4dc6] Finished in 0.113 seconds with exit status 0 (successful).
+  INFO [f137934b] Running /usr/bin/env git remote update --prune as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [f137934b] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-157b5085609623506eb3.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [f137934b] 	Fetching origin
+  INFO [f137934b] Finished in 1.265 seconds with exit status 0 (successful).
+ DEBUG [e1d1e358] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [e1d1e358] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [e1d1e358] Finished in 0.076 seconds with exit status 0 (successful).
+  INFO [dbfcf276] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210408084733 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [dbfcf276] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-157b5085609623506eb3.sh" ; /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210408084733 )
+  INFO [dbfcf276] Finished in 0.100 seconds with exit status 0 (successful).
+  INFO [df082608] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210408084733 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [df082608] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-157b5085609623506eb3.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210408084733 )
+  INFO [df082608] Finished in 0.148 seconds with exit status 0 (successful).
+ DEBUG [e58a9299] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [e58a9299] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [e58a9299] Finished in 0.082 seconds with exit status 0 (successful).
+ DEBUG [97de7154] Running /usr/bin/env git rev-list --max-count=1 master as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [97de7154] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-157b5085609623506eb3.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [97de7154] 	e6495b52b260087e862a57ff5710c72f2b38ba49
+ DEBUG [97de7154] Finished in 0.098 seconds with exit status 0 (successful).
+ DEBUG [1bb2e51e] Running if test ! -d /var/www/bullet-dynamics/releases/20210408084733; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210408084733'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [1bb2e51e] Command: if test ! -d /var/www/bullet-dynamics/releases/20210408084733; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210408084733'" 1>&2; false; fi
+ DEBUG [1bb2e51e] Finished in 0.089 seconds with exit status 0 (successful).
+  INFO [2d7ab207] Running /usr/bin/env echo "e6495b52b260087e862a57ff5710c72f2b38ba49" > REVISION as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [2d7ab207] Command: cd /var/www/bullet-dynamics/releases/20210408084733 && /usr/bin/env echo "e6495b52b260087e862a57ff5710c72f2b38ba49" > REVISION
+  INFO [2d7ab207] Finished in 0.087 seconds with exit status 0 (successful).
+  INFO [bd0209b6] Running source /var/www/bullet-dynamics/shared/env/bin/activate && /var/www/bullet-dynamics/shared/env/bin/pip install -r /var/www/bullet-dynamics/releases/20210408084733/backend/requirements.txt as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [bd0209b6] Command: source /var/www/bullet-dynamics/shared/env/bin/activate && /var/www/bullet-dynamics/shared/env/bin/pip install -r /var/www/bullet-dynamics/releases/20210408084733/backend/requirements.txt
+ DEBUG [bd0209b6] 	Requirement already satisfied: asgiref==3.3.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210408084733/backend/requirements.txt (line 1)) (3.3.1)
+ DEBUG [bd0209b6] 	Requirement already satisfied: Django==3.1.7 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210408084733/backend/requirements.txt (line 2)) (3.1.7)
+ DEBUG [bd0209b6] 	Requirement already satisfied: djangorestframework==3.12.2 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210408084733/backend/requirements.txt (line 3)) (3.12.2)
+ DEBUG [bd0209b6] 	Requirement already satisfied: pytz==2021.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210408084733/backend/requirements.txt (line 4)) (2021.1)
+ DEBUG [bd0209b6] 	Requirement already satisfied: sqlparse==0.4.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210408084733/backend/requirements.txt (line 5)) (0.4.1)
+  INFO [bd0209b6] Finished in 2.015 seconds with exit status 0 (successful).
+  INFO [002bc2ca] Running /usr/bin/env ln -s /var/www/bullet-dynamics/releases/20210408084733 /var/www/bullet-dynamics/releases/current as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [002bc2ca] Command: /usr/bin/env ln -s /var/www/bullet-dynamics/releases/20210408084733 /var/www/bullet-dynamics/releases/current
+  INFO [002bc2ca] Finished in 0.103 seconds with exit status 0 (successful).
+  INFO [dda49222] Running /usr/bin/env mv /var/www/bullet-dynamics/releases/current /var/www/bullet-dynamics as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [dda49222] Command: /usr/bin/env mv /var/www/bullet-dynamics/releases/current /var/www/bullet-dynamics
+  INFO [dda49222] Finished in 0.105 seconds with exit status 0 (successful).
+  INFO [a7d442bd] Running cd /var/www/bullet-dynamics/releases/20210408084733/frontend && npm install && npm run build as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [a7d442bd] Command: cd /var/www/bullet-dynamics/releases/20210408084733/frontend && npm install && npm run build
+ DEBUG [a7d442bd] 	
+> yorkie@2.0.0 install /var/www/bullet-dynamics/releases/20210408084733/frontend/node_modules/yorkie
+> node bin/install.js
+
+ DEBUG [a7d442bd] 	setting up Git hooks
+ DEBUG [a7d442bd] 	can't find .git directory, skipping Git hooks installation
+ DEBUG [a7d442bd] 	
+> core-js@3.9.1 postinstall /var/www/bullet-dynamics/releases/20210408084733/frontend/node_modules/core-js
+> node -e "try{require('./postinstall')}catch(e){}"
+
+ DEBUG [a7d442bd] 	[96mThank you for using core-js ([94m https://github.com/zloirock/core-js [96m) for polyfilling JavaScript standard library![0m
+
+[96mThe project needs your help! Please consider supporting of core-js on Open Collective or Patreon: [0m
+[96m>[94m https://opencollective.com/core-js [0m
+[96m>[94m https://www.patreon.com/zloirock [0m
+
+[96mAlso, the author of core-js ([94m https://github.com/zloirock [96m) is looking for a good job -)[0m
+
+ DEBUG [a7d442bd] 	
+> ejs@2.7.4 postinstall /var/www/bullet-dynamics/releases/20210408084733/frontend/node_modules/ejs
+> node ./postinstall.js
+
+ DEBUG [a7d442bd] 	Thank you for installing [35mEJS[0m: built with the [32mJake[0m JavaScript build tool ([32mhttps://jakejs.com/[0m)
+
+ DEBUG [a7d442bd] 	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/webpack-dev-server/node_modules/fsevents):
+npm
+ DEBUG [a7d442bd] 	 WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+ DEBUG [a7d442bd] 	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/watchpack-chokidar2/node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+ DEBUG [a7d442bd] 	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+ DEBUG [a7d442bd] 	
+ DEBUG [a7d442bd] 	added 1332 packages from 977 contributors and audited 1338 packages in 25.554s
+ DEBUG [a7d442bd] 	
+77 packages are looking for funding
+  run `npm fund` for details
+
+ DEBUG [a7d442bd] 	found 0 vulnerabilities
+
+ DEBUG [a7d442bd] 	
+> bullet-dynamics-frontend@0.1.0 build /var/www/bullet-dynamics/releases/20210408084733/frontend
+> vue-cli-service build
+
+ DEBUG [a7d442bd] 	
+ DEBUG [a7d442bd] 	-  Building for production...
+ DEBUG [a7d442bd] 	 WARNING  Compiled with 2 warnings8:48:53 AM
+ DEBUG [a7d442bd] 	
+ DEBUG [a7d442bd] 	 warning  
+ DEBUG [a7d442bd] 	
+ DEBUG [a7d442bd] 	asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  css/chunk-vendors.767e5b95.css (314 KiB)
+  js/chunk-vendors.2f2ce4a8.js (251 KiB)
+
+ warning  
+ DEBUG [a7d442bd] 	
+entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  app (572 KiB)
+      css/chunk-vendors.767e5b95.css
+      js/chunk-vendors.2f2ce4a8.js
+      js/app.bc13773d.js
+
+
+ DEBUG [a7d442bd] 	  File                                   Size              Gzipped
+
+  dist/js/chunk-vendors.2f2ce4a8.js      250.79 KiB        84.36 KiB
+  dist/js/app.bc13773d.js                7.30 KiB          2.87 KiB
+  dist/js/about.c53f8d80.js              0.83 KiB          0.46 KiB
+  dist/css/chunk-vendors.767e5b95.css    314.33 KiB        36.90 KiB
+
+  Images and other types of assets omitted.
+
+ DEBUG [a7d442bd] 	 DONE  Build complete. The dist directory is ready to be deployed.
+ DEBUG [a7d442bd] 	 INFO  Check out deployment instructions at https://cli.vuejs.org/guide/deployment.html
+      
+  INFO [a7d442bd] Finished in 76.434 seconds with exit status 0 (successful).
+ DEBUG [7fb54b5d] Running /usr/bin/env ls -x /var/www/bullet-dynamics/releases as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [7fb54b5d] Command: /usr/bin/env ls -x /var/www/bullet-dynamics/releases
+ DEBUG [7fb54b5d] 	20210408081643	20210408083548	20210408083757	20210408084733
+ DEBUG [7fb54b5d] Finished in 0.125 seconds with exit status 0 (successful).
+ DEBUG [e31e7bbe] Running if test ! -d /var/www/bullet-dynamics/releases; then echo "Directory does not exist '/var/www/bullet-dynamics/releases'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [e31e7bbe] Command: if test ! -d /var/www/bullet-dynamics/releases; then echo "Directory does not exist '/var/www/bullet-dynamics/releases'" 1>&2; false; fi
+ DEBUG [e31e7bbe] Finished in 0.082 seconds with exit status 0 (successful).
+  INFO [c12341d3] Running /usr/bin/env echo "Branch master (at e6495b52b260087e862a57ff5710c72f2b38ba49) deployed as release 20210408084733 by ma2s" >> /var/www/bullet-dynamics/revisions.log as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [c12341d3] Command: cd /var/www/bullet-dynamics/releases && /usr/bin/env echo "Branch master (at e6495b52b260087e862a57ff5710c72f2b38ba49) deployed as release 20210408084733 by ma2s" >> /var/www/bullet-dynamics/revisions.log
+  INFO [c12341d3] Finished in 0.114 seconds with exit status 0 (successful).
