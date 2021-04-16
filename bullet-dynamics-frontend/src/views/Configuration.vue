@@ -176,11 +176,56 @@
               </v-row>
               <v-row>
                 <v-col>
-                <v-img
-                  :src="require('../assets/gun.png')"
-                  contain
-                  height="200"
-                />
+                  <v-img
+                    :src="require('../assets/gun.png')"
+                    contain
+                    height="200"
+                  />
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="2">
+                  Weight:
+                </v-col>
+                <v-col cols="12" sm="8">
+                  <v-progress-linear
+                    v-model="totalWeightProgress"
+                    color="red"
+                    height="25"
+                  ></v-progress-linear>
+                </v-col>
+                <v-col cols="12" sm="2">
+                  {{totalWeight}} kg
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="2">
+                  Price:
+                </v-col>
+                <v-col cols="12" sm="8">
+                  <v-progress-linear
+                    v-model="totalPriceProgress"
+                    color="amber"
+                    height="25"
+                  ></v-progress-linear>
+                </v-col>
+                <v-col cols="12" sm="2">
+                  {{totalPrice}} $
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="2">
+                  Length:
+                </v-col>
+                <v-col cols="12" sm="8">
+                  <v-progress-linear
+                    v-model="totalLenghtProgress"
+                    color="green"
+                    height="25"
+                  ></v-progress-linear>
+                </v-col>
+                <v-col cols="12" sm="2">
+                  {{totalLength}} cm
                 </v-col>
               </v-row>
             </v-container>
@@ -206,25 +251,25 @@ export default {
       selectedPlatform: {
         id: 0,
         desc: "Platform alpha",
-        weight: 0,
-        price: 0,
-        length: 0,
-        standard_cannon_length: 0,
+        weight: 2,
+        price: 500,
+        length: 80,
+        standard_cannon_length: 20,
       },
       selectedAmmunition: {
         id: 0,
         desc: "Ammunition alpha",
-        weight: 0,
-        price: 0,
+        weight: 0.2,
+        price: 40,
         bullet_weight: 0,
         cx: 0,
       },
       selectedCannon: {
         id: 0,
         desc: "Cannon alpha",
-        weight: 0,
-        price: 0,
-        length: 0,
+        weight: 1,
+        price: 100,
+        length: 15,
       },
     };
   },
@@ -241,6 +286,24 @@ export default {
     cannons() {
       return this.$store.state.cannons;
     },
+    totalWeight() {
+      return this.selectedPlatform.weight + this.selectedAmmunition.weight + this.selectedCannon.weight;
+    },
+    totalWeightProgress() {
+      return this.totalWeight / 5.0 * 100.0;
+    },
+    totalPrice() {
+      return this.selectedPlatform.price + this.selectedAmmunition.price + this.selectedCannon.price;
+    },
+    totalPriceProgress() {
+      return this.totalPrice / 3000.0 * 100.0;
+    },
+    totalLength() {
+      return this.selectedPlatform.length + this.selectedPlatform.standard_cannon_length + this.selectedCannon.length;
+    },
+    totalLenghtProgress() {
+      return this.totalLength / 120.0 * 100.0;
+    }
   },
 };
 </script>
