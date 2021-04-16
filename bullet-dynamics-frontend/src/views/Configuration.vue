@@ -1,6 +1,6 @@
 <template>
   <div class="configuration">
-    <v-container class="grey lighten-5">
+    <v-container class="grey lighten-5" fluid>
       <v-row v-if="!loadingData">
         <v-col cols="12" sm="4">
           <v-card class="pa-2" outlined tile>
@@ -95,9 +95,24 @@
         </v-col>
       </v-row>
       <v-row v-else>
+        <v-spacer></v-spacer>
         <v-col>
-          Loading...
+          <v-card style="margin: 20px; padding: 10px">
+            <v-card-subtitle style="text-align: center">
+              <h2>CONFIGURATION</h2>
+              <div style="margin: 15px 0">Loading data</div>
+            </v-card-subtitle>
+            <v-card-text style="text-align: center">
+              <v-progress-circular
+                :size="70"
+                :width="7"
+                color="primary"
+                indeterminate
+              ></v-progress-circular>
+            </v-card-text>
+          </v-card>
         </v-col>
+        <v-spacer></v-spacer>
       </v-row>
     </v-container>
   </div>
