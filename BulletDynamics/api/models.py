@@ -1,4 +1,7 @@
 from django.db import models
+from django_seed import Seed
+
+seeder = Seed.seeder()
 
 # Create your models here.
 class Ammo(models.Model):    
@@ -41,6 +44,9 @@ class User(models.Model):
 class InitSpeed(models.Model):
     cannon_id = models.ForeignKey('Cannon', on_delete=models.SET_NULL, null=True)
     ammo_id = models.ForeignKey('Ammo', on_delete=models.SET_NULL, null=True)
-    init_speed = models.DecimalField(max_digits=8, decimal_places=5)
+    init_speed = models.DecimalField(max_digits=8, decimal_places=5)    
 
-    
+#seeder.add_entity(Ammo, 3, {
+#    'name': lambda x: ammo_names.pop(0),
+#    ''
+#})
