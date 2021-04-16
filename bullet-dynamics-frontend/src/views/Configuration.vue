@@ -1,7 +1,7 @@
 <template>
   <div class="configuration">
     <v-container class="grey lighten-5">
-      <v-row>
+      <v-row v-if="!loadingData">
         <v-col cols="12" sm="4">
           <v-card class="pa-2" outlined tile>
             <v-container>
@@ -94,6 +94,11 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-row v-else>
+        <v-col>
+          Loading...
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -123,6 +128,14 @@ export default {
     };
   },
   computed: {
+    loadingData() {
+      return (
+        this.configs == null ||
+        this.platforms == null ||
+        this.ammunitions == null ||
+        this.cannons == null
+      );
+    },
     configs() {
       return this.$store.state.configs;
     },
@@ -219,6 +232,17 @@ export default {
     selectedConfigCannonId: function () {
       this.updateConfig(this.selectedConfigId);
     },
+  },
+  created: function () {
+    const configs = this.$store.state.configs;
+    const platforms = this.$store.state.platforms;
+    const ammunitions = this.$store.state.ammunitions;
+    const cannons = this.$store.state.cannons;
+
+    if (configs == null) this.$store.dispatch("fetchConfigs");
+    if (platforms == null) this.$store.dispatch("fetchPlatforms");
+    if (ammunitions == null) this.$store.dispatch("fetchAmmunitions");
+    if (cannons == null) this.$store.dispatch("fetchCannons");
   },
 };
 </script>
