@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 class Ammo(models.Model):    
     name = models.CharField(max_length=64)
@@ -42,8 +43,7 @@ class Param(models.Model):
     class Meta:
         ordering = ['id']
 
-class User(models.Model):
-    name = models.CharField(max_length=64)
+class User(AbstractUser):
     param = models.ForeignKey('Param', on_delete=models.SET_NULL, null=True) 
     config = models.ManyToManyField(Config)
     class Meta:
