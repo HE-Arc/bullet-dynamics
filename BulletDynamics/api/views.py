@@ -1,5 +1,4 @@
 from django.shortcuts import render
-# Create your views here.
 from rest_framework import generics, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -8,6 +7,7 @@ from .models import Ammo, Cannon, Config, InitSpeed, Param, Platform, User
 from .serializers import (AmmoSerializer, CannonSerializer, ConfigSerializer,
                           InitSpeedSerializer, ParamSerializer,
                           PlatformSerializer, UserSerializer)
+
 
 class AmmoViewSet(viewsets.ModelViewSet):
     queryset = Ammo.objects.all().order_by('id')
