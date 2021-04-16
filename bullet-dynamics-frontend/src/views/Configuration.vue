@@ -1,7 +1,7 @@
 <template>
   <div class="configuration">
-    <v-container class="grey lighten-5">
-      <v-row>
+    <v-container class="grey lighten-5" fluid>
+      <v-row v-if="!loadingData">
         <v-col cols="12" sm="4">
           <v-card class="pa-2" outlined tile>
             <v-container>
@@ -26,7 +26,7 @@
               </v-row>
             </v-container>
             <gun-component-list name="Platforms" :components="platforms" />
-            <gun-component-list name="Ammunition" :components="ammunitions" />
+            <gun-component-list name="Ammo" :components="ammos" />
             <gun-component-list name="Cannons" :components="cannons" />
           </v-card>
         </v-col>
@@ -43,9 +43,9 @@
                 </v-col>
                 <v-col cols="12" sm="4">
                   <gun-component-card-droppable
-                    type="ammunition"
+                    type="ammo"
                     :configId="selectedConfigId"
-                    :component="selectedAmmunition"
+                    :component="selectedAmmo"
                   />
                 </v-col>
                 <v-col cols="12" sm="4">
@@ -94,6 +94,30 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-row v-else>
+        <v-spacer></v-spacer>
+        <v-col>
+          <v-card style="margin: 20px; padding: 10px">
+            <v-card-subtitle style="text-align: center">
+              <h2>CONFIGURATION</h2>
+              <div style="margin: 15px 0">Loading data</div>
+            </v-card-subtitle>
+            <v-card-text style="text-align: center">
+              <v-progress-circular
+                :size="70"
+                :width="7"
+                color="primary"
+                indeterminate
+              ></v-progress-circular>
+              {{configs}}
+              {{platforms}}
+              {{ammos}}
+              {{cannons}}
+            </v-card-text>
+          </v-card>
+        </v-col>
+        <v-spacer></v-spacer>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -115,7 +139,7 @@ export default {
     return {
       selectedConfigId: null,
       selectedPlatform: null,
-      selectedAmmunition: null,
+      selectedAmmo: null,
       selectedCannon: null,
       weight: 0,
       price: 0,
@@ -123,6 +147,14 @@ export default {
     };
   },
   computed: {
+    loadingData() {
+      return (
+        this.configs.length <= 0 ||
+        this.platforms.length <= 0 ||
+        this.ammos.length <= 0 ||
+        this.cannons.length <= 0
+      );
+    },
     configs() {
       return this.$store.state.configs;
     },
@@ -130,14 +162,14 @@ export default {
       if (this.selectedConfigId != null)
         return this.$store.state.configs.find(
           (config) => config.id == this.selectedConfigId
-        ).plateform_id;
+        ).platform_id;
       else return null;
     },
-    selectedConfigAmmunitionId: function () {
+    selectedConfigAmmoId: function () {
       if (this.selectedConfigId != null)
         return this.$store.state.configs.find(
           (config) => config.id == this.selectedConfigId
-        ).munition_id;
+        ).ammo_id;
       else return null;
     },
     selectedConfigCannonId: function () {
@@ -150,8 +182,8 @@ export default {
     platforms() {
       return this.$store.state.platforms;
     },
-    ammunitions() {
-      return this.$store.state.ammunitions;
+    ammos() {
+      return this.$store.state.ammos;
     },
     cannons() {
       return this.$store.state.cannons;
@@ -173,23 +205,18 @@ export default {
       );
 
       if (config != null) {
-        this.selectedPlatform = this.$store.state.platforms.find(
-          (component) => component.id == config.plateform_id
-        );
-        this.selectedAmmunition = this.$store.state.ammunitions.find(
-          (component) => component.id == config.munition_id
-        );
-        this.selectedCannon = this.$store.state.cannons.find(
-          (component) => component.id == config.cannon_id
-        );
+        this.selectedPlatform = this.$store.state.platforms[config.platform_id];
+        this.selectedAmmo = this.$store.state.ammos[config.ammo_id];
+        this.selectedCannon = this.$store.state.cannons[config.cannon_id];
 
+        //TODO cast to int 
         this.weight =
           this.selectedPlatform.weight +
-          this.selectedAmmunition.weight +
+          this.selectedAmmo.weight +
           this.selectedCannon.weight;
         this.price =
           this.selectedPlatform.price +
-          this.selectedAmmunition.price +
+          this.selectedAmmo.price +
           this.selectedCannon.price;
         this.length =
           this.selectedPlatform.length +
@@ -197,7 +224,7 @@ export default {
           this.selectedCannon.length;
       } else {
         this.selectedPlatform = null;
-        this.selectedAmmunition = null;
+        this.selectedAmmo = null;
         this.selectedCannon = null;
 
         this.weight = 0;
@@ -213,12 +240,35 @@ export default {
     selectedConfigPlatformId: function () {
       this.updateConfig(this.selectedConfigId);
     },
-    selectedConfigAmmunitionId: function () {
+    selectedConfigAmmoId: function () {
       this.updateConfig(this.selectedConfigId);
     },
     selectedConfigCannonId: function () {
       this.updateConfig(this.selectedConfigId);
     },
+    configs: function (nv) {
+      console.log(nv);
+    },
+    platforms: function (nv) {
+      console.log(nv);
+    },
+    ammos: function (nv) {
+      console.log(nv);
+    },
+    cannons: function (nv) {
+      console.log(nv);
+    },
+  },
+  created: function () {
+    const configs = this.$store.state.configs;
+    const platforms = this.$store.state.platforms;
+    const ammos = this.$store.state.ammos;
+    const cannons = this.$store.state.cannons;
+
+    if (configs.length <= 0) this.$store.dispatch("fetchConfigs");
+    if (platforms.length <= 0) this.$store.dispatch("fetchPlatforms");
+    if (ammos.length <= 0) this.$store.dispatch("fetchAmmos");
+    if (cannons.length <= 0) this.$store.dispatch("fetchCannons");
   },
 };
 </script>

@@ -29,7 +29,7 @@ export default {
   computed: {
     imgSrc() {
       if (this.type == "platform") return "gun";
-      else if (this.type == "ammunition") return "ammunition";
+      else if (this.type == "ammo") return "ammo";
       else return "cannon";
     },
   },
@@ -41,7 +41,7 @@ export default {
     tooltip(component) {
       if (this.type == "platform") {
         return (
-          component.desc +
+          component.name +
           ": " +
           component.weight +
           "g, " +
@@ -50,9 +50,9 @@ export default {
           component.length +
           "cm"
         );
-      } else if (this.type == "ammunition") {
+      } else if (this.type == "ammo") {
         return (
-          component.desc +
+          component.name +
           ": " +
           component.weight +
           "g, " +
@@ -61,7 +61,7 @@ export default {
         );
       } else {
         return (
-          component.desc +
+          component.name +
           ": " +
           component.weight +
           "g, " +
