@@ -2,13 +2,13 @@
   <div class="configuration">
     <v-container class="grey lighten-5">
       <v-row>
-        <v-col cols="12" sm="6">
+        <v-col cols="12" sm="4">
           <v-card class="pa-2" outlined tile>
             <v-container>
               <v-row>
                 <v-col cols="12" sm="6">
                   <v-select
-                    v-model="selectedConfig"
+                    v-model="selectedConfigId"
                     :items="configs"
                     item-text="name"
                     item-value="id"
@@ -24,156 +24,39 @@
                   >
                 </v-col>
               </v-row>
-              <v-row>
-                <v-col>
-                  <h2>Platforms</h2>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="3" :key="platform" v-for="platform in platforms">
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-card v-bind="attrs" v-on="on">
-                        <v-card-text style="padding: 0">
-                          <v-img
-                            :src="require('../assets/gun_icon.png')"
-                            contain
-                            height="50"
-                          />
-                        </v-card-text>
-                      </v-card>
-                    </template>
-                    <span>
-                      {{ platform.desc }}: {{ platform.weight }}g,
-                      {{ platform.price }}$, {{ platform.length }}cm
-                    </span>
-                  </v-tooltip>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col>
-                  <h2>Ammunition</h2>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col
-                  cols="3"
-                  :key="ammunition"
-                  v-for="ammunition in ammunitions"
-                >
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-card v-bind="attrs" v-on="on">
-                        <v-card-text style="padding: 0">
-                          <v-img
-                            :src="require('../assets/ammunition_icon.png')"
-                            contain
-                            height="50"
-                          />
-                        </v-card-text>
-                      </v-card>
-                    </template>
-                    <span>
-                      {{ ammunition.desc }}: {{ ammunition.weight }}g,
-                      {{ ammunition.price }}$
-                    </span>
-                  </v-tooltip>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col>
-                  <h2>Cannons</h2>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="3" :key="cannon" v-for="cannon in cannons">
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-card v-bind="attrs" v-on="on">
-                        <v-card-text style="padding: 0">
-                          <v-img
-                            :src="require('../assets/cannon_icon.png')"
-                            contain
-                            height="50"
-                          />
-                        </v-card-text>
-                      </v-card>
-                    </template>
-                    <span>
-                      {{ cannon.desc }}: {{ cannon.weight }}g,
-                      {{ cannon.price }}$, {{ cannon.length }}cm
-                    </span>
-                  </v-tooltip>
-                </v-col>
-              </v-row>
             </v-container>
+            <gun-component-list name="Platforms" :components="platforms" />
+            <gun-component-list name="Ammunition" :components="ammunitions" />
+            <gun-component-list name="Cannons" :components="cannons" />
           </v-card>
         </v-col>
-        <v-col cols="12" sm="6">
+        <v-col cols="12" sm="8">
           <v-card class="pa-2" outlined tile>
             <v-container>
-              <v-row>
+              <v-row v-if="selectedConfigId != null">
                 <v-col cols="12" sm="4">
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-card v-bind="attrs" v-on="on">
-                        <v-card-text style="padding: 0">
-                          <v-img
-                            :src="require('../assets/gun_icon.png')"
-                            contain
-                            height="50"
-                          />
-                        </v-card-text>
-                      </v-card>
-                    </template>
-                    <span>
-                      {{ selectedPlatform.desc }}:
-                      {{ selectedPlatform.weight }}g,
-                      {{ selectedPlatform.price }}$,
-                      {{ selectedPlatform.length }}cm
-                    </span>
-                  </v-tooltip>
+                  <gun-component-card-droppable
+                    type="platform"
+                    :configId="selectedConfigId"
+                    :component="selectedPlatform"
+                  />
                 </v-col>
                 <v-col cols="12" sm="4">
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-card v-bind="attrs" v-on="on">
-                        <v-card-text style="padding: 0">
-                          <v-img
-                            :src="require('../assets/ammunition_icon.png')"
-                            contain
-                            height="50"
-                          />
-                        </v-card-text>
-                      </v-card>
-                    </template>
-                    <span>
-                      {{ selectedAmmunition.desc }}:
-                      {{ selectedAmmunition.weight }}g,
-                      {{ selectedAmmunition.price }}$
-                    </span>
-                  </v-tooltip>
+                  <gun-component-card-droppable
+                    type="ammunition"
+                    :configId="selectedConfigId"
+                    :component="selectedAmmunition"
+                  />
                 </v-col>
                 <v-col cols="12" sm="4">
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-card v-bind="attrs" v-on="on">
-                        <v-card-text style="padding: 0">
-                          <v-img
-                            :src="require('../assets/cannon_icon.png')"
-                            contain
-                            height="50"
-                          />
-                        </v-card-text>
-                      </v-card>
-                    </template>
-                    <span>
-                      {{ selectedCannon.desc }}: {{ selectedCannon.weight }}g,
-                      {{ selectedCannon.price }}$, {{ selectedCannon.length }}cm
-                    </span>
-                  </v-tooltip>
+                  <gun-component-card-droppable
+                    type="cannon"
+                    :configId="selectedConfigId"
+                    :component="selectedCannon"
+                  />
                 </v-col>
               </v-row>
+              <v-row v-else> Sélectionne une config PD! </v-row>
               <v-row>
                 <v-col>
                   <v-img
@@ -183,52 +66,31 @@
                   />
                 </v-col>
               </v-row>
-              <v-row>
-                <v-col cols="12" sm="2">
-                  Weight:
-                </v-col>
-                <v-col cols="12" sm="8">
-                  <v-progress-linear
-                    v-model="totalWeightProgress"
-                    color="red"
-                    height="25"
-                  ></v-progress-linear>
-                </v-col>
-                <v-col cols="12" sm="2">
-                  {{totalWeight}} kg
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" sm="2">
-                  Price:
-                </v-col>
-                <v-col cols="12" sm="8">
-                  <v-progress-linear
-                    v-model="totalPriceProgress"
-                    color="amber"
-                    height="25"
-                  ></v-progress-linear>
-                </v-col>
-                <v-col cols="12" sm="2">
-                  {{totalPrice}} $
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12" sm="2">
-                  Length:
-                </v-col>
-                <v-col cols="12" sm="8">
-                  <v-progress-linear
-                    v-model="totalLenghtProgress"
-                    color="green"
-                    height="25"
-                  ></v-progress-linear>
-                </v-col>
-                <v-col cols="12" sm="2">
-                  {{totalLength}} cm
-                </v-col>
-              </v-row>
             </v-container>
+            <div v-if="selectedConfigId != null">
+              <gun-progress-bar
+                name="Weight"
+                unit="kg"
+                color="red"
+                :total="weight"
+                :progress="weightProgress"
+              />
+              <gun-progress-bar
+                name="Price"
+                unit="$"
+                color="amber"
+                :total="price"
+                :progress="priceProgress"
+              />
+              <gun-progress-bar
+                name="Length"
+                unit="cm"
+                color="green"
+                :total="length"
+                :progress="lenghtProgress"
+              />
+            </div>
+            <div v-else>Sélectionne une config PD!</div>
           </v-card>
         </v-col>
       </v-row>
@@ -238,44 +100,52 @@
 
 <script>
 // @ is an alias to /src
-//import HelloWorld from "@/components/HelloWorld.vue";
+import GunComponentList from "@/components/GunComponentList.vue";
+import GunComponentCardDroppable from "@/components/GunComponentCardDroppable.vue";
+import GunProgressBar from "@/components/GunProgressBar.vue";
 
 export default {
   name: "Configuration",
   components: {
-    //HelloWorld,
+    GunComponentList,
+    GunComponentCardDroppable,
+    GunProgressBar,
   },
   data() {
     return {
-      selectedConfig: null,
-      selectedPlatform: {
-        id: 0,
-        desc: "Platform alpha",
-        weight: 2,
-        price: 500,
-        length: 80,
-        standard_cannon_length: 20,
-      },
-      selectedAmmunition: {
-        id: 0,
-        desc: "Ammunition alpha",
-        weight: 0.2,
-        price: 40,
-        bullet_weight: 0,
-        cx: 0,
-      },
-      selectedCannon: {
-        id: 0,
-        desc: "Cannon alpha",
-        weight: 1,
-        price: 100,
-        length: 15,
-      },
+      selectedConfigId: null,
+      selectedPlatform: null,
+      selectedAmmunition: null,
+      selectedCannon: null,
+      weight: 0,
+      price: 0,
+      length: 0,
     };
   },
   computed: {
     configs() {
       return this.$store.state.configs;
+    },
+    selectedConfigPlatformId() {
+      if (this.selectedConfigId != null)
+        return this.$store.state.configs.find(
+          (config) => config.id == this.selectedConfigId
+        ).plateform_id;
+      else return null;
+    },
+    selectedConfigAmmunitionId: function () {
+      if (this.selectedConfigId != null)
+        return this.$store.state.configs.find(
+          (config) => config.id == this.selectedConfigId
+        ).munition_id;
+      else return null;
+    },
+    selectedConfigCannonId: function () {
+      if (this.selectedConfigId != null)
+        return this.$store.state.configs.find(
+          (config) => config.id == this.selectedConfigId
+        ).cannon_id;
+      else return null;
     },
     platforms() {
       return this.$store.state.platforms;
@@ -286,24 +156,69 @@ export default {
     cannons() {
       return this.$store.state.cannons;
     },
-    totalWeight() {
-      return this.selectedPlatform.weight + this.selectedAmmunition.weight + this.selectedCannon.weight;
+    weightProgress() {
+      return (this.weight / 5.0) * 100.0;
     },
-    totalWeightProgress() {
-      return this.totalWeight / 5.0 * 100.0;
+    priceProgress() {
+      return (this.price / 3000.0) * 100.0;
     },
-    totalPrice() {
-      return this.selectedPlatform.price + this.selectedAmmunition.price + this.selectedCannon.price;
+    lenghtProgress() {
+      return (this.length / 120.0) * 100.0;
     },
-    totalPriceProgress() {
-      return this.totalPrice / 3000.0 * 100.0;
+  },
+  methods: {
+    updateConfig(configId) {
+      const config = this.$store.state.configs.find(
+        (config) => config.id == configId
+      );
+
+      if (config != null) {
+        this.selectedPlatform = this.$store.state.platforms.find(
+          (component) => component.id == config.plateform_id
+        );
+        this.selectedAmmunition = this.$store.state.ammunitions.find(
+          (component) => component.id == config.munition_id
+        );
+        this.selectedCannon = this.$store.state.cannons.find(
+          (component) => component.id == config.cannon_id
+        );
+
+        this.weight =
+          this.selectedPlatform.weight +
+          this.selectedAmmunition.weight +
+          this.selectedCannon.weight;
+        this.price =
+          this.selectedPlatform.price +
+          this.selectedAmmunition.price +
+          this.selectedCannon.price;
+        this.length =
+          this.selectedPlatform.length +
+          this.selectedPlatform.standard_cannon_length +
+          this.selectedCannon.length;
+      } else {
+        this.selectedPlatform = null;
+        this.selectedAmmunition = null;
+        this.selectedCannon = null;
+
+        this.weight = 0;
+        this.price = 0;
+        this.length = 0;
+      }
     },
-    totalLength() {
-      return this.selectedPlatform.length + this.selectedPlatform.standard_cannon_length + this.selectedCannon.length;
+  },
+  watch: {
+    selectedConfigId: function (newConfigId) {
+      this.updateConfig(newConfigId);
     },
-    totalLenghtProgress() {
-      return this.totalLength / 120.0 * 100.0;
-    }
+    selectedConfigPlatformId: function () {
+      this.updateConfig(this.selectedConfigId);
+    },
+    selectedConfigAmmunitionId: function () {
+      this.updateConfig(this.selectedConfigId);
+    },
+    selectedConfigCannonId: function () {
+      this.updateConfig(this.selectedConfigId);
+    },
   },
 };
 </script>
