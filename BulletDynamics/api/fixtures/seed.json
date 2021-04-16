@@ -1,7 +1,7 @@
 [
     {
         "model": "api.ammo",
-        "pk": 1,
+        "id": 1,
         "fields": {
             "name": "5.56 NATO",
             "weight": 0.37,
@@ -12,7 +12,7 @@
     },
     {
         "model": "api.ammo",
-        "pk": 2,
+        "id": 2,
         "fields": {
             "name": "7.62 NATO",
             "weight": 0.75,
@@ -23,7 +23,7 @@
     },
     {
         "model": "api.ammo",
-        "pk": 3,
+        "id": 3,
         "fields": {
             "name": "7.62x39",
             "weight": 0.49,
@@ -34,7 +34,7 @@
     },
     {
         "model": "api.cannon",
-        "pk": 1,
+        "id": 1,
         "fields": {
             "name": "10.5\" light",
             "weight": 0.50,
@@ -44,7 +44,7 @@
     },
     {
         "model": "api.cannon",
-        "pk": 2,
+        "id": 2,
         "fields": {
             "name": "14\" M4 milspec",
             "weight": 0.70,
@@ -54,7 +54,7 @@
     },
     {
         "model": "api.cannon",
-        "pk": 3,
+        "id": 3,
         "fields": {
             "name": "16\" AR-15 Standard",
             "weight": 0.70,
@@ -64,7 +64,7 @@
     },
     {
         "model": "api.cannon",
-        "pk": 4,
+        "id": 4,
         "fields": {
             "name": "20\" M16",
             "weight": 0.85,
@@ -74,7 +74,7 @@
     },
     {
         "model": "api.platform",
-        "pk": 1,
+        "id": 1,
         "fields": {
             "name": "AR-15",
             "weight": 3,
@@ -85,7 +85,7 @@
     },
     {
         "model": "api.platform",
-        "pk": 2,
+        "id": 2,
         "fields": {
             "name": "AK-M",
             "weight": 3.5,
@@ -96,7 +96,7 @@
     },
     {
         "model": "api.platform",
-        "pk": 3,
+        "id": 3,
         "fields": {
             "name": "AR-10",
             "weight": 3.7,
@@ -107,7 +107,7 @@
     },
     {
         "model": "api.initspeed",
-        "pk": 1,
+        "id": 1,
         "fields": {
             "init_speed": 760,
             "ammo_id": 1,
@@ -116,7 +116,7 @@
     },
     {
         "model": "api.initspeed",
-        "pk": 2,
+        "id": 2,
         "fields": {
             "init_speed": 855,
             "ammo_id": 1,
@@ -125,7 +125,7 @@
     },
     {
         "model": "api.initspeed",
-        "pk": 3,
+        "id": 3,
         "fields": {
             "init_speed": 905,
             "ammo_id": 1,
@@ -134,7 +134,7 @@
     },
     {
         "model": "api.initspeed",
-        "pk": 4,
+        "id": 4,
         "fields": {
             "init_speed": 935,
             "ammo_id": 1,
@@ -143,7 +143,7 @@
     },
     {
         "model": "api.initspeed",
-        "pk": 5,
+        "id": 5,
         "fields": {
             "init_speed": 690,
             "ammo_id": 2,
@@ -152,7 +152,7 @@
     },
     {
         "model": "api.initspeed",
-        "pk": 6,
+        "id": 6,
         "fields": {
             "init_speed": 780,
             "ammo_id": 2,
@@ -161,7 +161,7 @@
     },
     {
         "model": "api.initspeed",
-        "pk": 7,
+        "id": 7,
         "fields": {
             "init_speed": 780,
             "ammo_id": 2,
@@ -170,7 +170,7 @@
     },
     {
         "model": "api.initspeed",
-        "pk": 8,
+        "id": 8,
         "fields": {
             "init_speed": 815,
             "ammo_id": 2,
@@ -179,7 +179,7 @@
     },
     {
         "model": "api.initspeed",
-        "pk": 9,
+        "id": 9,
         "fields": {
             "init_speed": 640,
             "ammo_id": 3,
@@ -188,7 +188,7 @@
     },
     {
         "model": "api.initspeed",
-        "pk": 10,
+        "id": 10,
         "fields": {
             "init_speed": 695,
             "ammo_id": 3,
@@ -197,7 +197,7 @@
     },
     {
         "model": "api.initspeed",
-        "pk": 11,
+        "id": 11,
         "fields": {
             "init_speed": 715,
             "ammo_id": 3,
@@ -206,7 +206,7 @@
     },
     {
         "model": "api.initspeed",
-        "pk": 12,
+        "id": 12,
         "fields": {
             "init_speed": 740,
             "ammo_id": 3,

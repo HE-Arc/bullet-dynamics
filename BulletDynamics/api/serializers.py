@@ -2,37 +2,45 @@ from rest_framework import serializers
 
 from .models import Ammo, Cannon, Config, InitSpeed, Param, Platform, User
 
-class AmmoSerializer(serializers.HyperlinkedModelSerializer):
+class AmmoSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
     class Meta:
         model = Ammo
-        fields = ('name', 'weight', 'price', 'bullet_weight', 'cx')
+        fields = '__all__'
 
-class PlatformSerializer(serializers.HyperlinkedModelSerializer):
+class PlatformSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
     class Meta:
         model = Platform
-        fields = ('name', 'weight', 'price', 'length', 'standard_cannon_length')
+        fields = '__all__'
 
-class CannonSerializer(serializers.HyperlinkedModelSerializer):
+class CannonSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
     class Meta:
         model = Cannon
-        fields = ('name', 'weight', 'price', 'length')
+        fields = '__all__'
 
-class ConfigSerializer(serializers.HyperlinkedModelSerializer):
+class ConfigSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
     class Meta:
         model = Config
-        fields = ('name', 'cannon', 'ammo', 'platform')
+        fields = '__all__'
 
-class ParamSerializer(serializers.HyperlinkedModelSerializer):
+class ParamSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
     class Meta:
         model = Param
-        fields = ('name', 'height', 'angle')
+        fields = '__all__'
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
+    config = ConfigSerializer(read_only=True, many=True)
     class Meta:
         model = User
-        fields = ('name', 'param')
+        fields = '__all__'
 
-class InitSpeedSerializer(serializers.HyperlinkedModelSerializer):
+class InitSpeedSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
     class Meta:
         model = InitSpeed
-        fields = ('init_speed', 'cannon', 'ammo')
+        fields = '__all__'

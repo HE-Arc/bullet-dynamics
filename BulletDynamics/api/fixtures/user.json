@@ -1,0 +1,23 @@
+[
+    {
+        "model": "api.user",
+        "id": 1,
+        "fields": {
+            "username": "root",
+            "password": "pbkdf2_sha256$216000$HjAEDt5WnLPM$Woq5LAB4AZb3froExyiNwk9oA4+wKak0JPbvLshg2/Q=",
+            "is_superuser": true,
+            "is_staff": true
+        }
+    },
+    {
+        "model": "api.user",
+        "id": 2,
+        "fields": {
+            "username": "yo",
+            "password": "pbkdf2_sha256$216000$PNweSBo1uxyy$nkjsDpsGbU4vhJAh3JMv4H7xbIq9b0m1DR7DB3Egx5E=",
+            "is_superuser": false,
+            "is_staff": false
+        }
+    }   
+
+]

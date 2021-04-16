@@ -44,7 +44,7 @@ import GraphComponent from "../components/GraphComponent.vue";
 import SimulatorConfigList from "../components/SimulatorConfigList.vue";
 import SimulatorParamList from "../components/SimulatorParamList.vue";
 import { getAPI } from "../plugins/axios-api";
-import { mapState } from "vuex";
+//import { mapState } from "vuex";
 
 export default {
   name: "Simulator",
@@ -58,25 +58,27 @@ export default {
     SimulatorParamList,
     GraphComponent,
   },
-  computed: mapState(["APIData"]),
+  //computed: mapState(["APIData"]),
   methods: {
     loadConfigs() {
       let _this = this;
 
-      // Get loot history
       this.configs = [];
       this.loadingConfigs = true;
 
+      let username = this.$store.state.username;
+      //console.log(username);
+
       getAPI
-        .get("/api/configs/", {
+        .get(`/api/users/${username}/`, {
           headers: {
             Authorization: `Bearer ${_this.$store.state.accessToken}`,
           },
         })
         .then((response) => {
           console.log("Getting configs");
-          _this.configs = response.data;
-          console.log(response.data);
+          _this.configs = response.data.config;
+          console.log(_this.configs);
         })
         .catch((err) => {
           console.log(err);
@@ -87,9 +89,7 @@ export default {
     },
   },
   created: function () {
-    let _this = this;
-
-    _this.loadConfigs();
+    this.loadConfigs();
   },
 };
 </script>
