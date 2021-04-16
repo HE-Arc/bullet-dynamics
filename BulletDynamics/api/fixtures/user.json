@@ -1,10 +1,12 @@
 [
     {
         "model": "api.user",
-        "pk": 1,
+        "id": 1,
         "fields": {
             "username": "root",
-            "password": "ce5ca673d13b36118d54a7cf13aeb0ca012383bf771e713421b4d1fd841f539a"
+            "password": "pbkdf2_sha256$216000$HjAEDt5WnLPM$Woq5LAB4AZb3froExyiNwk9oA4+wKak0JPbvLshg2/Q=",
+            "is_superuser": true,
+            "is_staff": true
         }
     }    
 ]
