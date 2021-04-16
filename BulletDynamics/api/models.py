@@ -1,7 +1,7 @@
 from django.db import models
-from django_seed import Seed
+#from django_seed import Seed
 
-seeder = Seed.seeder()
+#seeder = Seed.seeder()
 
 # Create your models here.
 class Ammo(models.Model):    
