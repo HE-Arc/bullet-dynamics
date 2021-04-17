@@ -1844,3 +1844,212 @@ Entrypoints:
   INFO [2afe23b5] Running /usr/bin/env echo "Branch master (at ec89cf9c13e5393bc4ee8bb8160b3f2440e80f4b) deployed as release 20210417105912 by ma2s" >> /var/www/bullet-dynamics/revisions.log as poweruser@bullet.srvz-webapp.he-arc.ch
  DEBUG [2afe23b5] Command: cd /var/www/bullet-dynamics/releases && /usr/bin/env echo "Branch master (at ec89cf9c13e5393bc4ee8bb8160b3f2440e80f4b) deployed as release 20210417105912 by ma2s" >> /var/www/bullet-dynamics/revisions.log
   INFO [2afe23b5] Finished in 0.117 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-04-17 04:05:37 -0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [f1f880ca] Running /usr/bin/env mkdir -p /tmp as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [f1f880ca] Command: /usr/bin/env mkdir -p /tmp
+  INFO [f1f880ca] Finished in 0.493 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-1ab302a54dd996fa3b02.sh 0.0%
+  INFO Uploading /tmp/git-ssh-1ab302a54dd996fa3b02.sh 100.0%
+  INFO [02aebb4e] Running /usr/bin/env chmod 700 /tmp/git-ssh-1ab302a54dd996fa3b02.sh as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [02aebb4e] Command: /usr/bin/env chmod 700 /tmp/git-ssh-1ab302a54dd996fa3b02.sh
+  INFO [02aebb4e] Finished in 0.087 seconds with exit status 0 (successful).
+  INFO [7e126bdf] Running /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [7e126bdf] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-1ab302a54dd996fa3b02.sh" ; /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD )
+ DEBUG [7e126bdf] 	b375b1916b2057f732d06fe5132435ecb88c481e	HEAD
+  INFO [7e126bdf] Finished in 1.191 seconds with exit status 0 (successful).
+  INFO [a5757627] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [a5757627] Command: /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases
+  INFO [a5757627] Finished in 0.080 seconds with exit status 0 (successful).
+ DEBUG [7f301a5a] Running [ -f /var/www/bullet-dynamics/current/REVISION ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [7f301a5a] Command: [ -f /var/www/bullet-dynamics/current/REVISION ]
+ DEBUG [7f301a5a] Finished in 0.079 seconds with exit status 0 (successful).
+ DEBUG [26b44f3d] Running /usr/bin/env cat /var/www/bullet-dynamics/current/REVISION 2>/dev/null as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [26b44f3d] Command: /usr/bin/env cat /var/www/bullet-dynamics/current/REVISION 2>/dev/null
+ DEBUG [26b44f3d] 	ec89cf9c13e5393bc4ee8bb8160b3f2440e80f4b
+ DEBUG [26b44f3d] Finished in 0.090 seconds with exit status 0 (successful).
+ DEBUG [dc178972] Running [ -f /var/www/bullet-dynamics/repo/HEAD ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [dc178972] Command: [ -f /var/www/bullet-dynamics/repo/HEAD ]
+ DEBUG [dc178972] Finished in 0.074 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/bullet-dynamics/repo
+ DEBUG [31ecef12] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [31ecef12] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [31ecef12] Finished in 0.076 seconds with exit status 0 (successful).
+  INFO [51df3b66] Running /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [51df3b66] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-1ab302a54dd996fa3b02.sh" ; /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git )
+  INFO [51df3b66] Finished in 0.113 seconds with exit status 0 (successful).
+  INFO [c4ac5d89] Running /usr/bin/env git remote update --prune as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [c4ac5d89] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-1ab302a54dd996fa3b02.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [c4ac5d89] 	Fetching origin
+ DEBUG [c4ac5d89] 	From github.com:HE-Arc/bullet-dynamics
+   ec89cf9..2954962  master     -> master
+  INFO [c4ac5d89] Finished in 1.402 seconds with exit status 0 (successful).
+ DEBUG [2b42bf7a] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [2b42bf7a] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [2b42bf7a] Finished in 0.082 seconds with exit status 0 (successful).
+  INFO [6c9cccb9] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210417110539 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [6c9cccb9] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-1ab302a54dd996fa3b02.sh" ; /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210417110539 )
+  INFO [6c9cccb9] Finished in 0.092 seconds with exit status 0 (successful).
+  INFO [c540d2cc] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210417110539 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [c540d2cc] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-1ab302a54dd996fa3b02.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210417110539 )
+  INFO [c540d2cc] Finished in 0.184 seconds with exit status 0 (successful).
+ DEBUG [27f14306] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [27f14306] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [27f14306] Finished in 0.076 seconds with exit status 0 (successful).
+ DEBUG [d316af3c] Running /usr/bin/env git rev-list --max-count=1 master as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [d316af3c] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-1ab302a54dd996fa3b02.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [d316af3c] 	2954962baef3de876d5895fcad403e31fe81de92
+ DEBUG [d316af3c] Finished in 0.096 seconds with exit status 0 (successful).
+ DEBUG [62510a19] Running if test ! -d /var/www/bullet-dynamics/releases/20210417110539; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210417110539'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [62510a19] Command: if test ! -d /var/www/bullet-dynamics/releases/20210417110539; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210417110539'" 1>&2; false; fi
+ DEBUG [62510a19] Finished in 0.085 seconds with exit status 0 (successful).
+  INFO [fd5fc1af] Running /usr/bin/env echo "2954962baef3de876d5895fcad403e31fe81de92" > REVISION as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [fd5fc1af] Command: cd /var/www/bullet-dynamics/releases/20210417110539 && /usr/bin/env echo "2954962baef3de876d5895fcad403e31fe81de92" > REVISION
+  INFO [fd5fc1af] Finished in 0.084 seconds with exit status 0 (successful).
+  INFO [4142e158] Running source /var/www/bullet-dynamics/shared/env/bin/activate && /var/www/bullet-dynamics/shared/env/bin/pip install -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [4142e158] Command: source /var/www/bullet-dynamics/shared/env/bin/activate && /var/www/bullet-dynamics/shared/env/bin/pip install -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt
+ DEBUG [4142e158] 	Requirement already satisfied: asgiref==3.3.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 1)) (3.3.1)
+ DEBUG [4142e158] 	Requirement already satisfied: Django==3.1.7 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 2)) (3.1.7)
+ DEBUG [4142e158] 	Requirement already satisfied: django-cors-headers==3.7.0 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 3)) (3.7.0)
+ DEBUG [4142e158] 	Requirement already satisfied: django-environ==0.4.5 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 4)) (0.4.5)
+ DEBUG [4142e158] 	Requirement already satisfied: djangorestframework==3.12.2 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 5)) (3.12.2)
+ DEBUG [4142e158] 	Requirement already satisfied: djangorestframework-simplejwt==4.6.0 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 6)) (4.6.0)
+ DEBUG [4142e158] 	Requirement already satisfied: Faker==6.6.0 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 7)) (6.6.0)
+ DEBUG [4142e158] 	Requirement already satisfied: PyJWT==2.0.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 8)) (2.0.1)
+ DEBUG [4142e158] 	Requirement already satisfied: PyMySQL==1.0.2 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 9)) (1.0.2)
+ DEBUG [4142e158] 	Requirement already satisfied: python-dateutil==2.8.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 10)) (2.8.1)
+ DEBUG [4142e158] 	Requirement already satisfied: pytz==2021.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 11)) (2021.1)
+ DEBUG [4142e158] 	Requirement already satisfied: six==1.15.0 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 12)) (1.15.0)
+ DEBUG [4142e158] 	Requirement already satisfied: sqlparse==0.4.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 13)) (0.4.1)
+ DEBUG [4142e158] 	Requirement already satisfied: text-unidecode==1.3 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417110539/backend/requirements.txt (line 14)) (1.3)
+  INFO [4142e158] Finished in 2.567 seconds with exit status 0 (successful).
+  INFO [0c8d2772] Running /usr/bin/env ln -s /var/www/bullet-dynamics/releases/20210417110539 /var/www/bullet-dynamics/releases/current as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [0c8d2772] Command: /usr/bin/env ln -s /var/www/bullet-dynamics/releases/20210417110539 /var/www/bullet-dynamics/releases/current
+  INFO [0c8d2772] Finished in 0.092 seconds with exit status 0 (successful).
+  INFO [91aa8d39] Running /usr/bin/env mv /var/www/bullet-dynamics/releases/current /var/www/bullet-dynamics as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [91aa8d39] Command: /usr/bin/env mv /var/www/bullet-dynamics/releases/current /var/www/bullet-dynamics
+  INFO [91aa8d39] Finished in 0.099 seconds with exit status 0 (successful).
+  INFO [64c85b76] Running cp /var/www/bullet-dynamics/shared/.env /var/www/bullet-dynamics/releases/20210417110539/backend/BulletDynamics/.env as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [64c85b76] Command: cp /var/www/bullet-dynamics/shared/.env /var/www/bullet-dynamics/releases/20210417110539/backend/BulletDynamics/.env
+  INFO [64c85b76] Finished in 0.100 seconds with exit status 0 (successful).
+  INFO [d6682383] Running source /var/www/bullet-dynamics/shared/env/bin/activate && python3 /var/www/bullet-dynamics/releases/20210417110539/backend/manage.py migrate && cd /var/www/bullet-dynamics/releases/20210417110539/backend &&python3 /var/www/bullet-dynamics/releases/20210417110539/backend/manage.py collectstatic --noinput as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [d6682383] Command: source /var/www/bullet-dynamics/shared/env/bin/activate && python3 /var/www/bullet-dynamics/releases/20210417110539/backend/manage.py migrate && cd /var/www/bullet-dynamics/releases/20210417110539/backend &&python3 /var/www/bullet-dynamics/releases/20210417110539/backend/manage.py collectstatic --noinput
+ DEBUG [d6682383] 	Operations to perform:
+  Apply all migrations: admin, api, auth, contenttypes, sessions, token_blacklist
+Running migrations:
+  No migrations to apply.
+ DEBUG [d6682383] 	
+165 static files copied to '/var/www/bullet-dynamics/releases/20210417110539/backend/static'.
+  INFO [d6682383] Finished in 3.713 seconds with exit status 0 (successful).
+  INFO [93c922e7] Running /usr/bin/env sudo sv reload uwsgi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [93c922e7] Command: /usr/bin/env sudo sv reload uwsgi
+ DEBUG [93c922e7] 	ok: run: uwsgi: (pid 18023) 390s
+  INFO [93c922e7] Finished in 0.115 seconds with exit status 0 (successful).
+  INFO [e8a729e9] Running cd /var/www/bullet-dynamics/releases/20210417110539/frontend && npm install && npm run build as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [e8a729e9] Command: cd /var/www/bullet-dynamics/releases/20210417110539/frontend && npm install && npm run build
+ DEBUG [e8a729e9] 	npm
+ DEBUG [e8a729e9] 	 WARN read-shrinkwrap This version of npm is compatible with lockfileVersion@1, but package-lock.json was generated for lockfileVersion@2. I'll try to do my best with it!
+ DEBUG [e8a729e9] 	
+> yorkie@2.0.0 install /var/www/bullet-dynamics/releases/20210417110539/frontend/node_modules/yorkie
+> node bin/install.js
+
+ DEBUG [e8a729e9] 	setting up Git hooks
+ DEBUG [e8a729e9] 	can't find .git directory, skipping Git hooks installation
+ DEBUG [e8a729e9] 	
+> ejs@2.7.4 postinstall /var/www/bullet-dynamics/releases/20210417110539/frontend/node_modules/ejs
+> node ./postinstall.js
+
+ DEBUG [e8a729e9] 	Thank you for installing [35mEJS[0m: built with the [32mJake[0m JavaScript build tool ([32mhttps://jakejs.com/[0m)
+
+ DEBUG [e8a729e9] 	
+> core-js@3.10.1 postinstall /var/www/bullet-dynamics/releases/20210417110539/frontend/node_modules/core-js
+> node -e "try{require('./postinstall')}catch(e){}"
+
+ DEBUG [e8a729e9] 	[96mThank you for using core-js ([94m https://github.com/zloirock/core-js [96m) for polyfilling JavaScript standard library![0m
+
+[96mThe project needs your help! Please consider supporting of core-js on Open Collective or Patreon: [0m
+[96m>[94m https://opencollective.com/core-js [0m
+[96m>[94m https://www.patreon.com/zloirock [0m
+
+[96mAlso, the author of core-js ([94m https://github.com/zloirock [96m) is looking for a good job -)[0m
+
+ DEBUG [e8a729e9] 	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/webpack-dev-server/node_modules/fsevents):
+ DEBUG [e8a729e9] 	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+ DEBUG [e8a729e9] 	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/watchpack-chokidar2/node_modules/fsevents):
+ DEBUG [e8a729e9] 	npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+ DEBUG [e8a729e9] 	npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules/fsevents):
+npm 
+ DEBUG [e8a729e9] 	WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+ DEBUG [e8a729e9] 	
+ DEBUG [e8a729e9] 	added 1356 packages from 693 contributors and audited 1362 packages in 17.866s
+ DEBUG [e8a729e9] 	
+79 packages are looking for funding
+  run `npm fund` for details
+
+ DEBUG [e8a729e9] 	found 2 moderate severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
+ DEBUG [e8a729e9] 	
+> bullet-dynamics-frontend@0.1.0 build /var/www/bullet-dynamics/releases/20210417110539/frontend
+> vue-cli-service build
+
+ DEBUG [e8a729e9] 	
+ DEBUG [e8a729e9] 	-  Building for production...
+ DEBUG [e8a729e9] 	 WARNING  Compiled with 2 warnings11:07:04 AM
+ DEBUG [e8a729e9] 	
+ DEBUG [e8a729e9] 	 warning  
+ DEBUG [e8a729e9] 	
+asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  css/chunk-vendors.4049328f.css (367 KiB)
+  js/chunk-vendors.19a78a68.js (351 KiB)
+ DEBUG [e8a729e9] 	
+ warning  
+
+ DEBUG [e8a729e9] 	entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  app (737 KiB)
+      css/chunk-vendors.4049328f.css
+      js/chunk-vendors.19a78a68.js
+      css/app.9e213220.css
+      js/app.9562a57d.js
+
+
+ DEBUG [e8a729e9] 	  File                                   Size              Gzipped
+
+  dist/js/chunk-vendors.19a78a68.js      351.13 KiB        113.37 KiB
+  dist/js/about.611c5d51.js              55.91 KiB         15.09 KiB
+  dist/js/app.9562a57d.js                19.09 KiB         6.03 KiB
+  dist/css/chunk-vendors.4049328f.css    367.06 KiB        44.00 KiB
+  dist/css/about.76cad74e.css            11.45 KiB         2.44 KiB
+  dist/css/app.9e213220.css              0.10 KiB          0.09 KiB
+
+  Images and other types of assets omitted.
+
+ DEBUG [e8a729e9] 	 DONE  Build complete. The dist directory is ready to be deployed.
+ DEBUG [e8a729e9] 	 INFO  Check out deployment instructions at https://cli.vuejs.org/guide/deployment.html
+      
+  INFO [e8a729e9] Finished in 76.562 seconds with exit status 0 (successful).
+ DEBUG [a34c80be] Running /usr/bin/env ls -x /var/www/bullet-dynamics/releases as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [a34c80be] Command: /usr/bin/env ls -x /var/www/bullet-dynamics/releases
+ DEBUG [a34c80be] 	20210417104255	20210417104706	20210417105005	20210417105648	20210417105912
+20210417110539
+ DEBUG [a34c80be] Finished in 0.127 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on bullet.srvz-webapp.he-arc.ch
+ DEBUG [d29e9bab] Running [ -d /var/www/bullet-dynamics/current ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [d29e9bab] Command: [ -d /var/www/bullet-dynamics/current ]
+ DEBUG [d29e9bab] Finished in 0.078 seconds with exit status 0 (successful).
+ DEBUG [587cab8e] Running /usr/bin/env readlink /var/www/bullet-dynamics/current as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [587cab8e] Command: /usr/bin/env readlink /var/www/bullet-dynamics/current
+ DEBUG [587cab8e] 	/var/www/bullet-dynamics/releases/20210417110539
+ DEBUG [587cab8e] Finished in 0.093 seconds with exit status 0 (successful).
+  INFO [958288fd] Running /usr/bin/env rm -rf /var/www/bullet-dynamics/releases/20210417104255 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [958288fd] Command: /usr/bin/env rm -rf /var/www/bullet-dynamics/releases/20210417104255
+  INFO [958288fd] Finished in 0.517 seconds with exit status 0 (successful).
+ DEBUG [99d7676d] Running if test ! -d /var/www/bullet-dynamics/releases; then echo "Directory does not exist '/var/www/bullet-dynamics/releases'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [99d7676d] Command: if test ! -d /var/www/bullet-dynamics/releases; then echo "Directory does not exist '/var/www/bullet-dynamics/releases'" 1>&2; false; fi
+ DEBUG [99d7676d] Finished in 0.076 seconds with exit status 0 (successful).
+  INFO [f7bebade] Running /usr/bin/env echo "Branch master (at 2954962baef3de876d5895fcad403e31fe81de92) deployed as release 20210417110539 by ma2s" >> /var/www/bullet-dynamics/revisions.log as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [f7bebade] Command: cd /var/www/bullet-dynamics/releases && /usr/bin/env echo "Branch master (at 2954962baef3de876d5895fcad403e31fe81de92) deployed as release 20210417110539 by ma2s" >> /var/www/bullet-dynamics/revisions.log
+  INFO [f7bebade] Finished in 0.106 seconds with exit status 0 (successful).
