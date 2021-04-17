@@ -78,8 +78,30 @@ export default new Vuex.Store({
           })
       })
     },
+    async postConfig({ commit }, newConfig) {
+      try {
+        await getAPI.post('/api/configs/', newConfig);
+        
+        // Then, reload configs
+        const response = await getAPI.get('/api/configs/');
+        commit('updateConfigs', response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async fetchConfigs({ commit }) {
       try {
+        const response = await getAPI.get('/api/configs/');
+        commit('updateConfigs', response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deleteConfig({ commit }, configId) {
+      try {
+        await getAPI.delete('/api/configs/' + configId);
+        
+        // Then, reload configs
         const response = await getAPI.get('/api/configs/');
         commit('updateConfigs', response.data);
       } catch (error) {

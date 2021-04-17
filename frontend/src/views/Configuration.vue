@@ -6,7 +6,12 @@
           <v-card class="pa-2" outlined tile>
             <v-container>
               <v-row>
-                <v-col cols="12" sm="6">
+                <v-col>
+                  <h4>Configuration selection</h4>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="9">
                   <v-select
                     v-model="selectedConfigId"
                     :items="configs"
@@ -16,12 +21,29 @@
                   ></v-select>
                 </v-col>
                 <v-col cols="12" sm="3">
-                  <v-btn block color="success"><v-icon>mdi-plus</v-icon></v-btn>
+                  <v-btn block color="error" v-on:click="deleteConfig">
+                    <v-icon>mdi-trash-can</v-icon>
+                  </v-btn>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <h4>Configuration creation</h4>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="9">
+                  <v-text-field
+                    v-model="newConfigName"
+                    placeholder="New configuration name"
+                    solo
+                    dense
+                  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="3">
-                  <v-btn block color="error"
-                    ><v-icon>mdi-trash-can</v-icon></v-btn
-                  >
+                  <v-btn block color="success" v-on:click="createConfig">
+                    <v-icon>mdi-plus</v-icon>
+                  </v-btn>
                 </v-col>
               </v-row>
             </v-container>
@@ -64,7 +86,7 @@
                     colored-border
                     elevation="2"
                   >
-                    <b>Composants:</b> veuillez sélectionner une configuration.
+                    <b>Components:</b> please select a configuration.
                   </v-alert>
                 </v-col>
               </v-row>
@@ -103,7 +125,7 @@
             </div>
             <div v-else>
               <v-alert type="info" border="right" colored-border elevation="2">
-                <b>Détails:</b> veuillez sélectionner une configuration.
+                <b>Details:</b> please select a configuration.
               </v-alert>
             </div>
           </v-card>
@@ -152,6 +174,7 @@ export default {
       selectedPlatform: null,
       selectedAmmo: null,
       selectedCannon: null,
+      newConfigName: null,
       weight: 0,
       price: 0,
       length: 0,
@@ -210,6 +233,31 @@ export default {
     },
   },
   methods: {
+    createConfig() {
+      if (this.loadingData) console.log("Operation aborted: not enough data.");
+      else {
+        const name =
+          this.newConfigName != null ? this.newConfigName : "newConfig";
+        const cannon = this.cannons[0].id;
+        const ammo = this.ammos[0].id;
+        const platform = this.platforms[0].id;
+
+        this.$store.dispatch("postConfig", {
+          name: name,
+          cannon: cannon,
+          ammo: ammo,
+          platform: platform,
+        });
+      }
+    },
+    deleteConfig() {
+      if (this.selectedConfigId == null)
+        console.log("Operation aborted: no configuration selected.");
+      else {
+        this.$store.dispatch("deleteConfig", this.selectedConfigId);
+        this.selectedConfigId = null;
+      }
+    },
     updateConfig(configId) {
       const config = this.$store.state.configs.find(
         (config) => config.id == configId
