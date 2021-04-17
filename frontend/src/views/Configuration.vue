@@ -56,7 +56,18 @@
                   />
                 </v-col>
               </v-row>
-              <v-row v-else> Sélectionne une config PD! </v-row>
+              <v-row v-else>
+                <v-col>
+                  <v-alert
+                    type="info"
+                    border="right"
+                    colored-border
+                    elevation="2"
+                  >
+                    <b>Composants:</b> veuillez sélectionner une configuration.
+                  </v-alert>
+                </v-col>
+              </v-row>
               <v-row>
                 <v-col>
                   <v-img
@@ -90,7 +101,11 @@
                 :progress="lenghtProgress"
               />
             </div>
-            <div v-else>Sélectionne une config PD!</div>
+            <div v-else>
+              <v-alert type="info" border="right" colored-border elevation="2">
+                <b>Détails:</b> veuillez sélectionner une configuration.
+              </v-alert>
+            </div>
           </v-card>
         </v-col>
       </v-row>
@@ -109,10 +124,10 @@
                 color="primary"
                 indeterminate
               ></v-progress-circular>
-              {{configs}}
-              {{platforms}}
-              {{ammos}}
-              {{cannons}}
+              {{ configs }}
+              {{ platforms }}
+              {{ ammos }}
+              {{ cannons }}
             </v-card-text>
           </v-card>
         </v-col>
@@ -201,7 +216,7 @@ export default {
         this.selectedAmmo = this.$store.state.ammos[config.ammo_id];
         this.selectedCannon = this.$store.state.cannons[config.cannon_id];
 
-        //TODO cast to int 
+        //TODO cast to int
         this.weight =
           parseFloat(this.selectedPlatform.weight) +
           parseFloat(this.selectedAmmo.weight) +
@@ -210,10 +225,11 @@ export default {
           parseFloat(this.selectedPlatform.price) +
           parseFloat(this.selectedAmmo.price) +
           parseFloat(this.selectedCannon.price);
-        this.length = 100 * (
-          parseFloat(this.selectedPlatform.length) -
-          parseFloat(this.selectedPlatform.standard_cannon_length) +
-          parseFloat(this.selectedCannon.length));
+        this.length =
+          100 *
+          (parseFloat(this.selectedPlatform.length) -
+            parseFloat(this.selectedPlatform.standard_cannon_length) +
+            parseFloat(this.selectedCannon.length));
       } else {
         this.selectedPlatform = null;
         this.selectedAmmo = null;
