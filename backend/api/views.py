@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics, viewsets
+from rest_framework import generics, viewsets, views
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -37,3 +37,28 @@ class UserViewSet(viewsets.ModelViewSet):
 class InitSpeedViewSet(viewsets.ModelViewSet):
     queryset = InitSpeed.objects.all()
     serializer_class = InitSpeedSerializer
+
+class UserConfigsView(views.APIView):
+    serializer_class = ConfigSerializer
+
+    def get(self):
+        """
+        Return a list of configs for a user.
+        """
+        configs = User.objects.filter(username=self.request.username).config
+        return Response(configs)
+
+class SimulatorDataView(views.APIView):
+
+    def get(self):
+        """
+        Return the simulation data for each config.
+        """
+        simulatorData = {}
+        for config in self.request.configs:
+            simulatorData[config.id] = computeSimulatorData()
+        return Response(simulatorData)
+    
+    def computeSimulatorData(config):
+        #TODO replace with real values
+        return Simulation.getResult(bullet_weight = 0.010 , init_speed=500)

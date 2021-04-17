@@ -13,6 +13,7 @@ router.register(r'configs', views.ConfigViewSet)
 router.register(r'params', views.ParamViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'init_speeds', views.InitSpeedViewSet)
+#router.register(r'users', views.InitSpeedViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
