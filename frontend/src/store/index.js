@@ -26,15 +26,6 @@ export default new Vuex.Store({
       state.refreshToken = null
       localStorage.removeItem('accessToken')
     },
-    updateConfigPlatform(state, { configId, id }) {
-      state.configs.find(config => config.id == configId).platform = id;
-    },
-    updateConfigAmmo(state, { configId, id }) {
-      state.configs.find(config => config.id == configId).ammo = id;
-    },
-    updateConfigCannon(state, { configId, id }) {
-      state.configs.find(config => config.id == configId).cannon = id;
-    },
     updateConfigs(state, data) {
       state.configs = data;
     },
@@ -91,6 +82,17 @@ export default new Vuex.Store({
     },
     async fetchConfigs({ commit }) {
       try {
+        const response = await getAPI.get('/api/configs/');
+        commit('updateConfigs', response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async patchConfig({ commit }, patchedConfig) {
+      try {
+        await getAPI.patch('/api/configs/' + patchedConfig["id"], patchedConfig);
+        
+        // Then, reload configs
         const response = await getAPI.get('/api/configs/');
         commit('updateConfigs', response.data);
       } catch (error) {

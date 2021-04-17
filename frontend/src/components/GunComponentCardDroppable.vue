@@ -40,14 +40,16 @@ export default {
       if (event.dataTransfer.getData("type") != this.type) return;
 
       const id = event.dataTransfer.getData("id");
-      const payload = { configId: this.configId, id: id };
+      let patchedConfig = { "id": this.configId };
 
       if (this.type == "platform")
-        this.$store.commit("updateConfigPlatform", payload);
+        patchedConfig["platform"] = id;
       else if (this.type == "ammo")
-        this.$store.commit("updateConfigAmmo", payload);
+        patchedConfig["ammo"] = id;
       else if (this.type == "cannon")
-        this.$store.commit("updateConfigCannon", payload);
+        patchedConfig["cannon"] = id;
+      
+      this.$store.dispatch("patchConfig", patchedConfig);
     },
     tooltip(component) {
       if (this.type == "platform") {
