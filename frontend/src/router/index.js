@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Simulator from '../views/Simulator.vue'
+import Configuration from '../views/Configuration.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 
@@ -19,15 +20,14 @@ const routes = [
   {
     path: '/configuration',
     name: 'Configuration',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Configuration.vue')
+    component: Configuration,
+    meta: {
+      requiresLogin: true
+    },    
   },
   {
     path: '/simulator',
     name: 'Simulator',
-    //
     component: Simulator,
     meta: {
       requiresLogin: true
@@ -36,13 +36,11 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    //
     component: Login
   },
   {
     path: '/logout',
     name: 'Logout',
-    //
     component: Logout
   },
 ]

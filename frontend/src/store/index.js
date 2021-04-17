@@ -20,11 +20,13 @@ export default new Vuex.Store({
       state.refreshToken = refresh
       state.username = username
       localStorage.setItem('accessToken', access);
+      localStorage.setItem('username', username)
     },
     destroyToken(state) {
       state.accessToken = null
       state.refreshToken = null
       localStorage.removeItem('accessToken')
+      localStorage.removeItem('username')
     },
     updateConfigs(state, data) {
       state.configs = data;
@@ -43,6 +45,7 @@ export default new Vuex.Store({
     loggedIn(state) {
       if (localStorage.getItem('accessToken') != null) {
         state.accessToken = localStorage.getItem('accessToken');
+        state.username = localStorage.getItem('username');
       }
       return state.accessToken != null;
     }
@@ -69,59 +72,55 @@ export default new Vuex.Store({
           })
       })
     },
-    async postConfig({ commit }, newConfig) {
+    async postConfig({ state, dispatch }, newConfig) {
       try {
         //console.log(newConfig);
         await getAPI.post('/api/configs/', newConfig);
 
-        /*
         await getAPI.patch(`/api/users/${state.username}/`, {
           headers: { Authorization: `Bearer ${state.accessToken}` },
           data: { "config": [newConfig] }
         })
-        */
 
         // Then, reload configs
-        const response = await getAPI.get('/api/configs/');
-        commit('updateConfigs', response.data);
+        dispatch('fetchConfigs');
       } catch (error) {
         console.log(error);
       }
     },
-    async fetchConfigs({ commit }) {
+    async fetchConfigs({ commit, state }) {
       try {
-        const response = await getAPI.get('/api/configs/');
-        commit('updateConfigs', response.data);
-
-        /*
-        const response2 = await getAPI.get(`/api/users/${state.username}/`, {
+        const responseUserConfig = await getAPI.get(`/api/users/${state.username}/`, {
           headers: { Authorization: `Bearer ${state.accessToken}` }
         });
-        console.log("USER CONFIGS");
-        console.log(response2.data.config);
-        */
+        const userConfigs = responseUserConfig.data.config;
+
+        const response = await getAPI.get('/api/configs/');
+        const configs = response.data;
+        const myConfigs = configs.find(config => userConfigs.includes(config.id));
+
+        commit('updateConfigs', [myConfigs]);
       } catch (error) {
         console.log(error);
       }
     },
-    async patchConfig({ commit }, payload) {
+    async patchConfig({ dispatch }, payload) {
       try {
         //console.log(payload);
-        await getAPI.patch('/api/configs/' + payload["id"] + '/', payload["patchedConfig"]);        
+        await getAPI.patch('/api/configs/' + payload["id"] + '/', payload["patchedConfig"]);
+
         // Then, reload configs
-        const response = await getAPI.get('/api/configs/');
-        commit('updateConfigs', response.data);
+        dispatch('fetchConfigs');
       } catch (error) {
         console.log(error.response.data);
       }
     },
-    async deleteConfig({ commit }, configId) {
+    async deleteConfig({ dispatch }, configId) {
       try {
         await getAPI.delete('/api/configs/' + configId);
 
         // Then, reload configs
-        const response = await getAPI.get('/api/configs/');
-        commit('updateConfigs', response.data);
+        dispatch('fetchConfigs');
       } catch (error) {
         console.log(error);
       }
