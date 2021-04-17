@@ -6,7 +6,12 @@
           <v-card class="pa-2" outlined tile>
             <v-container>
               <v-row>
-                <v-col cols="12" sm="6">
+                <v-col>
+                  <h4>Configuration selection</h4>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="9">
                   <v-select
                     v-model="selectedConfigId"
                     :items="configs"
@@ -16,12 +21,29 @@
                   ></v-select>
                 </v-col>
                 <v-col cols="12" sm="3">
-                  <v-btn block color="success"><v-icon>mdi-plus</v-icon></v-btn>
+                  <v-btn block color="error" v-on:click="deleteConfig">
+                    <v-icon>mdi-trash-can</v-icon>
+                  </v-btn>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <h4>Configuration creation</h4>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" sm="9">
+                  <v-text-field
+                    v-model="newConfigName"
+                    placeholder="New configuration name"
+                    solo
+                    dense
+                  ></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="3">
-                  <v-btn block color="error"
-                    ><v-icon>mdi-trash-can</v-icon></v-btn
-                  >
+                  <v-btn block color="success" v-on:click="createConfig">
+                    <v-icon>mdi-plus</v-icon>
+                  </v-btn>
                 </v-col>
               </v-row>
             </v-container>
@@ -56,7 +78,18 @@
                   />
                 </v-col>
               </v-row>
-              <v-row v-else> Sélectionne une config PD! </v-row>
+              <v-row v-else>
+                <v-col>
+                  <v-alert
+                    type="info"
+                    border="right"
+                    colored-border
+                    elevation="2"
+                  >
+                    <b>Components:</b> please select a configuration.
+                  </v-alert>
+                </v-col>
+              </v-row>
               <v-row>
                 <v-col>
                   <v-img
@@ -90,7 +123,11 @@
                 :progress="lenghtProgress"
               />
             </div>
-            <div v-else>Sélectionne une config PD!</div>
+            <div v-else>
+              <v-alert type="info" border="right" colored-border elevation="2">
+                <b>Details:</b> please select a configuration.
+              </v-alert>
+            </div>
           </v-card>
         </v-col>
       </v-row>
@@ -109,16 +146,22 @@
                 color="primary"
                 indeterminate
               ></v-progress-circular>
-              {{configs}}
-              {{platforms}}
-              {{ammos}}
-              {{cannons}}
             </v-card-text>
           </v-card>
         </v-col>
         <v-spacer></v-spacer>
       </v-row>
     </v-container>
+
+    <v-snackbar v-model="snackbar" :timeout="snackbarTimeout">
+      {{ snackbarText }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -141,9 +184,13 @@ export default {
       selectedPlatform: null,
       selectedAmmo: null,
       selectedCannon: null,
+      newConfigName: null,
       weight: 0,
       price: 0,
       length: 0,
+      snackbar: false,
+      snackbarText: "Something happened.",
+      snackbarTimeout: 2000,
     };
   },
   computed: {
@@ -160,17 +207,23 @@ export default {
     },
     selectedConfigPlatformId() {
       if (this.selectedConfigId != null)
-        return this.$store.state.configs[this.selectedConfigId].platform_id;
+        return this.$store.state.configs.find(
+          (config) => config.id == this.selectedConfigId
+        ).platform;
       else return null;
     },
     selectedConfigAmmoId: function () {
       if (this.selectedConfigId != null)
-        return this.$store.state.configs[this.selectedConfigId].ammo_id;
+        return this.$store.state.configs.find(
+          (config) => config.id == this.selectedConfigId
+        ).ammo;
       else return null;
     },
     selectedConfigCannonId: function () {
       if (this.selectedConfigId != null)
-        return this.$store.state.configs[this.selectedConfigId].cannon_id;
+        return this.$store.state.configs.find(
+          (config) => config.id == this.selectedConfigId
+        ).cannon;
       else return null;
     },
     platforms() {
@@ -183,37 +236,73 @@ export default {
       return this.$store.state.cannons;
     },
     weightProgress() {
-      return (this.weight / 5.0) * 100.0;
+      return (this.weight / 5.5) * 100.0;
     },
     priceProgress() {
-      return (this.price / 3000.0) * 100.0;
+      return (this.price / 2250.0) * 100.0;
     },
     lenghtProgress() {
-      return (this.length / 120.0) * 100.0;
+      return (this.length / 100.0) * 100.0;
     },
   },
   methods: {
+    createConfig() {
+      if (this.loadingData) console.log("Operation aborted: not enough data.");
+      else {
+        const name =
+          this.newConfigName != null ? this.newConfigName : "newConfig";
+        const cannon = this.cannons[0].id;
+        const ammo = this.ammos[0].id;
+        const platform = this.platforms[0].id;
+
+        this.$store.dispatch("postConfig", {
+          name: name,
+          cannon: cannon,
+          ammo: ammo,
+          platform: platform,
+        });
+      }
+    },
+    deleteConfig() {
+      if (this.selectedConfigId == null)
+        console.log("Operation aborted: no configuration selected.");
+      else {
+        this.$store.dispatch("deleteConfig", this.selectedConfigId);
+        this.selectedConfigId = null;
+      }
+    },
     updateConfig(configId) {
-      const config = this.$store.state.configs[configId];
+      const config = this.$store.state.configs.find(
+        (config) => config.id == configId
+      );
 
       if (config != null) {
-        this.selectedPlatform = this.$store.state.platforms[config.platform_id];
-        this.selectedAmmo = this.$store.state.ammos[config.ammo_id];
-        this.selectedCannon = this.$store.state.cannons[config.cannon_id];
+        this.selectedPlatform = this.$store.state.platforms.find(
+          (platform) => platform.id == config.platform
+        );
+        this.selectedAmmo = this.$store.state.ammos.find(
+          (ammo) => ammo.id == config.ammo
+        );
+        this.selectedCannon = this.$store.state.cannons.find(
+          (cannon) => cannon.id == config.cannon
+        );
 
-        //TODO cast to int 
         this.weight =
           parseFloat(this.selectedPlatform.weight) +
           parseFloat(this.selectedAmmo.weight) +
           parseFloat(this.selectedCannon.weight);
+        this.weight = this.weight.toFixed(1);
         this.price =
           parseFloat(this.selectedPlatform.price) +
-          parseFloat(this.selectedAmmo.price) +
+          parseFloat(this.selectedAmmo.price * 30) +
           parseFloat(this.selectedCannon.price);
-        this.length = 100 * (
-          parseFloat(this.selectedPlatform.length) -
-          parseFloat(this.selectedPlatform.standard_cannon_length) +
-          parseFloat(this.selectedCannon.length));
+        this.price = this.price.toFixed(1);
+        this.length =
+          100 *
+          (parseFloat(this.selectedPlatform.length) -
+            parseFloat(this.selectedPlatform.standard_cannon_length) +
+            parseFloat(this.selectedCannon.length));
+        this.length = this.length.toFixed(1);
       } else {
         this.selectedPlatform = null;
         this.selectedAmmo = null;
@@ -238,18 +327,13 @@ export default {
     selectedConfigCannonId: function () {
       this.updateConfig(this.selectedConfigId);
     },
-    configs: function (nv) {
-      console.log(nv);
+    configs: function () {
+      this.snackbarText = "Configurations updated."
+      this.snackbar = true;
     },
-    platforms: function (nv) {
-      console.log(nv);
-    },
-    ammos: function (nv) {
-      console.log(nv);
-    },
-    cannons: function (nv) {
-      console.log(nv);
-    },
+    platforms: function () {},
+    ammos: function () {},
+    cannons: function () {},
   },
   created: function () {
     const configs = this.$store.state.configs;

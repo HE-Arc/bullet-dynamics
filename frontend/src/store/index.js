@@ -8,46 +8,27 @@ export default new Vuex.Store({
   state: {
     accessToken: null,
     refreshToken: null,
-    configs: {
-      1: { id: 1, name: "conf test 1", ammo_id: 1, platform_id: 1, cannon_id: 1 },
-      2: { id: 2, name: "conf test 2", ammo_id: 2, platform_id: 2, cannon_id: 2 },
-    },
-    platforms: {
-      1: { "id": 1, "name": "AR-15", "weight": 3, "price": 1500, "length": 0.83, "standard_cannon_length": 0.406 },
-      2: { "id": 2, "name": "AK-M", "weight": 3.5, "price": 500, "length": 0.88, "standard_cannon_length": 0.37 },
-    },
-    ammos: {
-      1: { "id": 1, "name": "5.56 NATO", "weight": 0.37, "price": 0.5, "bullet_weight": 0.004, "cx": 0.37 },
-      2: { "id": 2, "name": "7.62 NATO", "weight": 0.75, "price": 1.2, "bullet_weight": 0.010, "cx": 0.475 },
-    },
-    cannons: {
-      1: { "id": 1, "name": "10.5\" light", "weight": 0.50, "price": 200, "length": 0.267 },
-      2: { "id": 2, "name": "14\" M4 milspec", "weight": 0.70, "price": 150, "length": 0.37 },
-    },
+    configs: [],
+    platforms: [],
+    ammos: [],
+    cannons: [],
     username: null,
   },
   mutations: {
-    updateStorage (state, { access, refresh, username }) {
+    updateStorage(state, { access, refresh, username }) {
       state.accessToken = access
       state.refreshToken = refresh
       state.username = username
       localStorage.setItem('accessToken', access);
+      localStorage.setItem('username', username)
     },
     destroyToken(state) {
       state.accessToken = null
       state.refreshToken = null
       localStorage.removeItem('accessToken')
+      localStorage.removeItem('username')
     },
-    updateConfigPlatform(state, { configId, id }) {
-      state.configs[configId].platform_id = id;
-    },
-    updateConfigAmmo(state, { configId, id }) {
-      state.configs[configId].ammo_id = id;
-    },
-    updateConfigCannon(state, { configId, id }) {
-      state.configs[configId].cannon_id = id;
-    },
-    updatConfigs(state, data) {
+    updateConfigs(state, data) {
       state.configs = data;
     },
     updateCannons(state, data) {
@@ -64,6 +45,7 @@ export default new Vuex.Store({
     loggedIn(state) {
       if (localStorage.getItem('accessToken') != null) {
         state.accessToken = localStorage.getItem('accessToken');
+        state.username = localStorage.getItem('username');
       }
       return state.accessToken != null;
     }
@@ -74,7 +56,7 @@ export default new Vuex.Store({
         context.commit('destroyToken')
       }
     },
-    userLogin (context, usercredentials) {
+    userLogin(context, usercredentials) {
       let username = usercredentials.username;
       return new Promise((resolve, reject) => {
         getAPI.post('/api-token/', {
@@ -82,7 +64,7 @@ export default new Vuex.Store({
           password: usercredentials.password
         })
           .then(response => {
-            context.commit('updateStorage', { access: response.data.access, refresh: response.data.refresh, username }) 
+            context.commit('updateStorage', { access: response.data.access, refresh: response.data.refresh, username })
             resolve()
           })
           .catch(err => {
@@ -90,10 +72,57 @@ export default new Vuex.Store({
           })
       })
     },
-    async fetchConfigs({ commit }) {
+    async postConfig({ state, dispatch }, newConfig) {
       try {
+        //console.log(newConfig);
+        const response = await getAPI.post('/api/configs/', newConfig);
+        const newConfigId = response.data.id;
+
+        const myConfigs = state.configs.map(config => config.id);
+        myConfigs.push(newConfigId);
+        console.log(myConfigs);
+        await getAPI.patch(`/api/users/${state.username}/`, { "config": myConfigs }, {
+          headers: { Authorization: `Bearer ${state.accessToken}` }
+        })
+
+        // Then, reload configs
+        dispatch('fetchConfigs');
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async fetchConfigs({ commit, state }) {
+      try {
+        const responseUserConfig = await getAPI.get(`/api/users/${state.username}/`, {
+          headers: { Authorization: `Bearer ${state.accessToken}` }
+        });
+        const userConfigs = responseUserConfig.data.config;
+
         const response = await getAPI.get('/api/configs/');
-        commit('updatePlatforms', response.data);
+        const configs = response.data;
+        const myConfigs = configs.filter(config => userConfigs.includes(config.id));
+        commit('updateConfigs', myConfigs);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async patchConfig({ dispatch }, payload) {
+      try {
+        //console.log(payload);
+        await getAPI.patch('/api/configs/' + payload["id"] + '/', payload["patchedConfig"]);
+
+        // Then, reload configs
+        dispatch('fetchConfigs');
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    },
+    async deleteConfig({ dispatch }, configId) {
+      try {
+        await getAPI.delete('/api/configs/' + configId);
+
+        // Then, reload configs
+        dispatch('fetchConfigs');
       } catch (error) {
         console.log(error);
       }

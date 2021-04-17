@@ -34,7 +34,7 @@ class ParamSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
-    config = ConfigSerializer(read_only=True, many=True)
+    #config = ConfigSerializer(many=True)
     class Meta:
         model = User
         fields = '__all__'
