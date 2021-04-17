@@ -10,6 +10,7 @@
 server "bullet.srvz-webapp.he-arc.ch", user: "poweruser", roles: %w{app db web}, port: 1444
 set :deploy_to, "/var/www/#{fetch(:application)}"
 
+after 'deploy:publishing', 'django:migrate'
 
 namespace :django do
 
