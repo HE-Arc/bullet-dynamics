@@ -2,7 +2,7 @@
   <div>
     <v-container class="grey lighten-5" fluid>
       <v-row v-if="!loadingData" justify="space-between">
-        <v-col cols="4">
+        <v-col cols="12" md="4">
           <v-container>
             <v-row justify="space-between">
               <v-col>
@@ -16,7 +16,7 @@
             </v-row>
           </v-container>
         </v-col>
-        <v-col cols="8">
+        <v-col cols="12" md="8">
           <v-container>
             <v-row justify="space-between">
               <v-col>

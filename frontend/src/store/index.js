@@ -12,6 +12,7 @@ export default new Vuex.Store({
     platforms: [],
     ammos: [],
     cannons: [],
+    displayedConfigs: [],
     username: null,
   },
   mutations: {
@@ -39,6 +40,14 @@ export default new Vuex.Store({
     },
     updateAmmos(state, data) {
       state.ammos = data;
+    },
+    switchConfigDisplay(state, { configId, show }) {
+      const index = state.displayedConfigs.indexOf(configId);
+
+      if (index == -1 && show)
+        state.displayedConfigs.push(configId);
+      else if (index != -1 && !show)
+        state.displayedConfigs = state.displayedConfigs.filter(id => id != configId);
     },
   },
   getters: {

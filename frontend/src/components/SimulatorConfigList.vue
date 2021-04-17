@@ -4,7 +4,7 @@
     <v-list rounded>
       <v-list-item v-for="(config, i) in configs" :key="i">
         <v-list-item-content>
-          <SimulatorConfigElement :name="config.name" />
+          <SimulatorConfigElement :config="config" />
         </v-list-item-content>
       </v-list-item>
     </v-list>
