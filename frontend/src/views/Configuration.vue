@@ -175,17 +175,23 @@ export default {
     },
     selectedConfigPlatformId() {
       if (this.selectedConfigId != null)
-        return this.$store.state.configs[this.selectedConfigId].platform_id;
+        return this.$store.state.configs.find(
+          (config) => config.id == this.selectedConfigId
+        ).platform;
       else return null;
     },
     selectedConfigAmmoId: function () {
       if (this.selectedConfigId != null)
-        return this.$store.state.configs[this.selectedConfigId].ammo_id;
+        return this.$store.state.configs.find(
+          (config) => config.id == this.selectedConfigId
+        ).ammo;
       else return null;
     },
     selectedConfigCannonId: function () {
       if (this.selectedConfigId != null)
-        return this.$store.state.configs[this.selectedConfigId].cannon_id;
+        return this.$store.state.configs.find(
+          (config) => config.id == this.selectedConfigId
+        ).cannon;
       else return null;
     },
     platforms() {
@@ -198,38 +204,43 @@ export default {
       return this.$store.state.cannons;
     },
     weightProgress() {
-      return (this.weight / 5.0) * 100.0;
+      return (this.weight / 5.5) * 100.0;
     },
     priceProgress() {
-      return (this.price / 3000.0) * 100.0;
+      return (this.price / 1750.0) * 100.0;
     },
     lenghtProgress() {
-      return (this.length / 120.0) * 100.0;
+      return (this.length / 100.0) * 100.0;
     },
   },
   methods: {
     updateConfig(configId) {
-      const config = this.$store.state.configs[configId];
+      const config = this.$store.state.configs.find(
+        (config) => config.id == configId
+      );
 
       if (config != null) {
-        this.selectedPlatform = this.$store.state.platforms[config.platform_id];
-        this.selectedAmmo = this.$store.state.ammos[config.ammo_id];
-        this.selectedCannon = this.$store.state.cannons[config.cannon_id];
+        this.selectedPlatform = this.$store.state.platforms.find(platform => platform.id == config.platform);
+        this.selectedAmmo = this.$store.state.ammos.find(ammo => ammo.id == config.ammo);
+        this.selectedCannon = this.$store.state.cannons.find(cannon => cannon.id == config.cannon);
 
         //TODO cast to int
         this.weight =
           parseFloat(this.selectedPlatform.weight) +
           parseFloat(this.selectedAmmo.weight) +
           parseFloat(this.selectedCannon.weight);
+        this.weight = this.weight.toFixed(1);
         this.price =
           parseFloat(this.selectedPlatform.price) +
           parseFloat(this.selectedAmmo.price) +
           parseFloat(this.selectedCannon.price);
+        this.price = this.price.toFixed(1);
         this.length =
           100 *
           (parseFloat(this.selectedPlatform.length) -
             parseFloat(this.selectedPlatform.standard_cannon_length) +
             parseFloat(this.selectedCannon.length));
+        this.length = this.length.toFixed(1);
       } else {
         this.selectedPlatform = null;
         this.selectedAmmo = null;
