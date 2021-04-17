@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-container>
-      <v-row justify="space-between">
-        <v-col cols="4">
+    <v-container class="grey lighten-5" fluid>
+      <v-row v-if="!loadingData" justify="space-between">
+        <v-col cols="12" md="4">
           <v-container>
             <v-row justify="space-between">
               <v-col>
-                <SimulatorConfigList :configs="this.configs" />
+                <SimulatorConfigList :configs="configs" />
               </v-col>
             </v-row>
             <v-row justify="space-between">
@@ -16,7 +16,7 @@
             </v-row>
           </v-container>
         </v-col>
-        <v-col cols="8">
+        <v-col cols="12" md="8">
           <v-container>
             <v-row justify="space-between">
               <v-col>
@@ -34,62 +34,75 @@
           </v-container>
         </v-col>
       </v-row>
+      <v-row v-else>
+        <v-spacer></v-spacer>
+        <v-col>
+          <loading-screen />
+        </v-col>
+        <v-spacer></v-spacer>
+      </v-row>
     </v-container>
+
+    <snackbar-info
+      :snackbar="snackbar"
+      :timeout="snackbarTimeout"
+      :text="snackbarText"
+    />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import GraphComponent from "../components/GraphComponent.vue";
-import SimulatorConfigList from "../components/SimulatorConfigList.vue";
-import SimulatorParamList from "../components/SimulatorParamList.vue";
-import { getAPI } from "../plugins/axios-api";
-//import { mapState } from "vuex";
+import GraphComponent from "@/components/GraphComponent.vue";
+import LoadingScreen from '@/components/LoadingScreen.vue';
+import SimulatorConfigList from "@/components/SimulatorConfigList.vue";
+import SimulatorParamList from "@/components/SimulatorParamList.vue";
+import SnackbarInfo from "@/components/SnackbarInfo.vue";
 
 export default {
   name: "Simulator",
-  data() {
-    return {
-      configs: [],
-    };
-  },
   components: {
     SimulatorConfigList,
     SimulatorParamList,
     GraphComponent,
+    LoadingScreen,
+    SnackbarInfo,
   },
-  //computed: mapState(["APIData"]),
-  methods: {
-    loadConfigs() {
-      let _this = this;
-
-      this.configs = [];
-      this.loadingConfigs = true;
-
-      let username = this.$store.state.username;
-      //console.log(username);
-
-      getAPI
-        .get(`/api/users/${username}/`, {
-          headers: {
-            Authorization: `Bearer ${_this.$store.state.accessToken}`,
-          },
-        })
-        .then((response) => {
-          console.log("Getting configs");
-          _this.configs = response.data.config;
-          console.log(_this.configs);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .then(() => {
-          _this.loadingConfigs = false;
-        });
+  data() {
+    return {
+      snackbar: false,
+      snackbarText: "Something happened.",
+      snackbarTimeout: 2000,
+    };
+  },
+  computed: {
+    loadingData() {
+      return (
+        this.$store.state.platforms.length <= 0 ||
+        this.$store.state.ammos.length <= 0 ||
+        this.$store.state.cannons.length <= 0
+      );
+    },
+    configs() {
+      return Object.values(this.$store.state.configs);
+    },
+  },
+  watch: {
+    configs: function () {
+      this.snackbarText = "Configurations updated.";
+      this.snackbar = true;
     },
   },
   created: function () {
-    this.loadConfigs();
+    const configs = this.$store.state.configs;
+    const platforms = this.$store.state.platforms;
+    const ammos = this.$store.state.ammos;
+    const cannons = this.$store.state.cannons;
+
+    if (configs.length <= 0) this.$store.dispatch("fetchConfigs");
+    if (platforms.length <= 0) this.$store.dispatch("fetchPlatforms");
+    if (ammos.length <= 0) this.$store.dispatch("fetchAmmos");
+    if (cannons.length <= 0) this.$store.dispatch("fetchCannons");
   },
 };
 </script>
