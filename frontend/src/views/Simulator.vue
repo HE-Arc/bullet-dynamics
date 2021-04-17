@@ -84,7 +84,6 @@ export default {
       return Object.values(this.$store.state.configs);
     },
   },
-  //computed: mapState(["APIData"]),
   methods: {
     loadConfigs() {
       let _this = this;

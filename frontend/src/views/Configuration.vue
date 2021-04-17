@@ -93,7 +93,7 @@
               <v-row>
                 <v-col>
                   <v-img
-                    :src="require('../assets/gun.png')"
+                    :src="require('../assets/' + gun_img + '.png')"
                     contain
                     height="200"
                   />
@@ -196,11 +196,18 @@ export default {
   computed: {
     loadingData() {
       return (
-        this.configs.length <= 0 ||
         this.platforms.length <= 0 ||
         this.ammos.length <= 0 ||
         this.cannons.length <= 0
       );
+    },
+    gun_img() {
+      if (this.selectedPlatform == null)
+        return 'gun';
+      else {
+        const letter = this.selectedPlatform.name[1];
+        return letter == 'R' ? 'gun_ar' : 'gun';
+      }
     },
     configs() {
       return Object.values(this.$store.state.configs);
@@ -328,7 +335,7 @@ export default {
       this.updateConfig(this.selectedConfigId);
     },
     configs: function () {
-      this.snackbarText = "Configurations updated."
+      this.snackbarText = "Configurations updated.";
       this.snackbar = true;
     },
     platforms: function () {},
