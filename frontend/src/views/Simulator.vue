@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-container>
-      <v-row justify="space-between">
+    <v-container class="grey lighten-5" fluid>
+      <v-row v-if="!loadingData" justify="space-between">
         <v-col cols="4">
           <v-container>
             <v-row justify="space-between">
               <v-col>
-                <SimulatorConfigList :configs="this.configs" />
+                <SimulatorConfigList :configs="configs" />
               </v-col>
             </v-row>
             <v-row justify="space-between">
@@ -34,6 +34,26 @@
           </v-container>
         </v-col>
       </v-row>
+      <v-row v-else>
+        <v-spacer></v-spacer>
+        <v-col>
+          <v-card style="margin: 20px; padding: 10px">
+            <v-card-subtitle style="text-align: center">
+              <h2>CONFIGURATION</h2>
+              <div style="margin: 15px 0">Loading data</div>
+            </v-card-subtitle>
+            <v-card-text style="text-align: center">
+              <v-progress-circular
+                :size="70"
+                :width="7"
+                color="primary"
+                indeterminate
+              ></v-progress-circular>
+            </v-card-text>
+          </v-card>
+        </v-col>
+        <v-spacer></v-spacer>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -48,15 +68,21 @@ import { getAPI } from "../plugins/axios-api";
 
 export default {
   name: "Simulator",
-  data() {
-    return {
-      configs: [],
-    };
-  },
   components: {
     SimulatorConfigList,
     SimulatorParamList,
     GraphComponent,
+  },
+  data() {
+    return {};
+  },
+  computed: {
+    loadingData() {
+      return this.configs.length <= 0;
+    },
+    configs() {
+      return Object.values(this.$store.state.configs);
+    },
   },
   //computed: mapState(["APIData"]),
   methods: {
