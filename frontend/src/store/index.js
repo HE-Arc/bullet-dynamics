@@ -75,11 +75,14 @@ export default new Vuex.Store({
     async postConfig({ state, dispatch }, newConfig) {
       try {
         //console.log(newConfig);
-        await getAPI.post('/api/configs/', newConfig);
+        const response = await getAPI.post('/api/configs/', newConfig);
+        const newConfigId = response.data.id;
 
-        await getAPI.patch(`/api/users/${state.username}/`, {
-          headers: { Authorization: `Bearer ${state.accessToken}` },
-          data: { "config": [newConfig] }
+        const myConfigs = state.configs.map(config => config.id);
+        myConfigs.push(newConfigId);
+        console.log(myConfigs);
+        await getAPI.patch(`/api/users/${state.username}/`, { "config": myConfigs }, {
+          headers: { Authorization: `Bearer ${state.accessToken}` }
         })
 
         // Then, reload configs
@@ -97,9 +100,8 @@ export default new Vuex.Store({
 
         const response = await getAPI.get('/api/configs/');
         const configs = response.data;
-        const myConfigs = configs.find(config => userConfigs.includes(config.id));
-
-        commit('updateConfigs', [myConfigs]);
+        const myConfigs = configs.filter(config => userConfigs.includes(config.id));
+        commit('updateConfigs', myConfigs);
       } catch (error) {
         console.log(error);
       }
