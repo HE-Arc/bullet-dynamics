@@ -124,10 +124,6 @@
                 color="primary"
                 indeterminate
               ></v-progress-circular>
-              {{ configs }}
-              {{ platforms }}
-              {{ ammos }}
-              {{ cannons }}
             </v-card-text>
           </v-card>
         </v-col>
@@ -220,11 +216,16 @@ export default {
       );
 
       if (config != null) {
-        this.selectedPlatform = this.$store.state.platforms.find(platform => platform.id == config.platform);
-        this.selectedAmmo = this.$store.state.ammos.find(ammo => ammo.id == config.ammo);
-        this.selectedCannon = this.$store.state.cannons.find(cannon => cannon.id == config.cannon);
+        this.selectedPlatform = this.$store.state.platforms.find(
+          (platform) => platform.id == config.platform
+        );
+        this.selectedAmmo = this.$store.state.ammos.find(
+          (ammo) => ammo.id == config.ammo
+        );
+        this.selectedCannon = this.$store.state.cannons.find(
+          (cannon) => cannon.id == config.cannon
+        );
 
-        //TODO cast to int
         this.weight =
           parseFloat(this.selectedPlatform.weight) +
           parseFloat(this.selectedAmmo.weight) +
@@ -265,18 +266,10 @@ export default {
     selectedConfigCannonId: function () {
       this.updateConfig(this.selectedConfigId);
     },
-    configs: function (nv) {
-      console.log(nv);
-    },
-    platforms: function (nv) {
-      console.log(nv);
-    },
-    ammos: function (nv) {
-      console.log(nv);
-    },
-    cannons: function (nv) {
-      console.log(nv);
-    },
+    configs: function () {},
+    platforms: function () {},
+    ammos: function () {},
+    cannons: function () {},
   },
   created: function () {
     const configs = this.$store.state.configs;
