@@ -39,11 +39,11 @@ export default {
     onDrop(event) {
       if (event.dataTransfer.getData("type") != this.type) return;
 
-      const id = event.dataTransfer.getData("id");
+      const id = parseInt(event.dataTransfer.getData("id"));
       let payload = { "id": this.configId, "patchedConfig": {} };
 
       if (this.type == "platform")
-        payload["patchedConfig"]["platform"] = id;
+        payload["patchedConfig"] = {"platform": id};
       else if (this.type == "ammo")
         payload["patchedConfig"]["ammo"] = id;
       else if (this.type == "cannon")

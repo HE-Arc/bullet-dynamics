@@ -239,7 +239,7 @@ export default {
       return (this.weight / 5.5) * 100.0;
     },
     priceProgress() {
-      return (this.price / 1750.0) * 100.0;
+      return (this.price / 2250.0) * 100.0;
     },
     lenghtProgress() {
       return (this.length / 100.0) * 100.0;
@@ -294,7 +294,7 @@ export default {
         this.weight = this.weight.toFixed(1);
         this.price =
           parseFloat(this.selectedPlatform.price) +
-          parseFloat(this.selectedAmmo.price) +
+          parseFloat(this.selectedAmmo.price * 30) +
           parseFloat(this.selectedCannon.price);
         this.price = this.price.toFixed(1);
         this.length =

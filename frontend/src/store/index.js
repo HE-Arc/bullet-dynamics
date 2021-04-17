@@ -71,6 +71,7 @@ export default new Vuex.Store({
     },
     async postConfig({ commit }, newConfig) {
       try {
+        //console.log(newConfig);
         await getAPI.post('/api/configs/', newConfig);
 
         /*
@@ -105,14 +106,13 @@ export default new Vuex.Store({
     },
     async patchConfig({ commit }, payload) {
       try {
-        console.log(payload);
-        await getAPI.patch('/api/configs/' + payload["id"], payload["patchedConfig"]);
-
+        //console.log(payload);
+        await getAPI.patch('/api/configs/' + payload["id"] + '/', payload["patchedConfig"]);        
         // Then, reload configs
         const response = await getAPI.get('/api/configs/');
         commit('updateConfigs', response.data);
       } catch (error) {
-        console.log(error);
+        console.log(error.response.data);
       }
     },
     async deleteConfig({ commit }, configId) {
