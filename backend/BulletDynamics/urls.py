@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# Need to remove the "backend/" and find a better solution
+# but we don't have enough time
 urlpatterns = [
     path('backend/admin/', admin.site.urls),
     path('backend/', include('api.urls')),
