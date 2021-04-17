@@ -6,4 +6,8 @@ backend/api/__pycache__/
 
 backend/api/migrations/__pycache__/
 
+.vscode/
+
+log/
+
 backend/BulletDynamics/__pycache__/
