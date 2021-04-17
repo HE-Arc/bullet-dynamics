@@ -15,7 +15,7 @@ export default new Vuex.Store({
     username: null,
   },
   mutations: {
-    updateStorage (state, { access, refresh, username }) {
+    updateStorage(state, { access, refresh, username }) {
       state.accessToken = access
       state.refreshToken = refresh
       state.username = username
@@ -53,7 +53,7 @@ export default new Vuex.Store({
         context.commit('destroyToken')
       }
     },
-    userLogin (context, usercredentials) {
+    userLogin(context, usercredentials) {
       let username = usercredentials.username;
       return new Promise((resolve, reject) => {
         getAPI.post('/api-token/', {
@@ -61,7 +61,7 @@ export default new Vuex.Store({
           password: usercredentials.password
         })
           .then(response => {
-            context.commit('updateStorage', { access: response.data.access, refresh: response.data.refresh, username }) 
+            context.commit('updateStorage', { access: response.data.access, refresh: response.data.refresh, username })
             resolve()
           })
           .catch(err => {
@@ -72,7 +72,14 @@ export default new Vuex.Store({
     async postConfig({ commit }, newConfig) {
       try {
         await getAPI.post('/api/configs/', newConfig);
-        
+
+        /*
+        await getAPI.patch(`/api/users/${state.username}/`, {
+          headers: { Authorization: `Bearer ${state.accessToken}` },
+          data: { "config": [newConfig] }
+        })
+        */
+
         // Then, reload configs
         const response = await getAPI.get('/api/configs/');
         commit('updateConfigs', response.data);
@@ -84,14 +91,23 @@ export default new Vuex.Store({
       try {
         const response = await getAPI.get('/api/configs/');
         commit('updateConfigs', response.data);
+
+        /*
+        const response2 = await getAPI.get(`/api/users/${state.username}/`, {
+          headers: { Authorization: `Bearer ${state.accessToken}` }
+        });
+        console.log("USER CONFIGS");
+        console.log(response2.data.config);
+        */
       } catch (error) {
         console.log(error);
       }
     },
-    async patchConfig({ commit }, patchedConfig) {
+    async patchConfig({ commit }, payload) {
       try {
-        await getAPI.patch('/api/configs/' + patchedConfig["id"], patchedConfig);
-        
+        console.log(payload);
+        await getAPI.patch('/api/configs/' + payload["id"], payload["patchedConfig"]);
+
         // Then, reload configs
         const response = await getAPI.get('/api/configs/');
         commit('updateConfigs', response.data);
@@ -102,7 +118,7 @@ export default new Vuex.Store({
     async deleteConfig({ commit }, configId) {
       try {
         await getAPI.delete('/api/configs/' + configId);
-        
+
         // Then, reload configs
         const response = await getAPI.get('/api/configs/');
         commit('updateConfigs', response.data);
