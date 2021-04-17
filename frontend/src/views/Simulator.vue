@@ -55,6 +55,16 @@
         <v-spacer></v-spacer>
       </v-row>
     </v-container>
+
+    <v-snackbar v-model="snackbar" :timeout="snackbarTimeout">
+      {{ snackbarText }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -63,8 +73,6 @@
 import GraphComponent from "../components/GraphComponent.vue";
 import SimulatorConfigList from "../components/SimulatorConfigList.vue";
 import SimulatorParamList from "../components/SimulatorParamList.vue";
-import { getAPI } from "../plugins/axios-api";
-//import { mapState } from "vuex";
 
 export default {
   name: "Simulator",
@@ -74,47 +82,40 @@ export default {
     GraphComponent,
   },
   data() {
-    return {};
+    return {
+      snackbar: false,
+      snackbarText: "Something happened.",
+      snackbarTimeout: 2000,
+    };
   },
   computed: {
     loadingData() {
-      return this.configs.length <= 0;
+      return (
+        this.$store.state.platforms.length <= 0 ||
+        this.$store.state.ammos.length <= 0 ||
+        this.$store.state.cannons.length <= 0
+      );
     },
     configs() {
       return Object.values(this.$store.state.configs);
     },
   },
-  methods: {
-    loadConfigs() {
-      let _this = this;
-
-      this.configs = [];
-      this.loadingConfigs = true;
-
-      let username = this.$store.state.username;
-      //console.log(username);
-
-      getAPI
-        .get(`/api/users/${username}/`, {
-          headers: {
-            Authorization: `Bearer ${_this.$store.state.accessToken}`,
-          },
-        })
-        .then((response) => {
-          console.log("Getting configs");
-          _this.configs = response.data.config;
-          console.log(_this.configs);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .then(() => {
-          _this.loadingConfigs = false;
-        });
+  watch: {
+    configs: function () {
+      this.snackbarText = "Configurations updated.";
+      this.snackbar = true;
     },
   },
   created: function () {
-    this.loadConfigs();
+    const configs = this.$store.state.configs;
+    const platforms = this.$store.state.platforms;
+    const ammos = this.$store.state.ammos;
+    const cannons = this.$store.state.cannons;
+
+    if (configs.length <= 0) this.$store.dispatch("fetchConfigs");
+    if (platforms.length <= 0) this.$store.dispatch("fetchPlatforms");
+    if (ammos.length <= 0) this.$store.dispatch("fetchAmmos");
+    if (cannons.length <= 0) this.$store.dispatch("fetchCannons");
   },
 };
 </script>
