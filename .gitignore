@@ -1,8 +1,9 @@
 
 .venv
 .env
-BulletDynamics/api/__pycache__/
 
-BulletDynamics/api/migrations/__pycache__/
+backend/api/__pycache__/
 
-BulletDynamics/BulletDynamics/__pycache__/
+backend/api/migrations/__pycache__/
+
+backend/BulletDynamics/__pycache__/
