@@ -13,10 +13,10 @@ router.register(r'configs', views.ConfigViewSet)
 router.register(r'params', views.ParamViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'init_speeds', views.InitSpeedViewSet)
-#router.register(r'users', views.InitSpeedViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
+    path('test/', views.TestView.as_view(template_name="")),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token/', TokenObtainPairView.as_view()),
     path('api-token-refresh/', TokenRefreshView.as_view()),

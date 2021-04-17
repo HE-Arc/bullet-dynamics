@@ -2,11 +2,13 @@ from django.shortcuts import render
 from rest_framework import generics, viewsets, views
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.decorators import action
+from django.views import generic
 
 from .models import Ammo, Cannon, Config, InitSpeed, Param, Platform, User
 from .serializers import (AmmoSerializer, CannonSerializer, ConfigSerializer,
                           InitSpeedSerializer, ParamSerializer,
-                          PlatformSerializer, UserSerializer)
+                          PlatformSerializer, UserSerializer, SimulatorSerializer)
 
 class AmmoViewSet(viewsets.ModelViewSet):
     queryset = Ammo.objects.all()
@@ -21,7 +23,7 @@ class CannonViewSet(viewsets.ModelViewSet):
     serializer_class = CannonSerializer
 
 class ConfigViewSet(viewsets.ModelViewSet):
-    psermission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     queryset = Config.objects.all()
     serializer_class = ConfigSerializer
 
@@ -37,7 +39,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class InitSpeedViewSet(viewsets.ModelViewSet):
     queryset = InitSpeed.objects.all()
     serializer_class = InitSpeedSerializer
-
+'''
 class UserConfigsView(views.APIView):
     serializer_class = ConfigSerializer
 
@@ -46,19 +48,25 @@ class UserConfigsView(views.APIView):
         Return a list of configs for a user.
         """
         configs = User.objects.filter(username=self.request.username).config
-        return Response(configs)
+        return Response(configs)'''
 
-class SimulatorDataView(views.APIView):
+class TestView(generic.ListView):
 
+
+    def get_queryset(self):
+        return ['yo', 'fdp']
+
+"""
     def get(self):
-        """
-        Return the simulation data for each config.
-        """
-        simulatorData = {}
-        for config in self.request.configs:
-            simulatorData[config.id] = computeSimulatorData()
-        return Response(simulatorData)
+        
+        #Return the simulation data for each config.
+        
+        #simulatorData = {}
+        #for config in self.request.configs:
+            #simulatorData[config.id] = computeSimulatorData()
+        #return Response(simulatorData)
+        return Response("yo")
     
     def computeSimulatorData(config):
         #TODO replace with real values
-        return Simulation.getResult(bullet_weight = 0.010 , init_speed=500)
+        return Simulation.getResult(bullet_weight = 0.010 , init_speed=500)"""

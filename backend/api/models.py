@@ -54,4 +54,5 @@ class InitSpeed(models.Model):
     ammo = models.ForeignKey('Ammo', on_delete=models.SET_NULL, null=True)
     init_speed = models.DecimalField(max_digits=6, decimal_places=3)
     class Meta:
-        ordering = ['id']   
+        ordering = ['id']  
+

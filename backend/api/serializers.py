@@ -1,6 +1,9 @@
+from django.db import models
 from rest_framework import serializers
 
-from .models import Ammo, Cannon, Config, InitSpeed, Param, Platform, User
+from .models import (Ammo, Cannon, Config, InitSpeed, Param, Platform,
+                    User)
+
 
 class AmmoSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
@@ -44,3 +47,17 @@ class InitSpeedSerializer(serializers.ModelSerializer):
     class Meta:
         model = InitSpeed
         fields = '__all__'
+
+class SimulatorSerializer(serializers.Serializer):
+
+    output = serializers.SerializerMethodField('test')
+
+    class Meta:
+        model = Ammo, InitSpeed
+        fields = ('output')
+
+    def test(self, a, i):
+        #x =  self.context['request'].x
+        output = a.weight + i.init_speed  # obj comes from the queryset from view
+        return output
+
