@@ -152,6 +152,16 @@
         <v-spacer></v-spacer>
       </v-row>
     </v-container>
+
+    <v-snackbar v-model="snackbar" :timeout="snackbarTimeout">
+      {{ snackbarText }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -178,6 +188,9 @@ export default {
       weight: 0,
       price: 0,
       length: 0,
+      snackbar: false,
+      snackbarText: "Something happened.",
+      snackbarTimeout: 2000,
     };
   },
   computed: {
@@ -314,7 +327,10 @@ export default {
     selectedConfigCannonId: function () {
       this.updateConfig(this.selectedConfigId);
     },
-    configs: function () {},
+    configs: function () {
+      this.snackbarText = "Configurations updated."
+      this.snackbar = true;
+    },
     platforms: function () {},
     ammos: function () {},
     cannons: function () {},
