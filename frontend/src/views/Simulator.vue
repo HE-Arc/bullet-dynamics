@@ -37,42 +37,27 @@
       <v-row v-else>
         <v-spacer></v-spacer>
         <v-col>
-          <v-card style="margin: 20px; padding: 10px">
-            <v-card-subtitle style="text-align: center">
-              <h2>CONFIGURATION</h2>
-              <div style="margin: 15px 0">Loading data</div>
-            </v-card-subtitle>
-            <v-card-text style="text-align: center">
-              <v-progress-circular
-                :size="70"
-                :width="7"
-                color="primary"
-                indeterminate
-              ></v-progress-circular>
-            </v-card-text>
-          </v-card>
+          <loading-screen />
         </v-col>
         <v-spacer></v-spacer>
       </v-row>
     </v-container>
 
-    <v-snackbar v-model="snackbar" :timeout="snackbarTimeout">
-      {{ snackbarText }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
+    <snackbar-info
+      :snackbar="snackbar"
+      :timeout="snackbarTimeout"
+      :text="snackbarText"
+    />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import GraphComponent from "../components/GraphComponent.vue";
-import SimulatorConfigList from "../components/SimulatorConfigList.vue";
-import SimulatorParamList from "../components/SimulatorParamList.vue";
+import GraphComponent from "@/components/GraphComponent.vue";
+import LoadingScreen from '@/components/LoadingScreen.vue';
+import SimulatorConfigList from "@/components/SimulatorConfigList.vue";
+import SimulatorParamList from "@/components/SimulatorParamList.vue";
+import SnackbarInfo from "@/components/SnackbarInfo.vue";
 
 export default {
   name: "Simulator",
@@ -80,6 +65,8 @@ export default {
     SimulatorConfigList,
     SimulatorParamList,
     GraphComponent,
+    LoadingScreen,
+    SnackbarInfo,
   },
   data() {
     return {
