@@ -1487,3 +1487,152 @@ Traceback (most recent call last):
   File "/var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages/pymysql/connections.py", line 664, in connect
     raise exc
 django.db.utils.OperationalError: (2003, "Can't connect to MySQL server on 'localhost' ([Errno 99] Cannot assign requested address)")
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-04-17 03:56:46 -0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [a84a9759] Running /usr/bin/env mkdir -p /tmp as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [a84a9759] Command: /usr/bin/env mkdir -p /tmp
+  INFO [a84a9759] Finished in 0.313 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-f44be33fe8571d0edcd1.sh 0.0%
+  INFO Uploading /tmp/git-ssh-f44be33fe8571d0edcd1.sh 100.0%
+  INFO [20758ecb] Running /usr/bin/env chmod 700 /tmp/git-ssh-f44be33fe8571d0edcd1.sh as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [20758ecb] Command: /usr/bin/env chmod 700 /tmp/git-ssh-f44be33fe8571d0edcd1.sh
+  INFO [20758ecb] Finished in 0.080 seconds with exit status 0 (successful).
+  INFO [313bfe83] Running /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [313bfe83] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-f44be33fe8571d0edcd1.sh" ; /usr/bin/env git ls-remote git@github.com:HE-Arc/bullet-dynamics.git HEAD )
+ DEBUG [313bfe83] 	b375b1916b2057f732d06fe5132435ecb88c481e	HEAD
+  INFO [313bfe83] Finished in 1.187 seconds with exit status 0 (successful).
+  INFO [dff4f927] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [dff4f927] Command: /usr/bin/env mkdir -p /var/www/bullet-dynamics/shared /var/www/bullet-dynamics/releases
+  INFO [dff4f927] Finished in 0.098 seconds with exit status 0 (successful).
+ DEBUG [0efb53b3] Running [ -f /var/www/bullet-dynamics/current/REVISION ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [0efb53b3] Command: [ -f /var/www/bullet-dynamics/current/REVISION ]
+ DEBUG [0efb53b3] Finished in 0.087 seconds with exit status 0 (successful).
+ DEBUG [af5b8048] Running /usr/bin/env cat /var/www/bullet-dynamics/current/REVISION 2>/dev/null as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [af5b8048] Command: /usr/bin/env cat /var/www/bullet-dynamics/current/REVISION 2>/dev/null
+ DEBUG [af5b8048] 	6aadb208673523785468a0bab0b3dcff17b1cbc4
+ DEBUG [af5b8048] Finished in 0.111 seconds with exit status 0 (successful).
+ DEBUG [65190f94] Running [ -f /var/www/bullet-dynamics/repo/HEAD ] as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [65190f94] Command: [ -f /var/www/bullet-dynamics/repo/HEAD ]
+ DEBUG [65190f94] Finished in 0.071 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/bullet-dynamics/repo
+ DEBUG [b6c369a9] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [b6c369a9] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [b6c369a9] Finished in 0.083 seconds with exit status 0 (successful).
+  INFO [b5eddcd1] Running /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [b5eddcd1] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-f44be33fe8571d0edcd1.sh" ; /usr/bin/env git remote set-url origin git@github.com:HE-Arc/bullet-dynamics.git )
+  INFO [b5eddcd1] Finished in 0.099 seconds with exit status 0 (successful).
+  INFO [6bf3209b] Running /usr/bin/env git remote update --prune as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [6bf3209b] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-f44be33fe8571d0edcd1.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [6bf3209b] 	Fetching origin
+ DEBUG [6bf3209b] 	From github.com:HE-Arc/bullet-dynamics
+   6aadb20..ca7bb7e  master     -> master
+  INFO [6bf3209b] Finished in 1.392 seconds with exit status 0 (successful).
+ DEBUG [ab3791b2] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [ab3791b2] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [ab3791b2] Finished in 0.079 seconds with exit status 0 (successful).
+  INFO [e5b76d4a] Running /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210417105648 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [e5b76d4a] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-f44be33fe8571d0edcd1.sh" ; /usr/bin/env mkdir -p /var/www/bullet-dynamics/releases/20210417105648 )
+  INFO [e5b76d4a] Finished in 0.097 seconds with exit status 0 (successful).
+  INFO [ef2e29f8] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210417105648 as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [ef2e29f8] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-f44be33fe8571d0edcd1.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/bullet-dynamics/releases/20210417105648 )
+  INFO [ef2e29f8] Finished in 0.173 seconds with exit status 0 (successful).
+ DEBUG [a06e69d2] Running if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [a06e69d2] Command: if test ! -d /var/www/bullet-dynamics/repo; then echo "Directory does not exist '/var/www/bullet-dynamics/repo'" 1>&2; false; fi
+ DEBUG [a06e69d2] Finished in 0.081 seconds with exit status 0 (successful).
+ DEBUG [44be55b0] Running /usr/bin/env git rev-list --max-count=1 master as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [44be55b0] Command: cd /var/www/bullet-dynamics/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-f44be33fe8571d0edcd1.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [44be55b0] 	ca7bb7e0509c7711c9085c18afb6417d525b7ba5
+ DEBUG [44be55b0] Finished in 0.098 seconds with exit status 0 (successful).
+ DEBUG [d7a78f9f] Running if test ! -d /var/www/bullet-dynamics/releases/20210417105648; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210417105648'" 1>&2; false; fi as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [d7a78f9f] Command: if test ! -d /var/www/bullet-dynamics/releases/20210417105648; then echo "Directory does not exist '/var/www/bullet-dynamics/releases/20210417105648'" 1>&2; false; fi
+ DEBUG [d7a78f9f] Finished in 0.095 seconds with exit status 0 (successful).
+  INFO [95ca0431] Running /usr/bin/env echo "ca7bb7e0509c7711c9085c18afb6417d525b7ba5" > REVISION as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [95ca0431] Command: cd /var/www/bullet-dynamics/releases/20210417105648 && /usr/bin/env echo "ca7bb7e0509c7711c9085c18afb6417d525b7ba5" > REVISION
+  INFO [95ca0431] Finished in 0.087 seconds with exit status 0 (successful).
+  INFO [450d829c] Running source /var/www/bullet-dynamics/shared/env/bin/activate && /var/www/bullet-dynamics/shared/env/bin/pip install -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [450d829c] Command: source /var/www/bullet-dynamics/shared/env/bin/activate && /var/www/bullet-dynamics/shared/env/bin/pip install -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt
+ DEBUG [450d829c] 	Requirement already satisfied: asgiref==3.3.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt (line 1)) (3.3.1)
+ DEBUG [450d829c] 	Requirement already satisfied: Django==3.1.7 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt (line 2)) (3.1.7)
+ DEBUG [450d829c] 	Requirement already satisfied: django-cors-headers==3.7.0 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt (line 3)) (3.7.0)
+ DEBUG [450d829c] 	Collecting django-environ==0.4.5
+ DEBUG [450d829c] 	  Downloading django_environ-0.4.5-py2.py3-none-any.whl (21 kB)
+ DEBUG [450d829c] 	Requirement already satisfied: djangorestframework==3.12.2 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt (line 5)) (3.12.2)
+ DEBUG [450d829c] 	Requirement already satisfied: djangorestframework-simplejwt==4.6.0 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt (line 6)) (4.6.0)
+ DEBUG [450d829c] 	Requirement already satisfied: Faker==6.6.0 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt (line 7)) (6.6.0)
+ DEBUG [450d829c] 	Requirement already satisfied: PyJWT==2.0.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt (line 8)) (2.0.1)
+ DEBUG [450d829c] 	Requirement already satisfied: PyMySQL==1.0.2 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt (line 9)) (1.0.2)
+ DEBUG [450d829c] 	Requirement already satisfied: python-dateutil==2.8.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt (line 10)) (2.8.1)
+ DEBUG [450d829c] 	Requirement already satisfied: pytz==2021.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt (line 11)) (2021.1)
+ DEBUG [450d829c] 	Requirement already satisfied: six==1.15.0 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt (line 12)) (1.15.0)
+ DEBUG [450d829c] 	Requirement already satisfied: sqlparse==0.4.1 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt (line 13)) (0.4.1)
+ DEBUG [450d829c] 	Requirement already satisfied: text-unidecode==1.3 in /var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages (from -r /var/www/bullet-dynamics/releases/20210417105648/backend/requirements.txt (line 14)) (1.3)
+ DEBUG [450d829c] 	Installing collected packages: django-environ
+ DEBUG [450d829c] 	Successfully installed django-environ-0.4.5
+  INFO [450d829c] Finished in 1.783 seconds with exit status 0 (successful).
+  INFO [66734c36] Running /usr/bin/env ln -s /var/www/bullet-dynamics/releases/20210417105648 /var/www/bullet-dynamics/releases/current as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [66734c36] Command: /usr/bin/env ln -s /var/www/bullet-dynamics/releases/20210417105648 /var/www/bullet-dynamics/releases/current
+  INFO [66734c36] Finished in 0.085 seconds with exit status 0 (successful).
+  INFO [3ae6773c] Running /usr/bin/env mv /var/www/bullet-dynamics/releases/current /var/www/bullet-dynamics as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [3ae6773c] Command: /usr/bin/env mv /var/www/bullet-dynamics/releases/current /var/www/bullet-dynamics
+  INFO [3ae6773c] Finished in 0.088 seconds with exit status 0 (successful).
+  INFO [17347829] Running cp /var/www/bullet-dynamics/shared/.env /var/www/bullet-dynamics/releases/20210417105648/backend/BulletDynamics/.env as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [17347829] Command: cp /var/www/bullet-dynamics/shared/.env /var/www/bullet-dynamics/releases/20210417105648/backend/BulletDynamics/.env
+  INFO [17347829] Finished in 0.091 seconds with exit status 0 (successful).
+  INFO [930a4da5] Running source /var/www/bullet-dynamics/shared/env/bin/activate && python3 /var/www/bullet-dynamics/releases/20210417105648/backend/manage.py migrate && cd /var/www/bullet-dynamics/releases/20210417105648/backend &&python3 /var/www/bullet-dynamics/releases/20210417105648/backend/manage.py collectstatic --noinput as poweruser@bullet.srvz-webapp.he-arc.ch
+ DEBUG [930a4da5] Command: source /var/www/bullet-dynamics/shared/env/bin/activate && python3 /var/www/bullet-dynamics/releases/20210417105648/backend/manage.py migrate && cd /var/www/bullet-dynamics/releases/20210417105648/backend &&python3 /var/www/bullet-dynamics/releases/20210417105648/backend/manage.py collectstatic --noinput
+ DEBUG [930a4da5] 	Operations to perform:
+  Apply all migrations: admin, api, auth, contenttypes, sessions, token_blacklist
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying api.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying sessions.0001_initial... OK
+  Applying token_blacklist.0001_initial... OK
+  Applying token_blacklist.0002_outstandingtoken_jti_hex... OK
+  Applying token_blacklist.0003_auto_20171017_2007... OK
+  Applying token_blacklist.0004_auto_20171017_2013... OK
+  Applying token_blacklist.0005_remove_outstandingtoken_jti... OK
+  Applying token_blacklist.0006_auto_20171017_2113... OK
+  Applying token_blacklist.0007_auto_20171017_2214... OK
+ DEBUG [930a4da5] 	Traceback (most recent call last):
+  File "/var/www/bullet-dynamics/releases/20210417105648/backend/manage.py", line 20, in <module>
+    main()
+  File "/var/www/bullet-dynamics/releases/20210417105648/backend/manage.py", line 17, in main
+    execute_from_command_line(sys.argv)
+  File "/var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 401, in execute_from_command_line
+    utility.execute()
+  File "/var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages/django/core/management/__init__.py", line 395, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages/django/core/management/base.py", line 330, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages/django/core/management/base.py", line 371, in execute
+    output = self.handle(*args, **options)
+  File "/var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py", line 194, in handle
+    collected = self.collect()
+  File "/var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py", line 118, in collect
+    handler(path, prefixed_path, storage)
+  File "/var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py", line 345, in copy_file
+    if not self.delete_file(path, prefixed_path, source_storage):
+  File "/var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py", line 255, in delete_file
+    if self.storage.exists(prefixed_path):
+  File "/var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages/django/core/files/storage.py", line 311, in exists
+    return os.path.exists(self.path(name))
+  File "/var/www/bullet-dynamics/shared/env/lib/python3.8/site-packages/django/contrib/staticfiles/storage.py", line 38, in path
+    raise ImproperlyConfigured("You're using the staticfiles app "
+django.core.exceptions.ImproperlyConfigured: You're using the staticfiles app without having set the STATIC_ROOT setting to a filesystem path.
