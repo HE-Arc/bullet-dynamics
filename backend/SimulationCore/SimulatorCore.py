@@ -1,6 +1,6 @@
 import numpy as np
 import math as m
-from Projectile import *
+from .Projectile import *
 
 # Constants
 RHO = 1.22 #air density

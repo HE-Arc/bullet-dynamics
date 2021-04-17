@@ -23,7 +23,7 @@ class CannonViewSet(viewsets.ModelViewSet):
     serializer_class = CannonSerializer
 
 class ConfigViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
     queryset = Config.objects.all()
     serializer_class = ConfigSerializer
 
@@ -39,34 +39,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class InitSpeedViewSet(viewsets.ModelViewSet):
     queryset = InitSpeed.objects.all()
     serializer_class = InitSpeedSerializer
-'''
-class UserConfigsView(views.APIView):
-    serializer_class = ConfigSerializer
 
-    def get(self):
-        """
-        Return a list of configs for a user.
-        """
-        configs = User.objects.filter(username=self.request.username).config
-        return Response(configs)'''
-
-class TestView(generic.ListView):
-
-
-    def get_queryset(self):
-        return ['yo', 'fdp']
-
-"""
-    def get(self):
-        
-        #Return the simulation data for each config.
-        
-        #simulatorData = {}
-        #for config in self.request.configs:
-            #simulatorData[config.id] = computeSimulatorData()
-        #return Response(simulatorData)
-        return Response("yo")
-    
-    def computeSimulatorData(config):
-        #TODO replace with real values
-        return Simulation.getResult(bullet_weight = 0.010 , init_speed=500)"""
+class ResultView(generics.ListAPIView):
+    queryset = User.objects.get(username='root').config
+    serializer_class = SimulatorSerializer

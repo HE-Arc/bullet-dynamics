@@ -1,9 +1,13 @@
+import logging
+
 from django.db import models
 from rest_framework import serializers
 
-from .models import (Ammo, Cannon, Config, InitSpeed, Param, Platform,
-                    User)
+from .models import Ammo, Cannon, Config, InitSpeed, Param, Platform, User
 
+from SimulationCore import SimulatorCore
+
+logger = logging.getLogger(__name__)
 
 class AmmoSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
@@ -49,15 +53,18 @@ class InitSpeedSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SimulatorSerializer(serializers.Serializer):
-
-    output = serializers.SerializerMethodField('test')
-
+    output = serializers.SerializerMethodField('SmartestDjangoRequestInTheHistoryOfDjangoRequestMaybeEver')
     class Meta:
-        model = Ammo, InitSpeed
         fields = ('output')
 
-    def test(self, a, i):
-        #x =  self.context['request'].x
-        output = a.weight + i.init_speed  # obj comes from the queryset from view
+    def SmartestDjangoRequestInTheHistoryOfDjangoRequestMaybeEver(self, config):
+
+        a = config.ammo
+        c = config.cannon
+        i = InitSpeed.objects.filter(cannon=c, ammo=a).get().init_speed
+
+        simulator = SimulatorCore.Simulator()
+        output = simulator.run(v0=float(i), mass=float(a.weight), cx=float(a.cx))
+
         return output
 
