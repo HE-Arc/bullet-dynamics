@@ -53,8 +53,8 @@ class InitSpeedSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SimulatorSerializer(serializers.Serializer):
-    output = serializers.SerializerMethodField('SmartestDjangoRequestInTheHistoryOfDjangoRequestMaybeEver')
     id = serializers.ReadOnlyField()
+    data = serializers.SerializerMethodField('SmartestDjangoRequestInTheHistoryOfDjangoRequestMaybeEver')
     class Meta:
         model = Config
         fields = ('id')
@@ -65,7 +65,7 @@ class SimulatorSerializer(serializers.Serializer):
         i = InitSpeed.objects.filter(cannon=c, ammo=a).get().init_speed
 
         simulator = SimulatorCore.Simulator()
-        output = simulator.run(v0=float(i), mass=float(a.weight), cx=float(a.cx))
+        data = simulator.run(v0=float(i), mass=float(a.weight), cx=float(a.cx))
 
-        return output
+        return data
 
