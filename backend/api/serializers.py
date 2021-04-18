@@ -52,15 +52,16 @@ class InitSpeedSerializer(serializers.ModelSerializer):
         model = InitSpeed
         fields = '__all__'
 
+# Serializer that get the necassary data from the database and runs the simulation for each config of the current user
 class SimulatorSerializer(serializers.Serializer):
     id = serializers.ReadOnlyField()
     name = serializers.ReadOnlyField()
-    data = serializers.SerializerMethodField('SmartestDjangoRequestInTheHistoryOfDjangoRequestMaybeEver')
+    data = serializers.SerializerMethodField('run_simulation')
     class Meta:
         model = Config
         fields = ('id', 'name', 'data')
 
-    def SmartestDjangoRequestInTheHistoryOfDjangoRequestMaybeEver(self, config):
+    def run_simulation(self, config):
         a = config.ammo
         c = config.cannon
         i = InitSpeed.objects.filter(cannon=c, ammo=a).get().init_speed
