@@ -93,7 +93,7 @@
               <v-row>
                 <v-col>
                   <v-img
-                    :src="require('../assets/gun.png')"
+                    :src="require('../assets/' + gun_img + '.png')"
                     contain
                     height="200"
                   />
@@ -134,34 +134,17 @@
       <v-row v-else>
         <v-spacer></v-spacer>
         <v-col>
-          <v-card style="margin: 20px; padding: 10px">
-            <v-card-subtitle style="text-align: center">
-              <h2>CONFIGURATION</h2>
-              <div style="margin: 15px 0">Loading data</div>
-            </v-card-subtitle>
-            <v-card-text style="text-align: center">
-              <v-progress-circular
-                :size="70"
-                :width="7"
-                color="primary"
-                indeterminate
-              ></v-progress-circular>
-            </v-card-text>
-          </v-card>
+          <loading-screen title="CONFIGURATION"/>
         </v-col>
         <v-spacer></v-spacer>
       </v-row>
     </v-container>
 
-    <v-snackbar v-model="snackbar" :timeout="snackbarTimeout">
-      {{ snackbarText }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
+    <snackbar-info
+      :snackbar="snackbar"
+      :timeout="snackbarTimeout"
+      :text="snackbarText"
+    />
   </div>
 </template>
 
@@ -170,6 +153,8 @@
 import GunComponentList from "@/components/GunComponentList.vue";
 import GunComponentCardDroppable from "@/components/GunComponentCardDroppable.vue";
 import GunProgressBar from "@/components/GunProgressBar.vue";
+import LoadingScreen from "@/components/LoadingScreen.vue";
+import SnackbarInfo from "@/components/SnackbarInfo.vue";
 
 export default {
   name: "Configuration",
@@ -177,6 +162,8 @@ export default {
     GunComponentList,
     GunComponentCardDroppable,
     GunProgressBar,
+    LoadingScreen,
+    SnackbarInfo,
   },
   data() {
     return {
@@ -196,11 +183,17 @@ export default {
   computed: {
     loadingData() {
       return (
-        this.configs.length <= 0 ||
         this.platforms.length <= 0 ||
         this.ammos.length <= 0 ||
         this.cannons.length <= 0
       );
+    },
+    gun_img() {
+      if (this.selectedPlatform == null) return "gun";
+      else {
+        const letter = this.selectedPlatform.name[1];
+        return letter == "R" ? "gun_ar" : "gun";
+      }
     },
     configs() {
       return Object.values(this.$store.state.configs);
@@ -328,7 +321,7 @@ export default {
       this.updateConfig(this.selectedConfigId);
     },
     configs: function () {
-      this.snackbarText = "Configurations updated."
+      this.snackbarText = "Configurations updated.";
       this.snackbar = true;
     },
     platforms: function () {},

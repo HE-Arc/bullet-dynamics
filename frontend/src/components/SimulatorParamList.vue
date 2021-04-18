@@ -9,6 +9,7 @@
               type="number"
               :rules="rules"
               label="Height"
+              :disabled="true"
             ></v-text-field>
           </v-col>
           <v-col cols="6">
@@ -17,6 +18,7 @@
               type="number"
               :rules="rules"
               label="Angle"
+              :disabled="true"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -32,14 +34,6 @@ export default {
   data: () => ({
     height: 0,
     angle: 0,
-    items: [
-      {
-        name: "config 1",
-      },
-      {
-        name: "config 2",
-      },
-    ],
   }),
 };
 </script>

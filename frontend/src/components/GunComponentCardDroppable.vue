@@ -30,8 +30,13 @@ export default {
   },
   computed: {
     imgSrc() {
-      if (this.type == "platform") return "gun";
-      else if (this.type == "ammo") return "ammo";
+      if (this.type == "platform") {
+        if (this.component == null) return "gun";
+        else {
+          const letter = this.component.name[1];
+          return letter == "R" ? "gun_ar" : "gun";
+        }
+      } else if (this.type == "ammo") return "ammo";
       else return "cannon";
     },
   },
@@ -40,15 +45,12 @@ export default {
       if (event.dataTransfer.getData("type") != this.type) return;
 
       const id = parseInt(event.dataTransfer.getData("id"));
-      let payload = { "id": this.configId, "patchedConfig": {} };
+      let payload = { id: this.configId, patchedConfig: {} };
 
-      if (this.type == "platform")
-        payload["patchedConfig"] = {"platform": id};
-      else if (this.type == "ammo")
-        payload["patchedConfig"]["ammo"] = id;
-      else if (this.type == "cannon")
-        payload["patchedConfig"]["cannon"] = id;
-      
+      if (this.type == "platform") payload["patchedConfig"] = { platform: id };
+      else if (this.type == "ammo") payload["patchedConfig"]["ammo"] = id;
+      else if (this.type == "cannon") payload["patchedConfig"]["cannon"] = id;
+
       this.$store.dispatch("patchConfig", payload);
     },
     tooltip(component) {

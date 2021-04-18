@@ -28,8 +28,13 @@ export default {
   },
   computed: {
     imgSrc() {
-      if (this.type == "platform") return "gun";
-      else if (this.type == "ammo") return "ammo";
+      if (this.type == "platform") {
+        if (this.component == null) return "gun";
+        else {
+          const letter = this.component.name[1];
+          return letter == "R" ? "gun_ar" : "gun";
+        }
+      } else if (this.type == "ammo") return "ammo";
       else return "cannon";
     },
   },

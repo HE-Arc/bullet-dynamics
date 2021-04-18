@@ -1,56 +1,140 @@
 <template>
-<v-card>
-  <v-card-title>
-      {{name}}
-  </v-card-title>
-    <GChart
-        type="LineChart"
-        :data="chartData"
-        :options="chartOptions"
-    />
-  </v-card>
+  <div>
+    <v-card v-if="displayedConfigs.length <= 0">
+      <v-alert type="info" border="right" colored-border elevation="2">
+        <b>Chart:</b> please select a configuration.
+      </v-alert>
+    </v-card>
+    <v-card v-else-if="!loadingData">
+      <v-card-title>
+        {{ name }}
+      </v-card-title>
+      <GChart type="LineChart" :data="chartData" :options="chartOptions" />
+    </v-card>
+    <v-card v-else>
+      <loading-screen title="SIMULATION" />
+    </v-card>
+  </div>
 </template>
 
 <script>
-
-import { GChart } from 'vue-google-charts'
+import { GChart } from "vue-google-charts";
+import LoadingScreen from "./LoadingScreen.vue";
 
 export default {
-    components: {
-        GChart
-    },
+  name: "GraphComponent",
+  components: {
+    GChart,
+    LoadingScreen,
+  },
+  data() {
+    return {
+      chartOptions: {
+        chart: {
+          title: "title",
+          subtitle: "subtitle",
+        },
+        hAxis: {
+          title: "Horizontal distance[m]",
+        },
+        vAxis: {
+          title: "Vertical drop[m]",
+        },
+        height: 600,
+      },
+    };
+  },
+  computed: {
+    chartData() {
+      if (this.displayedConfigs.length <= 0 || this.simulatorData == null) {
+        console.log("YO");
+        console.log(this.displayedConfigs);
+        return [];
+      }
+      console.log(this.displayedConfigs);
 
-    name: 'GraphComponent',
+      const simDataSize = this.simulatorData[0]["data"][0].length;
+      const graphData = [];
 
-    data () {
-        return {
-        // Array will be automatically processed with visualization.arrayToDataTable function
-        chartData: [
-        ['meter', '1', '2', '3'],
-        [1,  37.8, 80.8, 41.8],
-        [2,  30.9, 69.5, 32.4],
-        [3,  25.4,   57, 25.7],
-        [4,  11.7, 18.8, 10.5],
-        [5,  11.9, 17.6, 10.4],
-        [6,   8.8, 13.6,  7.7],
-        [7,   7.6, 12.3,  9.6],
-        [8,  12.3, 29.2, 10.6],
-        [9,  16.9, 42.9, 14.8],
-        [10, 12.8, 30.9, 11.6],
-        [11,  12.3,  5.9,  4.7],
-        [12,  6.6,  8.4,  5.2],
-        [13,  4.8,  6.3,  3.6],
-        [14,  4.2,  6.2,  3.4]
-      ],
-        chartOptions: {
-            chart: {
-            title: 'title',
-            subtitle: 'subtitle',
-            },
-            }        
+      let maxX = 0;
+      this.simulatorData.forEach((element) => {
+        if (this.displayedConfigs.indexOf(element["id"]) >= 0) {
+          let tmp = element["data"][0][simDataSize - 1];
+          if (maxX < tmp) maxX = tmp;
         }
-    },
+      });
 
-    props: ['name'],
-  }
+      //console.log("maxX");
+      //console.log(maxX);
+
+      for (let x = 0; x < maxX; ++x) {
+        let dataRow = [x];
+
+        this.simulatorData.forEach((element) => {
+          if (this.displayedConfigs.indexOf(element["id"]) >= 0) {
+            let prevX = 0;
+            let nextX = element["data"][0][simDataSize - 1];
+            let prevXindex = 0;
+            let nextXindex = 0;
+
+            element["data"][0].forEach((val, index) => {
+              if (val > prevX && val < x) {
+                prevX = val;
+                prevXindex = index;
+              }
+              if (val >= x && val <= nextX) {
+                nextX = val;
+                nextXindex = index;
+              }
+            });
+            let closestX =
+              Math.abs(x - prevX) < Math.abs(x - nextX) ? prevX : nextX;
+
+            let closestIndex = closestX < x ? prevXindex : nextXindex;
+
+            let closestY = element["data"][1][closestIndex];
+
+            dataRow.push(closestY);
+          }
+        });
+
+        //console.log("dataRow");
+        //console.log(dataRow);
+
+        graphData.push(dataRow);
+      }
+
+      const titleRow = ["Meters"];
+      this.simulatorData.forEach((element) => {
+        if (this.displayedConfigs.indexOf(element["id"]) >= 0)
+          titleRow.push(element["name"]);
+      });
+      graphData.unshift(titleRow);
+
+      //console.log("graphData");
+      //console.log(graphData);
+
+      return graphData;
+    },
+    simulatorData() {
+      //console.log(this.$store.state.simulatorData);
+      return this.$store.state.simulatorData;
+    },
+    displayedConfigs() {
+      return this.$store.state.displayedConfigs;
+    },
+    loadingData() {
+      return this.simulatorData.length <= 0;
+    },
+  },
+  watch: {
+    displayedConfigs: function () {},
+  },
+  created: function () {
+    const simulatorData = this.$store.state.simulatorData;
+
+    if (simulatorData.length <= 0) this.$store.dispatch("fetchSimulatorData");
+  },
+  props: ["name"],
+};
 </script>
