@@ -66,13 +66,7 @@ class SimulatorSerializer(serializers.Serializer):
         i = InitSpeed.objects.filter(cannon=c, ammo=a).get().init_speed
 
         simulator = SimulatorCore.Simulator()
-        logger.error(float(i))
-        logger.error(float(a.bullet_weight))
-        logger.error(float(a.cx))
         data = simulator.run(v0=float(i), mass=float(a.bullet_weight), cx=float(a.cx))
-
-        logger.error(config)
-        logger.error(data)
 
         return data
 
