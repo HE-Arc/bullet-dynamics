@@ -14,36 +14,43 @@ from .serializers import (AmmoSerializer, CannonSerializer, ConfigSerializer,
 logger = logging.getLogger(__name__)
 
 class AmmoViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Ammo.objects.all()
     serializer_class = AmmoSerializer
 
 class PlatformViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Platform.objects.all()
     serializer_class = PlatformSerializer
 
 class CannonViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Cannon.objects.all()
     serializer_class = CannonSerializer
 
 class ConfigViewSet(viewsets.ModelViewSet):
-    #permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     queryset = Config.objects.all()
     serializer_class = ConfigSerializer
 
 class ParamViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Param.objects.all()
     serializer_class = ParamSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'username'
 
 class InitSpeedViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = InitSpeed.objects.all()
     serializer_class = InitSpeedSerializer
 
 class ResultView(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
     serializer_class = SimulatorSerializer
 
     def get_queryset(self):
