@@ -8,12 +8,13 @@ export default new Vuex.Store({
   state: {
     accessToken: null,
     refreshToken: null,
+    username: null,
     configs: [],
     platforms: [],
     ammos: [],
-    cannons: [],
-    displayedConfigs: [],
-    username: null,
+    cannons: [],    
+    displayedConfigs: [],    
+    simulatorData: [],
   },
   mutations: {
     updateStorage(state, { access, refresh, username }) {
@@ -49,6 +50,9 @@ export default new Vuex.Store({
       else if (index != -1 && !show)
         state.displayedConfigs = state.displayedConfigs.filter(id => id != configId);
     },
+    updateSimulator(state, data) {
+      state.simulatorData = data;
+    }
   },
   getters: {
     loggedIn(state) {
@@ -96,7 +100,7 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
-    async fetchConfigs({ commit, state }) {
+    async fetchConfigs({ commit, dispatch, state }) {
       try {
         const responseUserConfig = await getAPI.get(`/api/users/${state.username}/`, {
           headers: { Authorization: `Bearer ${state.accessToken}` }
@@ -105,8 +109,9 @@ export default new Vuex.Store({
 
         const response = await getAPI.get('/api/configs/');
         const configs = response.data;
-        const myConfigs = configs.filter(config => userConfigs.includes(config.id));
+        const myConfigs = configs.filter(config => userConfigs.includes(config.id));        
         commit('updateConfigs', myConfigs);
+        dispatch('fetchSimulatorData');
       } catch (error) {
         console.log(error);
       }
@@ -152,6 +157,14 @@ export default new Vuex.Store({
       try {
         const response = await getAPI.get('/api/cannons/');
         commit('updateCannons', response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async fetchSimulatorData({ commit, state }) {
+      try {
+        const response = await getAPI.get(`/api/sim/${state.username}/`);
+        commit('updateSimulator', response.data);
       } catch (error) {
         console.log(error);
       }

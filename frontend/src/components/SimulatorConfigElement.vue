@@ -49,6 +49,10 @@ export default {
       this.$store.commit("switchConfigDisplay", { configId, show });
     },
   },
+  created: function () {
+    const displayedConfigs = this.$store.state.displayedConfigs;
+    this.checkbox = displayedConfigs.indexOf(this.config.id) >= 0 ? true : false;    
+  },
   props: ["config"],
 };
 </script>
