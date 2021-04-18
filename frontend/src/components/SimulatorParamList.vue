@@ -9,6 +9,7 @@
               type="number"
               :rules="rules"
               label="Height"
+              :disabled="true"
             ></v-text-field>
           </v-col>
           <v-col cols="6">
@@ -17,6 +18,7 @@
               type="number"
               :rules="rules"
               label="Angle"
+              :disabled="true"
             ></v-text-field>
           </v-col>
         </v-row>

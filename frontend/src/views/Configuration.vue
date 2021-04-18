@@ -134,7 +134,7 @@
       <v-row v-else>
         <v-spacer></v-spacer>
         <v-col>
-          <loading-screen />
+          <loading-screen title="CONFIGURATION"/>
         </v-col>
         <v-spacer></v-spacer>
       </v-row>

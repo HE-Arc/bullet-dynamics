@@ -12,8 +12,8 @@ export default new Vuex.Store({
     configs: [],
     platforms: [],
     ammos: [],
-    displayedConfigs: [],
     cannons: [],    
+    displayedConfigs: [],    
     simulatorData: [],
   },
   mutations: {
@@ -100,7 +100,7 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
-    async fetchConfigs({ commit, state }) {
+    async fetchConfigs({ commit, dispatch, state }) {
       try {
         const responseUserConfig = await getAPI.get(`/api/users/${state.username}/`, {
           headers: { Authorization: `Bearer ${state.accessToken}` }
@@ -109,8 +109,9 @@ export default new Vuex.Store({
 
         const response = await getAPI.get('/api/configs/');
         const configs = response.data;
-        const myConfigs = configs.filter(config => userConfigs.includes(config.id));
+        const myConfigs = configs.filter(config => userConfigs.includes(config.id));        
         commit('updateConfigs', myConfigs);
+        dispatch('fetchSimulatorData');
       } catch (error) {
         console.log(error);
       }
@@ -162,7 +163,7 @@ export default new Vuex.Store({
     },
     async fetchSimulatorData({ commit, state }) {
       try {
-        const response = await getAPI.get(`/api/users/${state.username}/`);
+        const response = await getAPI.get(`/api/sim/${state.username}/`);
         commit('updateSimulator', response.data);
       } catch (error) {
         console.log(error);
