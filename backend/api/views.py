@@ -47,5 +47,5 @@ class ResultView(generics.ListAPIView):
     serializer_class = SimulatorSerializer
 
     def get_queryset(self):
-        username = self.request.GET.get('username','root')
+        username = self.kwargs['username']
         return User.objects.get(username=username).config

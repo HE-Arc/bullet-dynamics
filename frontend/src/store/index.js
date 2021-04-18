@@ -12,8 +12,8 @@ export default new Vuex.Store({
     configs: [],
     platforms: [],
     ammos: [],
-    cannons: [],    
-    displayedConfigs: [],    
+    cannons: [],
+    displayedConfigs: [],
     simulatorData: [],
   },
   mutations: {
@@ -64,24 +64,24 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    userLogout(context) {
+    async userLogout(context) {
       if (context.getters.loggedIn) context.commit('destroyToken')
     },
-    userLogin(context, usercredentials) {
-      let username = usercredentials.username;
-      return new Promise((resolve, reject) => {
-        getAPI.post('/api-token/', {
+    async userLogin({ state, commit, dispatch }, usercredentials) {
+      try {
+        const username = usercredentials.username;
+        const response = await getAPI.post('/api-token/', {
           username: username,
           password: usercredentials.password
-        })
-          .then(response => {
-            context.commit('updateStorage', { access: response.data.access, refresh: response.data.refresh, username })
-            resolve()
-          })
-          .catch(err => {
-            reject(err)
-          })
-      })
+        });
+        commit('updateStorage', { access: response.data.access, refresh: response.data.refresh, username })
+
+        // Then, reload configs and reset displayed configs
+        state.displayedConfigs = [];
+        dispatch('fetchConfigs');
+      } catch (error) {
+        console.log(error);
+      }
     },
     async postConfig({ state, dispatch }, newConfig) {
       try {
@@ -109,7 +109,7 @@ export default new Vuex.Store({
 
         const response = await getAPI.get('/api/configs/');
         const configs = response.data;
-        const myConfigs = configs.filter(config => userConfigs.includes(config.id));        
+        const myConfigs = configs.filter(config => userConfigs.includes(config.id));
         commit('updateConfigs', myConfigs);
         dispatch('fetchSimulatorData');
       } catch (error) {
@@ -163,6 +163,7 @@ export default new Vuex.Store({
     },
     async fetchSimulatorData({ commit, state }) {
       try {
+        console.log(state.username);
         const response = await getAPI.get(`/api/sim/${state.username}/`);
         commit('updateSimulator', response.data);
       } catch (error) {

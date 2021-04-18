@@ -9,9 +9,6 @@
       <v-btn v-if="this.$store.getters.loggedIn" icon @click="$router.push({ name: 'Logout' }).catch(() => {})">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
-      <v-btn icon @click="$router.push({ name: 'Login' }).catch(() => {})">
-        <v-icon>mdi-account</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" absolute temporary>

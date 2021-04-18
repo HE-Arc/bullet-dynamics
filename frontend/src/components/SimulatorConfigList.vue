@@ -1,11 +1,10 @@
 <template>
   <v-card class="mx-auto" max-width="500" outlined>
-    <v-card-title>Configurations</v-card-title>
+    <v-card-title>
+      <router-link to="/">Configurations</router-link>
+    </v-card-title>
     <v-list rounded>
-      <v-list-item
-        v-for="(config, i) in configs"
-        :key="i"
-      >
+      <v-list-item v-for="(config, i) in configs" :key="i">
         <v-list-item-content>
           <SimulatorConfigElement :config="config" />
         </v-list-item-content>
