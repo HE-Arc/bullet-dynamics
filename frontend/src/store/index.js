@@ -12,6 +12,7 @@ export default new Vuex.Store({
     configs: [],
     platforms: [],
     ammos: [],
+    displayedConfigs: [],
     cannons: [],    
     simulatorData: [],
   },
@@ -41,6 +42,14 @@ export default new Vuex.Store({
     updateAmmos(state, data) {
       state.ammos = data;
     },
+    switchConfigDisplay(state, { configId, show }) {
+      const index = state.displayedConfigs.indexOf(configId);
+
+      if (index == -1 && show)
+        state.displayedConfigs.push(configId);
+      else if (index != -1 && !show)
+        state.displayedConfigs = state.displayedConfigs.filter(id => id != configId);
+    },
     updateSimulator(state, data) {
       state.simulatorData = data;
     }
@@ -56,9 +65,7 @@ export default new Vuex.Store({
   },
   actions: {
     userLogout(context) {
-      if (context.getters.loggedIn) {
-        context.commit('destroyToken')
-      }
+      if (context.getters.loggedIn) context.commit('destroyToken')
     },
     userLogin(context, usercredentials) {
       let username = usercredentials.username;
@@ -78,13 +85,11 @@ export default new Vuex.Store({
     },
     async postConfig({ state, dispatch }, newConfig) {
       try {
-        //console.log(newConfig);
         const response = await getAPI.post('/api/configs/', newConfig);
         const newConfigId = response.data.id;
 
         const myConfigs = state.configs.map(config => config.id);
         myConfigs.push(newConfigId);
-        console.log(myConfigs);
         await getAPI.patch(`/api/users/${state.username}/`, { "config": myConfigs }, {
           headers: { Authorization: `Bearer ${state.accessToken}` }
         })
