@@ -5,7 +5,7 @@ from .Projectile import *
 # Constants
 RHO = 1.22 #air density
 g = 9.81 # gravity
-NB_TICKS = 3000 # resolution of simulation
+NB_TICKS = 5000 # resolution of simulation
 FLOOR_HEIGHT = -10 # height of the floor (the floor catch the projectile) must be (<= 0)
 THETA = 0 # initial angle of fire
 T0 = 0 # start time
@@ -16,7 +16,7 @@ class Simulator:
     def __init__(self):
         self.projectiles = []
 
-    def run(self,v0,mass,cx):
+    def run(self,v0,mass,cx,theta=THETA,floorh=FLOOR_HEIGHT):
         self.projectiles.append(Projectile(0,0,v0,mass,0.003**2*m.pi,cx,"p1"))
         # Mathematical simulation of projectiles trajectory, speed, energy
         #   - Calculations are made on each axis individualy, and made sequentialy :
@@ -27,13 +27,15 @@ class Simulator:
         #   - Air drag is computed with respect to :
         #       - air density, drag coeff., frontal surface and speed
         # 
+
+        theta = theta/360 * 2 * m.pi # convert to rad
         tickSize = (T_END-T0)/NB_TICKS
         t = np.linspace(T0, T_END, num=NB_TICKS)
         maxX = 0
         for p in self.projectiles:
 
-            p.vx = np.cos(THETA) * p.v0
-            p.vy = np.sin(THETA) * p.v0
+            p.vx = np.cos(theta) * p.v0
+            p.vy = np.sin(theta) * p.v0
             p.ax = 0
             p.ay = -g
             
@@ -49,7 +51,7 @@ class Simulator:
                 p.x = p.x + p.vx*tickSize
                 p.y = p.y + p.vy*tickSize
 
-                if p.y < FLOOR_HEIGHT:
+                if p.y < floorh:
                     break
                 if p.x > maxX:
                     maxX = p.x
@@ -64,4 +66,3 @@ class Simulator:
             tabOutput.append(p.trajectorysX)
             tabOutput.append(p.trajectorysY)
         return tabOutput
-
