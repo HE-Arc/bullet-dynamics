@@ -54,6 +54,10 @@ class InitSpeedSerializer(serializers.ModelSerializer):
 
 class SimulatorSerializer(serializers.Serializer):
     output = serializers.SerializerMethodField('SmartestDjangoRequestInTheHistoryOfDjangoRequestMaybeEver')
+    id = serializers.ReadOnlyField()
+    class Meta:
+        model = Config
+        fields = ('id')
 
     def SmartestDjangoRequestInTheHistoryOfDjangoRequestMaybeEver(self, config):
         a = config.ammo

@@ -32,14 +32,6 @@ export default {
   data: () => ({
     height: 0,
     angle: 0,
-    items: [
-      {
-        name: "config 1",
-      },
-      {
-        name: "config 2",
-      },
-    ],
   }),
 };
 </script>

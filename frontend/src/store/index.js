@@ -8,11 +8,12 @@ export default new Vuex.Store({
   state: {
     accessToken: null,
     refreshToken: null,
+    username: null,
     configs: [],
     platforms: [],
     ammos: [],
-    cannons: [],
-    username: null,
+    cannons: [],    
+    simulatorData: [],
   },
   mutations: {
     updateStorage(state, { access, refresh, username }) {
@@ -40,6 +41,9 @@ export default new Vuex.Store({
     updateAmmos(state, data) {
       state.ammos = data;
     },
+    updateSimulator(state, data) {
+      state.simulatorData = data;
+    }
   },
   getters: {
     loggedIn(state) {
@@ -147,6 +151,14 @@ export default new Vuex.Store({
       try {
         const response = await getAPI.get('/api/cannons/');
         commit('updateCannons', response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async fetchSimulatorData({ commit, state }) {
+      try {
+        const response = await getAPI.get(`/api/users/${state.username}/`);
+        commit('updateSimulator', response.data);
       } catch (error) {
         console.log(error);
       }
