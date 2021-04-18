@@ -4,11 +4,14 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.views import generic
+import logging
 
 from .models import Ammo, Cannon, Config, InitSpeed, Param, Platform, User
 from .serializers import (AmmoSerializer, CannonSerializer, ConfigSerializer,
                           InitSpeedSerializer, ParamSerializer,
                           PlatformSerializer, UserSerializer, SimulatorSerializer)
+
+logger = logging.getLogger(__name__)
 
 class AmmoViewSet(viewsets.ModelViewSet):
     queryset = Ammo.objects.all()
@@ -41,5 +44,8 @@ class InitSpeedViewSet(viewsets.ModelViewSet):
     serializer_class = InitSpeedSerializer
 
 class ResultView(generics.ListAPIView):
-    queryset = User.objects.get(username='root').config
     serializer_class = SimulatorSerializer
+
+    def get_queryset(self):
+        username = self.request.GET.get('username','root')
+        return User.objects.get(username=username).config

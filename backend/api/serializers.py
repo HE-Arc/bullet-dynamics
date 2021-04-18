@@ -54,11 +54,8 @@ class InitSpeedSerializer(serializers.ModelSerializer):
 
 class SimulatorSerializer(serializers.Serializer):
     output = serializers.SerializerMethodField('SmartestDjangoRequestInTheHistoryOfDjangoRequestMaybeEver')
-    class Meta:
-        fields = ('output')
 
     def SmartestDjangoRequestInTheHistoryOfDjangoRequestMaybeEver(self, config):
-
         a = config.ammo
         c = config.cannon
         i = InitSpeed.objects.filter(cannon=c, ammo=a).get().init_speed
