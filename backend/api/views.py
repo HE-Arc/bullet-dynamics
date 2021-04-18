@@ -1,12 +1,17 @@
 from django.shortcuts import render
-from rest_framework import generics, viewsets
+from rest_framework import generics, viewsets, views
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.decorators import action
+from django.views import generic
+import logging
 
 from .models import Ammo, Cannon, Config, InitSpeed, Param, Platform, User
 from .serializers import (AmmoSerializer, CannonSerializer, ConfigSerializer,
                           InitSpeedSerializer, ParamSerializer,
-                          PlatformSerializer, UserSerializer)
+                          PlatformSerializer, UserSerializer, SimulatorSerializer)
+
+logger = logging.getLogger(__name__)
 
 class AmmoViewSet(viewsets.ModelViewSet):
     queryset = Ammo.objects.all()
@@ -21,7 +26,7 @@ class CannonViewSet(viewsets.ModelViewSet):
     serializer_class = CannonSerializer
 
 class ConfigViewSet(viewsets.ModelViewSet):
-    psermission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
     queryset = Config.objects.all()
     serializer_class = ConfigSerializer
 
@@ -37,3 +42,10 @@ class UserViewSet(viewsets.ModelViewSet):
 class InitSpeedViewSet(viewsets.ModelViewSet):
     queryset = InitSpeed.objects.all()
     serializer_class = InitSpeedSerializer
+
+class ResultView(generics.ListAPIView):
+    serializer_class = SimulatorSerializer
+
+    def get_queryset(self):
+        username = self.request.GET.get('username','root')
+        return User.objects.get(username=username).config
